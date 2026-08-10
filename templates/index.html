@@ -8,13 +8,22 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <!-- Leaflet -->
+    <!-- ==========================================
+         LEAFLET CSS
+    =========================================== -->
+
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     >
 
+
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
 
         body {
             margin: 0;
@@ -22,54 +31,75 @@
             background: #f5f5f5;
         }
 
+
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: auto;
             background: white;
             padding: 20px;
         }
 
+
         h2 {
             text-align: center;
+            margin-bottom: 25px;
         }
+
+
+        /* ==========================================
+           LOCATION SECTION
+        =========================================== */
 
         .location-box {
             margin-bottom: 20px;
         }
 
+
         .location-box label {
             display: block;
             font-weight: bold;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
         }
+
 
         .location-row {
             display: flex;
             gap: 8px;
         }
 
+
         .location-row input {
             flex: 1;
-            padding: 10px;
+            padding: 11px;
             font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
+
         button {
-            padding: 10px 15px;
+            padding: 10px 16px;
             cursor: pointer;
             border: none;
             background: #333;
             color: white;
-            border-radius: 4px;
+            border-radius: 5px;
         }
+
 
         button:hover {
             background: #555;
         }
 
+
+        /* ==========================================
+           SEARCH RESULTS
+        =========================================== */
+
         .search-results {
             margin-top: 5px;
         }
+
 
         .result {
             padding: 10px;
@@ -78,25 +108,240 @@
             cursor: pointer;
         }
 
+
         .result:hover {
             background: #f0f0f0;
         }
 
-        #map {
-            height: 550px;
+
+        /* ==========================================
+           FIND ROUTE BUTTON
+        =========================================== */
+
+        .route-button {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 5px;
+            font-size: 17px;
+            background: #222;
         }
+
+
+        .route-button:hover {
+            background: #444;
+        }
+
+
+        /* ==========================================
+           STATUS
+        =========================================== */
 
         #status {
             text-align: center;
             margin: 15px 0;
+            font-weight: bold;
         }
 
-        .route-button {
+
+        /* ==========================================
+           MAP
+        =========================================== */
+
+        #map {
+            height: 600px;
             width: 100%;
-            margin-top: 10px;
-            font-size: 17px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+
+        /* ==========================================
+           SELECTED ROUTE BOX
+        =========================================== */
+
+        #selectedRoute {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            border: 2px solid #28a745;
+
+            border-radius: 8px;
+
+            background: #f8fff9;
+
+        }
+
+
+        #selectedRoute h3 {
+
+            margin-top: 0;
+
+            color: #28a745;
+
+        }
+
+
+        .route-detail {
+
+            display: flex;
+
+            gap: 50px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .detail-item {
+
+            font-size: 15px;
+
+        }
+
+
+        .detail-value {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* ==========================================
+           ROUTE CARDS
+        =========================================== */
+
+        #routeResults {
+
+            margin-top: 20px;
+
+        }
+
+
+        .route-card {
+
+            padding: 15px;
+
+            margin-bottom: 10px;
+
+            border: 2px solid #ddd;
+
+            border-radius: 7px;
+
+            background: white;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .route-card:hover {
+
+            background: #f5f5f5;
+
+            border-color: #999;
+
+        }
+
+
+        /* Selected route card */
+
+        .route-card.selected {
+
+            border: 2px solid #28a745;
+
+            background: #f0fff3;
+
+        }
+
+
+        .route-title {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .route-small-info {
+
+            color: #555;
+
+            font-size: 15px;
+
+        }
+
+
+        .selected-label {
+
+            display: inline-block;
+
+            margin-left: 8px;
+
+            padding: 3px 7px;
+
+            background: #28a745;
+
+            color: white;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        =========================================== */
+
+        @media (max-width: 700px) {
+
+            .location-row {
+
+                flex-direction: column;
+
+            }
+
+
+            .location-row input {
+
+                width: 100%;
+
+            }
+
+
+            button {
+
+                width: 100%;
+
+            }
+
+
+            #map {
+
+                height: 450px;
+
+            }
+
+
+            .route-detail {
+
+                gap: 20px;
+
+            }
+
         }
 
     </style>
@@ -109,14 +354,19 @@
 
 <div class="container">
 
+
+    <!-- ==========================================
+         TITLE
+    =========================================== -->
+
     <h2>
         Women Safety Route Finder
     </h2>
 
 
-    <!-- ================================= -->
-    <!-- STARTING LOCATION -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         STARTING LOCATION
+    =========================================== -->
 
     <div class="location-box">
 
@@ -133,12 +383,20 @@
                 placeholder="Search starting location..."
             >
 
-            <button id="startSearchButton">
+
+            <button
+                id="startSearchButton">
+
                 Search
+
             </button>
 
-            <button id="currentLocationButton">
+
+            <button
+                id="currentLocationButton">
+
                 Use My Location
+
             </button>
 
         </div>
@@ -147,14 +405,15 @@
         <div
             id="startResults"
             class="search-results">
+
         </div>
 
     </div>
 
 
-    <!-- ================================= -->
-    <!-- DESTINATION -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         DESTINATION
+    =========================================== -->
 
     <div class="location-box">
 
@@ -171,8 +430,12 @@
                 placeholder="Search destination..."
             >
 
-            <button id="destinationSearchButton">
+
+            <button
+                id="destinationSearchButton">
+
                 Search
+
             </button>
 
         </div>
@@ -181,39 +444,108 @@
         <div
             id="destinationResults"
             class="search-results">
+
         </div>
 
     </div>
 
 
-    <!-- ================================= -->
-    <!-- ROUTE BUTTON -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         FIND ROUTES
+    =========================================== -->
 
     <button
         id="routeButton"
         class="route-button">
 
-        Find Shortest Route
+        Find Routes
 
     </button>
 
 
+    <!-- ==========================================
+         STATUS
+    =========================================== -->
+
     <p id="status">
-        Select a starting location and destination.
+
+        Select a starting location
+        and destination.
+
     </p>
 
 
-    <!-- ================================= -->
-    <!-- MAP -->
-    <!-- ================================= -->
+    <!-- ==========================================
+         MAP
+    =========================================== -->
 
     <div id="map"></div>
+
+
+    <!-- ==========================================
+         SELECTED ROUTE INFORMATION
+    =========================================== -->
+
+    <div id="selectedRoute">
+
+        <h3 id="selectedRouteTitle">
+
+            Selected Route
+
+        </h3>
+
+
+        <div class="route-detail">
+
+
+            <div class="detail-item">
+
+                Distance
+
+                <div
+                    id="selectedDistance"
+                    class="detail-value">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                Estimated Time
+
+                <div
+                    id="selectedDuration"
+                    class="detail-value">
+
+                    -
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         ROUTE CARDS
+    =========================================== -->
+
+    <div id="routeResults"></div>
+
 
 </div>
 
 
-<!-- Leaflet JS -->
+<!-- ==========================================
+     LEAFLET JS
+=========================================== -->
 
 <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
@@ -223,9 +555,9 @@
 <script>
 
 
-// ==========================================
+// ======================================================
 // MAP
-// ==========================================
+// ======================================================
 
 const defaultLatitude = 20.9371;
 
@@ -233,28 +565,37 @@ const defaultLongitude = 77.7796;
 
 
 const map = L.map("map").setView(
+
     [
         defaultLatitude,
         defaultLongitude
     ],
+
     14
+
 );
 
 
 L.tileLayer(
+
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
     {
+
         maxZoom: 19,
 
         attribution:
             "&copy; OpenStreetMap contributors"
+
     }
+
 ).addTo(map);
 
 
-// ==========================================
+// ======================================================
 // VARIABLES
-// ==========================================
+// ======================================================
+
 
 // Starting location
 
@@ -277,41 +618,61 @@ let startMarker = null;
 let destinationMarker = null;
 
 
-// Route
-
-let routeLine = null;
-
-
 // GPS
 
 let watchId = null;
 
 
-// ==========================================
+// Route layer group
+
+let routeLayerGroup = null;
+
+
+// Individual route layers
+
+let routeLayers = {};
+
+
+// All route information
+
+let availableRoutes = [];
+
+
+// Currently selected route
+
+let selectedRouteId = null;
+
+
+// ======================================================
 // STATUS
-// ==========================================
+// ======================================================
 
 function setStatus(message) {
 
     document
         .getElementById("status")
         .textContent = message;
+
 }
 
 
-// ==========================================
-// USE CURRENT LOCATION
-// ==========================================
+// ======================================================
+// CURRENT LOCATION
+// ======================================================
 
 document
     .getElementById("currentLocationButton")
     .addEventListener(
+
         "click",
+
         useCurrentLocation
+
     );
 
 
 function useCurrentLocation() {
+
 
     if (!navigator.geolocation) {
 
@@ -320,6 +681,7 @@ function useCurrentLocation() {
         );
 
         return;
+
     }
 
 
@@ -333,10 +695,12 @@ function useCurrentLocation() {
 
             function(position) {
 
-                startLatitude =
+
+                const latitude =
                     position.coords.latitude;
 
-                startLongitude =
+
+                const longitude =
                     position.coords.longitude;
 
 
@@ -344,28 +708,51 @@ function useCurrentLocation() {
                     position.coords.accuracy;
 
 
+                // Save starting coordinates
+
+                startLatitude =
+                    latitude;
+
+
+                startLongitude =
+                    longitude;
+
+
+                // Update marker
+
                 setStartMarker(
-                    startLatitude,
-                    startLongitude
+
+                    latitude,
+
+                    longitude
+
                 );
 
 
+                // Update input
+
                 document
-                    .getElementById("startInput")
+                    .getElementById(
+                        "startInput"
+                    )
                     .value =
                         "Current Location";
 
 
                 setStatus(
+
                     "Current location detected. Accuracy: "
                     + accuracy.toFixed(1)
                     + " meters"
+
                 );
 
 
-                // Stop watching after
-                // getting a reasonably
-                // accurate location.
+                /*
+                    Stop GPS when we get
+                    a reasonably accurate
+                    position.
+                */
 
                 if (accuracy <= 30) {
 
@@ -377,9 +764,14 @@ function useCurrentLocation() {
 
             },
 
+
             function(error) {
 
-                console.error(error);
+
+                console.error(
+                    "GPS Error:",
+                    error
+                );
 
 
                 if (error.code === 1) {
@@ -411,111 +803,162 @@ function useCurrentLocation() {
                     setStatus(
                         "Unable to get current location."
                     );
+
                 }
 
             },
 
+
             {
+
                 enableHighAccuracy: true,
 
                 maximumAge: 0,
 
                 timeout: 15000
+
             }
+
         );
+
 }
 
 
-// ==========================================
+// ======================================================
 // START MARKER
-// ==========================================
+// ======================================================
 
 function setStartMarker(
+
     latitude,
+
     longitude
+
 ) {
+
 
     if (startMarker === null) {
 
+
         startMarker =
-            L.marker([
-                latitude,
-                longitude
-            ])
+
+            L.marker(
+
+                [
+                    latitude,
+                    longitude
+                ]
+
+            )
+
             .addTo(map)
+
             .bindPopup(
                 "Starting Location"
             );
+
 
     }
 
     else {
 
-        startMarker.setLatLng([
-            latitude,
-            longitude
-        ]);
+
+        startMarker.setLatLng(
+
+            [
+                latitude,
+                longitude
+            ]
+
+        );
+
     }
 
 
     map.setView(
+
         [
             latitude,
             longitude
         ],
-        16
+
+        15
+
     );
+
 }
 
 
-// ==========================================
+// ======================================================
 // DESTINATION MARKER
-// ==========================================
+// ======================================================
 
 function setDestinationMarker(
+
     latitude,
+
     longitude,
+
     name
+
 ) {
+
 
     if (destinationMarker !== null) {
 
         map.removeLayer(
             destinationMarker
         );
+
     }
 
 
     destinationMarker =
-        L.marker([
-            latitude,
-            longitude
-        ])
+
+        L.marker(
+
+            [
+                latitude,
+                longitude
+            ]
+
+        )
+
         .addTo(map)
+
         .bindPopup(
             name || "Destination"
         )
+
         .openPopup();
 
 
     map.setView(
+
         [
             latitude,
             longitude
         ],
+
         15
+
     );
+
 }
 
 
-// ==========================================
-// SEARCH STARTING LOCATION
-// ==========================================
+// ======================================================
+// SEARCH START LOCATION
+// ======================================================
 
 document
-    .getElementById("startSearchButton")
+    .getElementById(
+        "startSearchButton"
+    )
     .addEventListener(
+
         "click",
+
         function() {
 
             searchLocation(
@@ -523,17 +966,22 @@ document
             );
 
         }
+
     );
 
 
-// ==========================================
+// ======================================================
 // SEARCH DESTINATION
-// ==========================================
+// ======================================================
 
 document
-    .getElementById("destinationSearchButton")
+    .getElementById(
+        "destinationSearchButton"
+    )
     .addEventListener(
+
         "click",
+
         function() {
 
             searchLocation(
@@ -541,16 +989,16 @@ document
             );
 
         }
+
     );
 
 
-// ==========================================
+// ======================================================
 // SEARCH LOCATION
-// ==========================================
+// ======================================================
 
-async function searchLocation(
-    type
-) {
+async function searchLocation(type) {
+
 
     let inputId;
 
@@ -559,24 +1007,31 @@ async function searchLocation(
 
     if (type === "start") {
 
-        inputId = "startInput";
+        inputId =
+            "startInput";
 
-        resultId = "startResults";
+        resultId =
+            "startResults";
 
     }
 
     else {
 
-        inputId = "destinationInput";
+        inputId =
+            "destinationInput";
 
         resultId =
             "destinationResults";
+
     }
 
 
     const query =
+
         document
-            .getElementById(inputId)
+            .getElementById(
+                inputId
+            )
             .value
             .trim();
 
@@ -588,6 +1043,7 @@ async function searchLocation(
         );
 
         return;
+
     }
 
 
@@ -598,10 +1054,15 @@ async function searchLocation(
 
     try {
 
+
         const response =
+
             await fetch(
+
                 "/api/search-location?q="
-                + encodeURIComponent(query)
+                +
+                encodeURIComponent(query)
+
             );
 
 
@@ -616,39 +1077,58 @@ async function searchLocation(
             );
 
             return;
+
         }
 
 
-        displayResults(
+        displaySearchResults(
+
             data.locations,
+
             type,
+
             resultId
+
         );
+
 
     }
 
     catch (error) {
 
-        console.error(error);
+
+        console.error(
+            "Search error:",
+            error
+        );
+
 
         setStatus(
             "Unable to search location."
         );
+
     }
+
 }
 
 
-// ==========================================
-// DISPLAY RESULTS
-// ==========================================
+// ======================================================
+// DISPLAY SEARCH RESULTS
+// ======================================================
 
-function displayResults(
+function displaySearchResults(
+
     locations,
+
     type,
+
     resultId
+
 ) {
 
+
     const container =
+
         document.getElementById(
             resultId
         );
@@ -663,13 +1143,17 @@ function displayResults(
             "<p>No locations found.</p>";
 
         return;
+
     }
 
 
     locations.forEach(
+
         function(location) {
 
+
             const result =
+
                 document.createElement(
                     "div"
                 );
@@ -684,71 +1168,96 @@ function displayResults(
 
 
             result.addEventListener(
+
                 "click",
+
                 function() {
 
                     selectLocation(
+
                         location,
+
                         type
+
                     );
 
                 }
+
             );
 
 
             container.appendChild(
                 result
             );
+
         }
+
     );
+
 }
 
 
-// ==========================================
-// SELECT LOCATION
-// ==========================================
+// ======================================================
+// SELECT START / DESTINATION
+// ======================================================
 
 function selectLocation(
+
     location,
+
     type
+
 ) {
+
 
     if (type === "start") {
 
+
         startLatitude =
             location.latitude;
+
 
         startLongitude =
             location.longitude;
 
 
         document
-            .getElementById("startInput")
+            .getElementById(
+                "startInput"
+            )
             .value =
                 location.name;
 
 
         setStartMarker(
+
             startLatitude,
+
             startLongitude
+
         );
 
 
         document
-            .getElementById("startResults")
+            .getElementById(
+                "startResults"
+            )
             .innerHTML = "";
 
 
         setStatus(
             "Starting location selected."
         );
+
     }
 
 
     else {
 
+
         destinationLatitude =
             location.latitude;
+
 
         destinationLongitude =
             location.longitude;
@@ -763,9 +1272,13 @@ function selectLocation(
 
 
         setDestinationMarker(
+
             destinationLatitude,
+
             destinationLongitude,
+
             location.name
+
         );
 
 
@@ -779,27 +1292,42 @@ function selectLocation(
         setStatus(
             "Destination selected."
         );
+
     }
+
 }
 
 
-// ==========================================
-// FIND ROUTE
-// ==========================================
+// ======================================================
+// FIND ROUTES BUTTON
+// ======================================================
 
 document
-    .getElementById("routeButton")
+    .getElementById(
+        "routeButton"
+    )
     .addEventListener(
+
         "click",
-        findRoute
+
+        findRoutes
+
     );
 
 
-async function findRoute() {
+// ======================================================
+// FIND ROUTES
+// ======================================================
+
+async function findRoutes() {
+
 
     if (
+
         startLatitude === null ||
+
         startLongitude === null
+
     ) {
 
         setStatus(
@@ -807,12 +1335,16 @@ async function findRoute() {
         );
 
         return;
+
     }
 
 
     if (
+
         destinationLatitude === null ||
+
         destinationLongitude === null
+
     ) {
 
         setStatus(
@@ -820,26 +1352,33 @@ async function findRoute() {
         );
 
         return;
+
     }
 
 
     setStatus(
-        "Finding shortest route..."
+        "Finding available routes..."
     );
 
 
     try {
 
+
         const response =
+
             await fetch(
+
                 "/api/route",
+
                 {
 
                     method: "POST",
 
                     headers: {
+
                         "Content-Type":
                             "application/json"
+
                     },
 
                     body: JSON.stringify({
@@ -857,7 +1396,9 @@ async function findRoute() {
                             destinationLongitude
 
                     })
+
                 }
+
             );
 
 
@@ -872,69 +1413,773 @@ async function findRoute() {
             );
 
             return;
+
         }
 
 
-        drawRoute(
-            data.geometry
+        // Save routes
+
+        availableRoutes =
+            data.routes;
+
+
+        // Draw routes
+
+        drawRoutes(
+            data.routes
         );
 
 
-        const distanceKm =
-            data.distance / 1000;
+        // Create route cards
 
-
-        const durationMinutes =
-            data.duration / 60;
+        displayRouteInformation(
+            data.routes
+        );
 
 
         setStatus(
-            "Route found | "
-            + distanceKm.toFixed(2)
-            + " km | "
-            + durationMinutes.toFixed(1)
-            + " minutes"
+
+            data.route_count
+            + " route(s) found. Click a route to select it."
+
         );
+
 
     }
 
     catch (error) {
 
-        console.error(error);
+
+        console.error(
+            "Route error:",
+            error
+        );
+
 
         setStatus(
-            "Unable to find route."
+            "Unable to find routes."
         );
+
     }
+
 }
 
 
-// ==========================================
-// DRAW ROUTE
-// ==========================================
+// ======================================================
+// DRAW ROUTES
+// ======================================================
 
-function drawRoute(
-    geometry
-) {
+function drawRoutes(routes) {
 
-    if (routeLine !== null) {
+
+    console.log(
+        "Drawing routes:",
+        routes
+    );
+
+
+    // Remove previous routes
+
+    if (routeLayerGroup !== null) {
 
         map.removeLayer(
-            routeLine
+            routeLayerGroup
         );
+
     }
 
 
-    routeLine =
-        L.geoJSON(
-            geometry
-        ).addTo(map);
+    // Reset layers
+
+    routeLayers = {};
 
 
-    map.fitBounds(
-        routeLine.getBounds()
+    // Create new group
+
+    routeLayerGroup =
+        L.layerGroup()
+            .addTo(map);
+
+
+    let allBounds = null;
+
+
+    routes.forEach(
+
+        function(route) {
+
+
+            console.log(
+                "Creating route:",
+                route.route_id
+            );
+
+
+            // ======================================
+            // CREATE INDIVIDUAL ROUTE
+            // ======================================
+
+            const routeLayer =
+
+                L.geoJSON(
+
+                    route.geometry,
+
+                    {
+
+                        style: {
+
+                            color:
+                                "#87CEEB",
+
+                            weight:
+                                6,
+
+                            opacity:
+                                0.70
+
+                        }
+
+                    }
+
+                );
+
+
+            // Store layer
+
+            routeLayers[
+                route.route_id
+            ] = routeLayer;
+
+
+            // Add to map
+
+            routeLayer.addTo(
+                routeLayerGroup
+            );
+
+
+            // ======================================
+            // CLICK ROUTE
+            // ======================================
+
+            routeLayer.on(
+
+                "click",
+
+                function(event) {
+
+
+                    console.log(
+
+                        "CLICKED ROUTE:",
+                        route.route_id
+
+                    );
+
+
+                    L.DomEvent.stopPropagation(
+                        event
+                    );
+
+
+                    selectRoute(
+                        route.route_id
+                    );
+
+
+                }
+
+            );
+
+
+            // ======================================
+            // MOUSE OVER
+            // ======================================
+
+            routeLayer.on(
+
+                "mouseover",
+
+                function() {
+
+
+                    if (
+
+                        selectedRouteId !==
+                        route.route_id
+
+                    ) {
+
+
+                        routeLayer.setStyle({
+
+                            weight: 8,
+
+                            opacity: 0.9
+
+                        });
+
+
+                    }
+
+                }
+
+            );
+
+
+            // ======================================
+            // MOUSE OUT
+            // ======================================
+
+            routeLayer.on(
+
+                "mouseout",
+
+                function() {
+
+
+                    if (
+
+                        selectedRouteId !==
+                        route.route_id
+
+                    ) {
+
+
+                        routeLayer.setStyle({
+
+                            color:
+                                "#87CEEB",
+
+                            weight:
+                                6,
+
+                            opacity:
+                                0.70
+
+                        });
+
+
+                    }
+
+                }
+
+            );
+
+
+            // ======================================
+            // POPUP
+            // ======================================
+
+            routeLayer.bindPopup(
+
+                "<strong>Route "
+                + route.route_id
+                + "</strong><br><br>"
+
+                + "Distance: "
+                + route.distance_km
+                + " km<br>"
+
+                + "Estimated Time: "
+                + route.duration_minutes
+                + " minutes"
+
+            );
+
+
+            // ======================================
+            // BOUNDS
+            // ======================================
+
+            const bounds =
+                routeLayer.getBounds();
+
+
+            if (allBounds === null) {
+
+                allBounds =
+                    bounds;
+
+            }
+
+            else {
+
+                allBounds.extend(
+                    bounds
+                );
+
+            }
+
+        }
+
     );
+
+
+    // ==========================================
+    // FIT MAP
+    // ==========================================
+
+    if (allBounds !== null) {
+
+        map.fitBounds(
+
+            allBounds,
+
+            {
+
+                padding: [
+                    30,
+                    30
+                ]
+
+            }
+
+        );
+
+    }
+
+
+    // ==========================================
+    // SELECT FIRST ROUTE
+    // ==========================================
+
+    if (routes.length > 0) {
+
+        selectRoute(
+            routes[0].route_id
+        );
+
+    }
+
 }
+
+
+// ======================================================
+// SELECT ROUTE
+// ======================================================
+
+function selectRoute(routeId) {
+
+
+    console.log(
+        "Selecting route:",
+        routeId
+    );
+
+
+    selectedRouteId =
+        Number(routeId);
+
+
+    // ==========================================
+    // RESET EVERY ROUTE
+    // ==========================================
+
+    Object.keys(
+        routeLayers
+    ).forEach(
+
+        function(id) {
+
+
+            routeLayers[id].setStyle({
+
+                color:
+                    "#87CEEB",
+
+                weight:
+                    6,
+
+                opacity:
+                    0.70
+
+            });
+
+        }
+
+    );
+
+
+    // ==========================================
+    // SELECTED ROUTE
+    // ==========================================
+
+    const selectedLayer =
+        routeLayers[
+            selectedRouteId
+        ];
+
+
+    if (selectedLayer) {
+
+
+        selectedLayer.setStyle({
+
+            color:
+                "#28a745",
+
+            weight:
+                9,
+
+            opacity:
+                1
+
+        });
+
+
+        // Put selected route above
+        // other routes
+
+        selectedLayer.bringToFront();
+
+
+    }
+
+
+    // ==========================================
+    // RESET ROUTE CARDS
+    // ==========================================
+
+    document
+        .querySelectorAll(
+            ".route-card"
+        )
+        .forEach(
+
+            function(card) {
+
+                card.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        );
+
+
+    // ==========================================
+    // SELECT CARD
+    // ==========================================
+
+    const selectedCard =
+
+        document.getElementById(
+
+            "route-card-"
+            +
+            selectedRouteId
+
+        );
+
+
+    if (selectedCard) {
+
+
+        selectedCard.classList.add(
+            "selected"
+        );
+
+
+        // Scroll card into view
+        // when route is clicked
+
+        selectedCard.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "nearest"
+
+        });
+
+    }
+
+
+    // ==========================================
+    // FIND ROUTE DATA
+    // ==========================================
+
+    const selectedRoute =
+
+        availableRoutes.find(
+
+            function(route) {
+
+                return Number(
+                    route.route_id
+                )
+                ===
+                selectedRouteId;
+
+            }
+
+        );
+
+
+    if (!selectedRoute) {
+
+
+        console.error(
+
+            "Route data not found:",
+            routeId
+
+        );
+
+
+        return;
+
+    }
+
+
+    console.log(
+
+        "Selected route data:",
+        selectedRoute
+
+    );
+
+
+    // ==========================================
+    // SHOW SELECTED ROUTE BOX
+    // ==========================================
+
+    const selectedRouteBox =
+
+        document.getElementById(
+            "selectedRoute"
+        );
+
+
+    selectedRouteBox.style.display =
+        "block";
+
+
+    // ==========================================
+    // TITLE
+    // ==========================================
+
+    document
+        .getElementById(
+            "selectedRouteTitle"
+        )
+        .textContent =
+
+            "Route "
+            +
+            selectedRoute.route_id
+            +
+            " Selected";
+
+
+    // ==========================================
+    // DISTANCE
+    // ==========================================
+
+    document
+        .getElementById(
+            "selectedDistance"
+        )
+        .textContent =
+
+            selectedRoute.distance_km
+            +
+            " km";
+
+
+    // ==========================================
+    // TIME
+    // ==========================================
+
+    document
+        .getElementById(
+            "selectedDuration"
+        )
+        .textContent =
+
+            selectedRoute.duration_minutes
+            +
+            " minutes";
+
+
+    // ==========================================
+    // STATUS
+    // ==========================================
+
+    setStatus(
+
+        "Route "
+        +
+        selectedRoute.route_id
+        +
+        " selected | Distance: "
+        +
+        selectedRoute.distance_km
+        +
+        " km | Time: "
+        +
+        selectedRoute.duration_minutes
+        +
+        " minutes"
+
+    );
+
+}
+
+
+// ======================================================
+// DISPLAY ROUTE CARDS
+// ======================================================
+
+function displayRouteInformation(
+    routes
+) {
+
+
+    const container =
+        document.getElementById(
+            "routeResults"
+        );
+
+
+    container.innerHTML = "";
+
+
+    routes.forEach(
+
+        function(route) {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "route-card";
+
+
+            card.id =
+
+                "route-card-"
+                +
+                route.route_id;
+
+
+            card.innerHTML =
+
+                "<div class='route-title'>"
+
+                +
+
+                "Route "
+                +
+                route.route_id
+
+                +
+
+                "</div>"
+
+
+                +
+
+                "<div class='route-small-info'>"
+
+                +
+
+                "Distance: "
+                +
+                route.distance_km
+                +
+                " km"
+
+                +
+
+                "&nbsp;&nbsp; | &nbsp;&nbsp;"
+
+                +
+
+                "Time: "
+                +
+                route.duration_minutes
+                +
+                " minutes"
+
+                +
+
+                "</div>";
+
+
+            // ======================================
+            // CARD CLICK
+            // ======================================
+
+            card.addEventListener(
+
+                "click",
+
+                function(event) {
+
+
+                    event.stopPropagation();
+
+
+                    console.log(
+
+                        "Clicked route card:",
+                        route.route_id
+
+                    );
+
+
+                    selectRoute(
+
+                        route.route_id
+
+                    );
+
+                }
+
+            );
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+
+    );
+
+}
+
+
+// ======================================================
+// MAP CLICK
+// ======================================================
+
+map.on(
+
+    "click",
+
+    function(event) {
+
+
+        console.log(
+
+            "Map clicked:",
+
+            event.latlng.lat,
+
+            event.latlng.lng
+
+        );
+
+    }
+
+);
 
 
 </script>
