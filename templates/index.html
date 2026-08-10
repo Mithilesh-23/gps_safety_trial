@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Women Safety - Location</title>
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+
+        .top-panel {
+            padding: 15px;
+            background: white;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #status {
+            margin-top: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="top-panel">
+
+        <h2>Women Safety</h2>
+
+        <button id="locationButton">
+            Enable My Location
+        </button>
+
+        <p id="status">
+            Location is not enabled.
+        </p>
+
+    </div>
+
+
+    <div id="map"></div>
+
+
+    <!-- Leaflet JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <script>
+
+        // Default map location
+        // Amravati for testing
+        const defaultLatitude = 20.9371;
+        const defaultLongitude = 77.7796;
+
+
+        // Create map
+        const map = L.map("map").setView(
+            [defaultLatitude, defaultLongitude],
+            14
+        );
+
+
+        // OpenStreetMap tiles
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                maxZoom: 19,
+                attribution:
+                    '&copy; OpenStreetMap contributors'
+            }
+        ).addTo(map);
+
+
+        // Variable for current location marker
+        let currentMarker = null;
+
+
+        // Variable for GPS watch
+        let watchId = null;
+
+
+        // Enable location button
+        document
+            .getElementById("locationButton")
+            .addEventListener("click", startLocation);
+
+
+        function startLocation() {
+
+            // Check browser support
+            if (!navigator.geolocation) {
+
+                document.getElementById("status").textContent =
+                    "Geolocation is not supported by this browser.";
+
+                return;
+            }
+
+
+            document.getElementById("status").textContent =
+                "Requesting location permission...";
+
+
+            // Start continuous GPS tracking
+            watchId = navigator.geolocation.watchPosition(
+                handleLocation,
+                handleLocationError,
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 0,
+                    timeout: 10000
+                }
+            );
+        }
+
+
+        function handleLocation(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+            const accuracy =
+                position.coords.accuracy;
+
+
+            console.log("Latitude:", latitude);
+            console.log("Longitude:", longitude);
+            console.log("Accuracy:", accuracy);
+
+
+            document.getElementById("status").textContent =
+                "Location detected. Accuracy: "
+                + accuracy.toFixed(2)
+                + " meters";
+
+
+            // Create marker first time
+            if (currentMarker === null) {
+
+                currentMarker = L.marker(
+                    [latitude, longitude]
+                ).addTo(map);
+
+                currentMarker
+                    .bindPopup("Your Current Location")
+                    .openPopup();
+
+            }
+
+            // Update existing marker
+            else {
+
+                currentMarker.setLatLng(
+                    [latitude, longitude]
+                );
+            }
+
+
+            // Move map to current location
+            map.setView(
+                [latitude, longitude],
+                16
+            );
+        }
+
+
+        function handleLocationError(error) {
+
+            console.error(error);
+
+
+            if (error.code === 1) {
+
+                document.getElementById("status").textContent =
+                    "Location permission denied.";
+
+            }
+
+            else if (error.code === 2) {
+
+                document.getElementById("status").textContent =
+                    "Location unavailable.";
+
+            }
+
+            else if (error.code === 3) {
+
+                document.getElementById("status").textContent =
+                    "Location request timed out.";
+
+            }
+
+            else {
+
+                document.getElementById("status").textContent =
+                    "Unable to get your location.";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
