@@ -5,6 +5,10 @@
 
     <title>Women Safety Route Finder</title>
 
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet -->
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -15,27 +19,84 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background: #f5f5f5;
         }
 
-        .top-panel {
-            padding: 15px;
-            text-align: center;
+        .container {
+            max-width: 900px;
+            margin: auto;
             background: white;
+            padding: 20px;
         }
 
-        #map {
-            height: 600px;
-            width: 100%;
+        h2 {
+            text-align: center;
+        }
+
+        .location-box {
+            margin-bottom: 20px;
+        }
+
+        .location-box label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .location-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .location-row input {
+            flex: 1;
+            padding: 10px;
+            font-size: 15px;
         }
 
         button {
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            background: #333;
+            color: white;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        .search-results {
+            margin-top: 5px;
+        }
+
+        .result {
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: white;
             cursor: pointer;
         }
 
+        .result:hover {
+            background: #f0f0f0;
+        }
+
+        #map {
+            height: 550px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
         #status {
-            margin: 10px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .route-button {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 17px;
         }
 
     </style>
@@ -46,27 +107,113 @@
 <body>
 
 
-<div class="top-panel">
+<div class="container">
 
-    <h2>Women Safety Route Finder</h2>
+    <h2>
+        Women Safety Route Finder
+    </h2>
 
-    <button id="locationButton">
-        Enable My Location
-    </button>
 
-    <button id="routeButton">
+    <!-- ================================= -->
+    <!-- STARTING LOCATION -->
+    <!-- ================================= -->
+
+    <div class="location-box">
+
+        <label>
+            Starting Location
+        </label>
+
+
+        <div class="location-row">
+
+            <input
+                type="text"
+                id="startInput"
+                placeholder="Search starting location..."
+            >
+
+            <button id="startSearchButton">
+                Search
+            </button>
+
+            <button id="currentLocationButton">
+                Use My Location
+            </button>
+
+        </div>
+
+
+        <div
+            id="startResults"
+            class="search-results">
+        </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- DESTINATION -->
+    <!-- ================================= -->
+
+    <div class="location-box">
+
+        <label>
+            Destination
+        </label>
+
+
+        <div class="location-row">
+
+            <input
+                type="text"
+                id="destinationInput"
+                placeholder="Search destination..."
+            >
+
+            <button id="destinationSearchButton">
+                Search
+            </button>
+
+        </div>
+
+
+        <div
+            id="destinationResults"
+            class="search-results">
+        </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- ROUTE BUTTON -->
+    <!-- ================================= -->
+
+    <button
+        id="routeButton"
+        class="route-button">
+
         Find Shortest Route
+
     </button>
+
 
     <p id="status">
-        Enable your location first.
+        Select a starting location and destination.
     </p>
+
+
+    <!-- ================================= -->
+    <!-- MAP -->
+    <!-- ================================= -->
+
+    <div id="map"></div>
 
 </div>
 
 
-<div id="map"></div>
-
+<!-- Leaflet JS -->
 
 <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
@@ -76,15 +223,20 @@
 <script>
 
 
-// --------------------------------
+// ==========================================
 // MAP
-// --------------------------------
+// ==========================================
 
 const defaultLatitude = 20.9371;
+
 const defaultLongitude = 77.7796;
 
+
 const map = L.map("map").setView(
-    [defaultLatitude, defaultLongitude],
+    [
+        defaultLatitude,
+        defaultLongitude
+    ],
     14
 );
 
@@ -93,46 +245,73 @@ L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
         maxZoom: 19,
+
         attribution:
             "&copy; OpenStreetMap contributors"
     }
 ).addTo(map);
 
 
-// --------------------------------
+// ==========================================
 // VARIABLES
-// --------------------------------
+// ==========================================
 
-let currentMarker = null;
+// Starting location
 
-let destinationMarker = null;
+let startLatitude = null;
 
-let routeLine = null;
+let startLongitude = null;
 
-let currentLatitude = null;
 
-let currentLongitude = null;
+// Destination
 
 let destinationLatitude = null;
 
 let destinationLongitude = null;
 
+
+// Markers
+
+let startMarker = null;
+
+let destinationMarker = null;
+
+
+// Route
+
+let routeLine = null;
+
+
+// GPS
+
 let watchId = null;
 
 
-// --------------------------------
-// ENABLE LOCATION
-// --------------------------------
+// ==========================================
+// STATUS
+// ==========================================
+
+function setStatus(message) {
+
+    document
+        .getElementById("status")
+        .textContent = message;
+}
+
+
+// ==========================================
+// USE CURRENT LOCATION
+// ==========================================
 
 document
-    .getElementById("locationButton")
+    .getElementById("currentLocationButton")
     .addEventListener(
         "click",
-        startLocation
+        useCurrentLocation
     );
 
 
-function startLocation() {
+function useCurrentLocation() {
 
     if (!navigator.geolocation) {
 
@@ -145,136 +324,468 @@ function startLocation() {
 
 
     setStatus(
-        "Requesting location permission..."
+        "Getting your current location..."
     );
 
 
-    watchId = navigator.geolocation.watchPosition(
-        handleLocation,
-        handleLocationError,
-        {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 10000
-        }
-    );
+    watchId =
+        navigator.geolocation.watchPosition(
+
+            function(position) {
+
+                startLatitude =
+                    position.coords.latitude;
+
+                startLongitude =
+                    position.coords.longitude;
+
+
+                const accuracy =
+                    position.coords.accuracy;
+
+
+                setStartMarker(
+                    startLatitude,
+                    startLongitude
+                );
+
+
+                document
+                    .getElementById("startInput")
+                    .value =
+                        "Current Location";
+
+
+                setStatus(
+                    "Current location detected. Accuracy: "
+                    + accuracy.toFixed(1)
+                    + " meters"
+                );
+
+
+                // Stop watching after
+                // getting a reasonably
+                // accurate location.
+
+                if (accuracy <= 30) {
+
+                    navigator.geolocation.clearWatch(
+                        watchId
+                    );
+
+                }
+
+            },
+
+            function(error) {
+
+                console.error(error);
+
+
+                if (error.code === 1) {
+
+                    setStatus(
+                        "Location permission denied."
+                    );
+
+                }
+
+                else if (error.code === 2) {
+
+                    setStatus(
+                        "Location unavailable."
+                    );
+
+                }
+
+                else if (error.code === 3) {
+
+                    setStatus(
+                        "Location request timed out."
+                    );
+
+                }
+
+                else {
+
+                    setStatus(
+                        "Unable to get current location."
+                    );
+                }
+
+            },
+
+            {
+                enableHighAccuracy: true,
+
+                maximumAge: 0,
+
+                timeout: 15000
+            }
+        );
 }
 
 
-// --------------------------------
-// CURRENT LOCATION
-// --------------------------------
+// ==========================================
+// START MARKER
+// ==========================================
 
-function handleLocation(position) {
+function setStartMarker(
+    latitude,
+    longitude
+) {
 
-    currentLatitude =
-        position.coords.latitude;
+    if (startMarker === null) {
 
-    currentLongitude =
-        position.coords.longitude;
+        startMarker =
+            L.marker([
+                latitude,
+                longitude
+            ])
+            .addTo(map)
+            .bindPopup(
+                "Starting Location"
+            );
 
-    const accuracy =
-        position.coords.accuracy;
+    }
 
+    else {
 
-    console.log(
-        "Current location:",
-        currentLatitude,
-        currentLongitude
-    );
-
-
-    if (currentMarker === null) {
-
-        currentMarker = L.marker([
-            currentLatitude,
-            currentLongitude
-        ])
-        .addTo(map)
-        .bindPopup(
-            "Your Current Location"
-        );
-
-        currentMarker.openPopup();
-
-    } else {
-
-        currentMarker.setLatLng([
-            currentLatitude,
-            currentLongitude
+        startMarker.setLatLng([
+            latitude,
+            longitude
         ]);
     }
 
 
-    map.setView([
-        currentLatitude,
-        currentLongitude
-    ], 16);
-
-
-    setStatus(
-        "Location active. Click on the map to select destination."
-        + " Accuracy: "
-        + accuracy.toFixed(1)
-        + " m"
+    map.setView(
+        [
+            latitude,
+            longitude
+        ],
+        16
     );
 }
 
 
-// --------------------------------
-// DESTINATION
-// --------------------------------
+// ==========================================
+// DESTINATION MARKER
+// ==========================================
 
-map.on(
-    "click",
-    function(event) {
+function setDestinationMarker(
+    latitude,
+    longitude,
+    name
+) {
 
-        destinationLatitude =
-            event.latlng.lat;
+    if (destinationMarker !== null) {
 
-        destinationLongitude =
-            event.latlng.lng;
+        map.removeLayer(
+            destinationMarker
+        );
+    }
 
 
-        console.log(
-            "Destination:",
-            destinationLatitude,
-            destinationLongitude
+    destinationMarker =
+        L.marker([
+            latitude,
+            longitude
+        ])
+        .addTo(map)
+        .bindPopup(
+            name || "Destination"
+        )
+        .openPopup();
+
+
+    map.setView(
+        [
+            latitude,
+            longitude
+        ],
+        15
+    );
+}
+
+
+// ==========================================
+// SEARCH STARTING LOCATION
+// ==========================================
+
+document
+    .getElementById("startSearchButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            searchLocation(
+                "start"
+            );
+
+        }
+    );
+
+
+// ==========================================
+// SEARCH DESTINATION
+// ==========================================
+
+document
+    .getElementById("destinationSearchButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            searchLocation(
+                "destination"
+            );
+
+        }
+    );
+
+
+// ==========================================
+// SEARCH LOCATION
+// ==========================================
+
+async function searchLocation(
+    type
+) {
+
+    let inputId;
+
+    let resultId;
+
+
+    if (type === "start") {
+
+        inputId = "startInput";
+
+        resultId = "startResults";
+
+    }
+
+    else {
+
+        inputId = "destinationInput";
+
+        resultId =
+            "destinationResults";
+    }
+
+
+    const query =
+        document
+            .getElementById(inputId)
+            .value
+            .trim();
+
+
+    if (!query) {
+
+        setStatus(
+            "Please enter a location."
         );
 
+        return;
+    }
 
-        // Remove old destination marker
-        if (destinationMarker !== null) {
 
-            map.removeLayer(
-                destinationMarker
+    setStatus(
+        "Searching location..."
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/search-location?q="
+                + encodeURIComponent(query)
             );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            setStatus(
+                data.message
+            );
+
+            return;
         }
 
 
-        // Create new destination marker
-        destinationMarker =
-            L.marker([
-                destinationLatitude,
-                destinationLongitude
-            ])
-            .addTo(map)
-            .bindPopup(
-                "Destination"
-            )
-            .openPopup();
+        displayResults(
+            data.locations,
+            type,
+            resultId
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Unable to search location."
+        );
+    }
+}
+
+
+// ==========================================
+// DISPLAY RESULTS
+// ==========================================
+
+function displayResults(
+    locations,
+    type,
+    resultId
+) {
+
+    const container =
+        document.getElementById(
+            resultId
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (locations.length === 0) {
+
+        container.innerHTML =
+            "<p>No locations found.</p>";
+
+        return;
+    }
+
+
+    locations.forEach(
+        function(location) {
+
+            const result =
+                document.createElement(
+                    "div"
+                );
+
+
+            result.className =
+                "result";
+
+
+            result.textContent =
+                location.name;
+
+
+            result.addEventListener(
+                "click",
+                function() {
+
+                    selectLocation(
+                        location,
+                        type
+                    );
+
+                }
+            );
+
+
+            container.appendChild(
+                result
+            );
+        }
+    );
+}
+
+
+// ==========================================
+// SELECT LOCATION
+// ==========================================
+
+function selectLocation(
+    location,
+    type
+) {
+
+    if (type === "start") {
+
+        startLatitude =
+            location.latitude;
+
+        startLongitude =
+            location.longitude;
+
+
+        document
+            .getElementById("startInput")
+            .value =
+                location.name;
+
+
+        setStartMarker(
+            startLatitude,
+            startLongitude
+        );
+
+
+        document
+            .getElementById("startResults")
+            .innerHTML = "";
 
 
         setStatus(
-            "Destination selected. Click Find Shortest Route."
+            "Starting location selected."
         );
     }
-);
 
 
-// --------------------------------
+    else {
+
+        destinationLatitude =
+            location.latitude;
+
+        destinationLongitude =
+            location.longitude;
+
+
+        document
+            .getElementById(
+                "destinationInput"
+            )
+            .value =
+                location.name;
+
+
+        setDestinationMarker(
+            destinationLatitude,
+            destinationLongitude,
+            location.name
+        );
+
+
+        document
+            .getElementById(
+                "destinationResults"
+            )
+            .innerHTML = "";
+
+
+        setStatus(
+            "Destination selected."
+        );
+    }
+}
+
+
+// ==========================================
 // FIND ROUTE
-// --------------------------------
+// ==========================================
 
 document
     .getElementById("routeButton")
@@ -284,15 +795,15 @@ document
     );
 
 
-function findRoute() {
+async function findRoute() {
 
     if (
-        currentLatitude === null ||
-        currentLongitude === null
+        startLatitude === null ||
+        startLongitude === null
     ) {
 
         setStatus(
-            "Please enable your location first."
+            "Please select a starting location."
         );
 
         return;
@@ -305,7 +816,7 @@ function findRoute() {
     ) {
 
         setStatus(
-            "Please select a destination on the map."
+            "Please select a destination."
         );
 
         return;
@@ -317,41 +828,42 @@ function findRoute() {
     );
 
 
-    fetch(
-        "/api/route",
-        {
+    try {
 
-            method: "POST",
+        const response =
+            await fetch(
+                "/api/route",
+                {
 
-            headers: {
-                "Content-Type":
-                    "application/json"
-            },
+                    method: "POST",
 
-            body: JSON.stringify({
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                start_lat:
-                    currentLatitude,
+                    body: JSON.stringify({
 
-                start_lon:
-                    currentLongitude,
+                        start_lat:
+                            startLatitude,
 
-                end_lat:
-                    destinationLatitude,
+                        start_lon:
+                            startLongitude,
 
-                end_lon:
-                    destinationLongitude
+                        end_lat:
+                            destinationLatitude,
 
-            })
+                        end_lon:
+                            destinationLongitude
 
-        }
-    )
+                    })
+                }
+            );
 
-    .then(response =>
-        response.json()
-    )
 
-    .then(data => {
+        const data =
+            await response.json();
+
 
         if (!data.success) {
 
@@ -371,37 +883,39 @@ function findRoute() {
         const distanceKm =
             data.distance / 1000;
 
+
         const durationMinutes =
             data.duration / 60;
 
 
         setStatus(
-            "Route found. Distance: "
+            "Route found | "
             + distanceKm.toFixed(2)
-            + " km | Estimated time: "
+            + " km | "
             + durationMinutes.toFixed(1)
             + " minutes"
         );
 
-    })
+    }
 
-    .catch(error => {
+    catch (error) {
 
         console.error(error);
 
         setStatus(
             "Unable to find route."
         );
-
-    });
+    }
 }
 
 
-// --------------------------------
+// ==========================================
 // DRAW ROUTE
-// --------------------------------
+// ==========================================
 
-function drawRoute(geometry) {
+function drawRoute(
+    geometry
+) {
 
     if (routeLine !== null) {
 
@@ -423,55 +937,8 @@ function drawRoute(geometry) {
 }
 
 
-// --------------------------------
-// GPS ERROR
-// --------------------------------
-
-function handleLocationError(error) {
-
-    console.error(error);
-
-
-    if (error.code === 1) {
-
-        setStatus(
-            "Location permission denied."
-        );
-
-    } else if (error.code === 2) {
-
-        setStatus(
-            "Location unavailable."
-        );
-
-    } else if (error.code === 3) {
-
-        setStatus(
-            "Location request timed out."
-        );
-
-    } else {
-
-        setStatus(
-            "Unable to get your location."
-        );
-    }
-}
-
-
-// --------------------------------
-// STATUS
-// --------------------------------
-
-function setStatus(message) {
-
-    document
-        .getElementById("status")
-        .textContent = message;
-}
-
-
 </script>
+
 
 </body>
 

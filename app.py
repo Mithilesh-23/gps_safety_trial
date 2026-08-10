@@ -4,10 +4,83 @@ import requests
 app = Flask(__name__)
 
 
+# ---------------------------------------
+# HOME
+# ---------------------------------------
+
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
+# ---------------------------------------
+# SEARCH LOCATION
+# ---------------------------------------
+
+@app.route("/api/search-location", methods=["GET"])
+def search_location():
+
+    query = request.args.get("q", "").strip()
+
+    if not query:
+        return jsonify({
+            "success": False,
+            "message": "Location search is required"
+        }), 400
+
+    url = "https://nominatim.openstreetmap.org/search"
+
+    params = {
+        "q": query,
+        "format": "json",
+        "limit": 5
+    }
+
+    headers = {
+        "User-Agent": "WomenSafetyGPSPrototype/1.0"
+    }
+
+    try:
+
+        response = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            timeout=10
+        )
+
+        response.raise_for_status()
+
+        results = response.json()
+
+        locations = []
+
+        for result in results:
+
+            locations.append({
+                "name": result["display_name"],
+                "latitude": float(result["lat"]),
+                "longitude": float(result["lon"])
+            })
+
+        return jsonify({
+            "success": True,
+            "locations": locations
+        })
+
+    except requests.RequestException as error:
+
+        print("Nominatim error:", error)
+
+        return jsonify({
+            "success": False,
+            "message": "Unable to search location"
+        }), 500
+
+
+# ---------------------------------------
+# ROUTE
+# ---------------------------------------
 
 @app.route("/api/route", methods=["POST"])
 def get_route():
@@ -20,34 +93,40 @@ def get_route():
     end_lat = data.get("end_lat")
     end_lon = data.get("end_lon")
 
-    if not all([
+    if None in [
         start_lat,
         start_lon,
         end_lat,
         end_lon
-    ]):
+    ]:
+
         return jsonify({
             "success": False,
-            "message": "Missing coordinates"
+            "message": "Starting location and destination are required"
         }), 400
 
 
-    # OSRM uses:
+    # OSRM expects:
     # longitude,latitude
+
     coordinates = (
         f"{start_lon},{start_lat};"
         f"{end_lon},{end_lat}"
     )
 
+
     url = (
-        "https://router.project-osrm.org/route/v1/driving/"
+        "https://router.project-osrm.org/"
+        "route/v1/driving/"
         + coordinates
     )
+
 
     params = {
         "overview": "full",
         "geometries": "geojson"
     }
+
 
     try:
 
@@ -61,7 +140,9 @@ def get_route():
 
         osrm_data = response.json()
 
+
         if osrm_data.get("code") != "Ok":
+
             return jsonify({
                 "success": False,
                 "message": "Route not found"
@@ -70,23 +151,33 @@ def get_route():
 
         route = osrm_data["routes"][0]
 
+
         return jsonify({
+
             "success": True,
+
             "distance": route["distance"],
+
             "duration": route["duration"],
+
             "geometry": route["geometry"]
+
         })
 
 
     except requests.RequestException as error:
 
-        print("OSRM Error:", error)
+        print("OSRM error:", error)
 
         return jsonify({
             "success": False,
-            "message": "Unable to connect to routing service"
+            "message": "Unable to connect to OSRM"
         }), 500
 
+
+# ---------------------------------------
+# START FLASK
+# ---------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)
