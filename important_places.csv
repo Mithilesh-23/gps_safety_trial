@@ -1,0 +1,24 @@
+name,type,latitude,longitude,source
+Sipna College of Engineering and Technology,education,20.8809,77.7474,Institutional published location / coordinate source
+Amravati Railway Station,railway_station,20.93071,77.75807,OpenStreetMap-derived source
+New Amravati Railway Station,railway_station,20.90304,77.7329,OpenStreetMap-derived source
+Rajapeth Police Station,police_station,20.923847,77.754114,Police listing / location directory
+Amravati City Kotwali Police Station,police_station,20.930163,77.753666,OpenStreetMap-derived source
+Nagpuri Gate Police Station,police_station,20.93634,77.74445,OpenStreetMap-derived source
+Police Station Frezarpura,police_station,20.9324023,77.7762455,Location directory / OpenStreetMap-derived listing
+"Police Head Quarters, Amravati",police_headquarters,20.9315724,77.7734955,OpenStreetMap-derived source
+"Commissioner Of Police Office, Amravati",police_office,20.9311243,77.7751887,Location directory
+Government College of Engineering Amravati,education,20.95713,77.75692,OpenStreetMap-derived source
+Government Vidarbha Institute of Science and Humanities,education,20.95573,77.75498,OpenStreetMap-derived source
+Shri Ambadevi Temple,religious_landmark,20.92726,77.74891,OpenStreetMap-derived Mapcarta; Government of Maharashtra confirms temple is in central Amravati
+Jawahar Gate,historical_landmark,20.93192,77.75006,OpenStreetMap-derived Mapcarta / Wikimedia Commons
+Rajkamal Square,commercial_traffic_hub,20.92867,77.75265,MPCB Amravati Environmental Study; site described as commercial/traffic with heavy vehicle flow and congestion
+Maltekdi,hill_landmark,20.932762,77.76915,Published geographic coordinate source; Government of Maharashtra identifies Maltekdi as a hill inside the city
+Bamboo Garden Amravati,park_tourist_place,20.922792,77.792397,Wikimedia Commons GPS-tagged photograph; current reporting identifies Bamboo Garden as a major city facility
+Wadali Talav,waterbody_tourist_place,20.925,77.7953,OpenStreetMap-derived Mapcarta; Maharashtra Tourism lists Wadali Talav as a city attraction
+Wadali Garden,park_tourist_place,20.927921,77.793177,Published latitude/longitude source; structured local business listing
+Joshi Market,market_commercial,20.92961,77.75312,OpenStreetMap-derived Mapcarta
+Satidham Mandir,religious_landmark,20.92938,77.75608,OpenStreetMap-derived Mapcarta
+"Gajanan Maharaj Temple, Dastur Nagar",religious_landmark,20.9090003,77.7684206,Published local location directory
+"Sarafa, Amravati",commercial_area,20.932142,77.746864,Published geographic coordinate source
+Chhatri Talao Road,tourist_area,20.9135,77.762,Published geographic coordinate source; use as road/area reference rather than exact lake centroid

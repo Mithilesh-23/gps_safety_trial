@@ -1,2189 +1,1519 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Women Safety Route Finder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>Women Safety · Route Finder</title>
 
-    <!-- ==========================================
-         LEAFLET CSS
-    =========================================== -->
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
-
+    <!-- Google Font (Inter) for a clean, professional look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 
     <style>
-
+        /* ----- reset & base ----- */
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            padding: 24px 16px;
+            line-height: 1.5;
         }
-
 
         .container {
-            max-width: 1100px;
-            margin: auto;
-            background: white;
-            padding: 20px;
+            max-width: 1120px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+            padding: 28px 28px 32px;
+            transition: all 0.2s ease;
         }
 
-
+        /* ----- typography ----- */
         h2 {
-            text-align: center;
-            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: -0.01em;
+            color: #0f172a;
+            margin: 0 0 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
+        .subhead {
+            font-size: 14px;
+            color: #64748b;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
 
-        /* ==========================================
-           LOCATION SECTION
-        =========================================== */
+        /* ----- location boxes ----- */
+        .location-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 32px;
+            margin-bottom: 24px;
+        }
 
         .location-box {
-            margin-bottom: 20px;
+            flex: 1 1 240px;
+            min-width: 200px;
         }
-
 
         .location-box label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
+            font-weight: 500;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            color: #475569;
+            margin-bottom: 6px;
         }
-
 
         .location-row {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
-
 
         .location-row input {
-            flex: 1;
-            padding: 11px;
-            font-size: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            flex: 1 1 160px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid #d1d9e6;
+            border-radius: 12px;
+            background: #ffffff;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
         }
 
+        .location-row input:focus {
+            outline: none;
+            border-color: #94a3b8;
+            box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15);
+        }
 
-        button {
-            padding: 10px 16px;
-            cursor: pointer;
+        .btn {
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
             border: none;
-            background: #333;
+            border-radius: 12px;
+            background: #f1f5f9;
+            color: #1e293b;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.05s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .btn:hover {
+            background: #e2e8f0;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: #1e293b;
             color: white;
-            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(30, 41, 59, 0.08);
         }
 
-
-        button:hover {
-            background: #555;
+        .btn-primary:hover {
+            background: #0f172a;
         }
 
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #d1d9e6;
+        }
 
-        /* ==========================================
-           SEARCH RESULTS
-        =========================================== */
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #334155;
+        }
+
+        .btn-ghost:hover {
+            background: #f1f5f9;
+        }
 
         .search-results {
-            margin-top: 5px;
+            margin-top: 8px;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9edf2;
         }
-
 
         .result {
-            padding: 10px;
-            border: 1px solid #ddd;
-            background: white;
+            padding: 10px 14px;
+            font-size: 14px;
+            border-bottom: 1px solid #f1f5f9;
             cursor: pointer;
+            transition: background 0.1s;
         }
 
+        .result:last-child {
+            border-bottom: none;
+        }
 
         .result:hover {
-            background: #f0f0f0;
+            background: #f8fafc;
         }
 
-
-        /* ==========================================
-           FIND ROUTE BUTTON
-        =========================================== */
+        /* ----- action row (find routes) ----- */
+        .action-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 10px 0 16px;
+        }
 
         .route-button {
-            width: 100%;
-            margin-top: 5px;
-            font-size: 17px;
-            background: #222;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            background: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: background 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 10px rgba(30, 41, 59, 0.08);
+            letter-spacing: 0.2px;
         }
-
 
         .route-button:hover {
-            background: #444;
+            background: #0f172a;
+            box-shadow: 0 6px 14px rgba(30, 41, 59, 0.12);
         }
-
-
-        /* ==========================================
-           STATUS
-        =========================================== */
 
         #status {
-            text-align: center;
-            margin: 15px 0;
-            font-weight: bold;
+            font-size: 14px;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 0;
+            font-weight: 400;
         }
 
-
-        /* ==========================================
-           MAP
-        =========================================== */
-
+        /* ----- map ----- */
         #map {
-            height: 600px;
+            height: 520px;
             width: 100%;
-            margin-top: 20px;
-            border-radius: 6px;
+            border-radius: 20px;
+            margin-top: 18px;
+            border: 1px solid #e9edf2;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            background: #f1f5f9;
         }
 
-
-        /* ==========================================
-           SELECTED ROUTE BOX
-        =========================================== */
-
+        /* ----- selected route panel ----- */
         #selectedRoute {
-
             display: none;
-
-            margin-top: 20px;
-
-            padding: 18px;
-
-            border: 2px solid #28a745;
-
-            border-radius: 8px;
-
-            background: #f8fff9;
-
+            margin-top: 24px;
+            padding: 20px 24px 24px;
+            border-radius: 20px;
+            background: #fafcff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
         }
-
 
         #selectedRoute h3 {
-
+            font-weight: 600;
+            font-size: 18px;
+            color: #0f172a;
             margin-top: 0;
-
-            color: #28a745;
-
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
-
 
         .route-detail {
-
             display: flex;
-
-            gap: 50px;
-
+            gap: 40px 60px;
             flex-wrap: wrap;
-
         }
-
 
         .detail-item {
-
-            font-size: 15px;
-
+            font-size: 14px;
+            color: #475569;
         }
-
 
         .detail-value {
-
-            font-size: 21px;
-
-            font-weight: bold;
-
-            margin-top: 5px;
-
+            font-size: 24px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-top: 4px;
+            letter-spacing: -0.01em;
         }
 
-
-        /* ==========================================
-           ROUTE CARDS
-        =========================================== */
-
+        /* ----- route cards ----- */
         #routeResults {
-
             margin-top: 20px;
-
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
-
 
         .route-card {
-
-            padding: 15px;
-
-            margin-bottom: 10px;
-
-            border: 2px solid #ddd;
-
-            border-radius: 7px;
-
-            background: white;
-
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 1px solid #e9edf2;
+            background: #ffffff;
             cursor: pointer;
-
-            transition: 0.2s;
-
+            transition: border 0.15s, background 0.1s, box-shadow 0.1s;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
         }
-
 
         .route-card:hover {
-
-            background: #f5f5f5;
-
-            border-color: #999;
-
+            background: #fafcff;
+            border-color: #cbd5e1;
         }
-
-
-        /* Selected route card */
 
         .route-card.selected {
-
-            border: 2px solid #28a745;
-
-            background: #f0fff3;
-
+            border: 1px solid #1e293b;
+            background: #f8fafc;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
-
 
         .route-title {
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-            margin-bottom: 7px;
-
+            font-weight: 600;
+            font-size: 16px;
+            color: #0f172a;
+            margin-right: 20px;
         }
 
-
-        .route-small-info {
-
-            color: #555;
-
-            font-size: 15px;
-
+        .route-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            font-size: 14px;
+            color: #475569;
         }
 
+        .route-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
 
-        .selected-label {
+        .safety-count {
+            font-size: 13px;
+            font-weight: 500;
+            color: #334155;
+            background: #f1f5f9;
+            padding: 2px 12px;
+            border-radius: 30px;
+        }
 
+        /* ----- legend (leaflet) ----- */
+        .map-legend {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e9edf2;
+            font-size: 13px;
+            line-height: 1.6;
+            min-width: 130px;
+        }
+
+        .map-legend strong {
+            font-weight: 600;
+            color: #0f172a;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 2px 0;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
             display: inline-block;
-
-            margin-left: 8px;
-
-            padding: 3px 7px;
-
-            background: #28a745;
-
-            color: white;
-
-            border-radius: 4px;
-
-            font-size: 12px;
-
+            flex-shrink: 0;
         }
 
+        .safety-dot {
+            background: #dc2626;
+        }
 
-        /* ==========================================
-           MOBILE
-        =========================================== */
+        .start-dot {
+            background: #16a34a;
+        }
 
+        .destination-dot {
+            background: #2563eb;
+        }
+
+        .risk-dot {
+            background: #ef4444;
+            border: 1px solid #b91c1c;
+        }
+
+        /* ----- safety popup (leaflet) ----- */
+        .safety-popup {
+            min-width: 180px;
+        }
+
+        .safety-popup h4 {
+            font-weight: 600;
+            margin: 0 0 6px 0;
+            color: #0f172a;
+        }
+
+        .safety-popup p {
+            margin: 4px 0;
+            font-size: 13px;
+        }
+
+        /* ----- responsive ----- */
         @media (max-width: 700px) {
-
-            .location-row {
-
-                flex-direction: column;
-
+            body {
+                padding: 12px 8px;
             }
 
+            .container {
+                padding: 20px 16px;
+            }
+
+            .location-panel {
+                flex-direction: column;
+                gap: 16px;
+            }
 
             .location-row input {
-
-                width: 100%;
-
+                flex: 1 1 100%;
             }
 
-
-            button {
-
-                width: 100%;
-
+            .btn {
+                flex: 1 1 auto;
             }
 
+            .action-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #status {
+                text-align: center;
+            }
+
+            .route-button {
+                width: 100%;
+                justify-content: center;
+            }
 
             #map {
-
-                height: 450px;
-
+                height: 380px;
             }
 
+            .route-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .route-meta {
+                width: 100%;
+                justify-content: space-between;
+            }
 
             .route-detail {
-
-                gap: 20px;
-
+                gap: 16px 30px;
             }
-
         }
 
+        @media (max-width: 480px) {
+            .location-row {
+                flex-direction: column;
+            }
+
+            .location-row input {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ----- scrollbar for results ----- */
+        .search-results::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
     </style>
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
-    <!-- ==========================================
-         TITLE
-    =========================================== -->
-
-    <h2>
-        Women Safety Route Finder
-    </h2>
-
-
-    <!-- ==========================================
-         STARTING LOCATION
-    =========================================== -->
-
-    <div class="location-box">
-
-        <label>
-            Starting Location
-        </label>
-
-
-        <div class="location-row">
-
-            <input
-                type="text"
-                id="startInput"
-                placeholder="Search starting location..."
-            >
-
-
-            <button
-                id="startSearchButton">
-
-                Search
-
-            </button>
-
-
-            <button
-                id="currentLocationButton">
-
-                Use My Location
-
-            </button>
-
-        </div>
-
-
-        <div
-            id="startResults"
-            class="search-results">
-
-        </div>
-
+    <!-- header -->
+    <h2>⟡ Safety Route Finder</h2>
+    <div class="subhead">
+        <span>Women safety · route intelligence</span>
+        <span style="font-weight:400; color:#94a3b8;">real‑time</span>
     </div>
 
-
-    <!-- ==========================================
-         DESTINATION
-    =========================================== -->
-
-    <div class="location-box">
-
-        <label>
-            Destination
-        </label>
-
-
-        <div class="location-row">
-
-            <input
-                type="text"
-                id="destinationInput"
-                placeholder="Search destination..."
-            >
-
-
-            <button
-                id="destinationSearchButton">
-
-                Search
-
-            </button>
-
+    <!-- location inputs -->
+    <div class="location-panel">
+        <!-- start -->
+        <div class="location-box">
+            <label>Starting location</label>
+            <div class="location-row">
+                <input type="text" id="startInput" placeholder="Search start ...">
+                <button class="btn" id="startSearchButton">Search</button>
+                <button class="btn btn-outline" id="currentLocationButton">📍 Current</button>
+            </div>
+            <div id="startResults" class="search-results"></div>
         </div>
 
-
-        <div
-            id="destinationResults"
-            class="search-results">
-
+        <!-- destination -->
+        <div class="location-box">
+            <label>Destination</label>
+            <div class="location-row">
+                <input type="text" id="destinationInput" placeholder="Search destination ...">
+                <button class="btn" id="destinationSearchButton">Search</button>
+            </div>
+            <div id="destinationResults" class="search-results"></div>
         </div>
-
     </div>
 
+    <!-- action row -->
+    <div class="action-row">
+        <button id="routeButton" class="route-button">Find routes</button>
+        <span id="status">Select start and destination</span>
+    </div>
 
-    <!-- ==========================================
-         FIND ROUTES
-    =========================================== -->
-
-    <button
-        id="routeButton"
-        class="route-button">
-
-        Find Routes
-
-    </button>
-
-
-    <!-- ==========================================
-         STATUS
-    =========================================== -->
-
-    <p id="status">
-
-        Select a starting location
-        and destination.
-
-    </p>
-
-
-    <!-- ==========================================
-         MAP
-    =========================================== -->
-
+    <!-- map -->
     <div id="map"></div>
 
-
-    <!-- ==========================================
-         SELECTED ROUTE INFORMATION
-    =========================================== -->
-
-    <div id="selectedRoute">
-
-        <h3 id="selectedRouteTitle">
-
-            Selected Route
-
-        </h3>
-
-
-        <div class="route-detail">
-
-
-            <div class="detail-item">
-
-                Distance
-
-                <div
-                    id="selectedDistance"
-                    class="detail-value">
-
-                    -
-
-                </div>
-
-            </div>
-
-
-            <div class="detail-item">
-
-                Estimated Time
-
-                <div
-                    id="selectedDuration"
-                    class="detail-value">
-
-                    -
-
-                </div>
-
-            </div>
-
-
-        </div>
-
+    <div style="
+        margin-top: 12px;
+        font-size: 12px;
+        color: #64748b;
+    ">
+        Route colors are based on safety score.
+        Green indicates the safest available route.
+        Click any route on the map or route card to inspect it.
     </div>
 
+    <!-- selected route detail -->
+    <div id="selectedRoute">
+        <h3 id="selectedRouteTitle">Selected route</h3>
+        <div class="route-detail">
+            <div class="detail-item">
+                Distance
+                <div id="selectedDistance" class="detail-value">—</div>
+            </div>
+            <div class="detail-item">
+                Est. time
+                <div id="selectedDuration" class="detail-value">—</div>
+            </div>
+            <div class="detail-item">
+                Risk points
+                <div id="selectedSafetyCount" class="detail-value">—</div>
+            </div>
+            <div class="detail-item">
+                Safety score
+                <div id="selectedSafetyScore" class="detail-value">—</div>
+            </div>
+            <div class="detail-item">
+                Route risk
+                <div id="selectedRouteRisk" class="detail-value">—</div>
+            </div>
+        </div>
+    </div>
 
-    <!-- ==========================================
-         ROUTE CARDS
-    =========================================== -->
-
+    <!-- route cards -->
     <div id="routeResults"></div>
-
 
 </div>
 
-
-<!-- ==========================================
-     LEAFLET JS
-=========================================== -->
-
-<script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-</script>
-
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+    // ============================================================
+    //  MAP INIT
+    // ============================================================
+    const defaultLat = 20.9371;
+    const defaultLon = 77.7796;
 
+    const map = L.map('map').setView([defaultLat, defaultLon], 14);
 
-// ======================================================
-// MAP
-// ======================================================
-
-const defaultLatitude = 20.9371;
-
-const defaultLongitude = 77.7796;
-
-
-const map = L.map("map").setView(
-
-    [
-        defaultLatitude,
-        defaultLongitude
-    ],
-
-    14
-
-);
-
-
-L.tileLayer(
-
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
-    {
-
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-        attribution:
-            "&copy; OpenStreetMap contributors"
+    // ----- Layer for risk points affecting the selected route -----
+    let routeRiskLayer = L.layerGroup().addTo(map);
 
+    // ----- variables -----
+    let startLat = null, startLon = null;
+    let destLat = null, destLon = null;
+    let startMarker = null;
+    let destMarker = null;
+    let watchId = null;
+    let routeLayerGroup = null;
+    let routeLayers = {};
+    let availableRoutes = [];
+    let selectedRouteId = null;
+
+    // All safety data loaded from area_risk.csv through /api/safety-data.
+    // We use this as the source for route-specific risk points.
+    let allSafetyPoints = [];
+    // safetyMarkerGroup removed — we now use routeRiskLayer
+
+    // ----- status helper -----
+    function setStatus(msg) {
+        document.getElementById('status').textContent = msg;
     }
 
-).addTo(map);
+    // ============================================================
+    //  CURRENT LOCATION
+    // ============================================================
+    document.getElementById('currentLocationButton').addEventListener('click', useCurrentLocation);
 
-
-// ======================================================
-// VARIABLES
-// ======================================================
-
-
-// Starting location
-
-let startLatitude = null;
-
-let startLongitude = null;
-
-
-// Destination
-
-let destinationLatitude = null;
-
-let destinationLongitude = null;
-
-
-// Markers
-
-let startMarker = null;
-
-let destinationMarker = null;
-
-
-// GPS
-
-let watchId = null;
-
-
-// Route layer group
-
-let routeLayerGroup = null;
-
-
-// Individual route layers
-
-let routeLayers = {};
-
-
-// All route information
-
-let availableRoutes = [];
-
-
-// Currently selected route
-
-let selectedRouteId = null;
-
-
-// ======================================================
-// STATUS
-// ======================================================
-
-function setStatus(message) {
-
-    document
-        .getElementById("status")
-        .textContent = message;
-
-}
-
-
-// ======================================================
-// CURRENT LOCATION
-// ======================================================
-
-document
-    .getElementById("currentLocationButton")
-    .addEventListener(
-
-        "click",
-
-        useCurrentLocation
-
-    );
-
-
-function useCurrentLocation() {
-
-
-    if (!navigator.geolocation) {
-
-        setStatus(
-            "Geolocation is not supported."
+    function useCurrentLocation() {
+        if (!navigator.geolocation) {
+            setStatus('Geolocation not supported.');
+            return;
+        }
+        setStatus('Getting current location …');
+        watchId = navigator.geolocation.watchPosition(
+            (pos) => {
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                const acc = pos.coords.accuracy;
+                startLat = lat;
+                startLon = lng;
+                setStartMarker(lat, lng);
+                document.getElementById('startInput').value = 'Current Location';
+                setStatus(`Location detected (accuracy ${acc.toFixed(1)} m)`);
+                if (acc <= 30) navigator.geolocation.clearWatch(watchId);
+            },
+            (err) => {
+                console.error('GPS error:', err);
+                if (err.code === 1) setStatus('Location permission denied.');
+                else if (err.code === 2) setStatus('Location unavailable.');
+                else if (err.code === 3) setStatus('Location timeout.');
+                else setStatus('Unable to get location.');
+            },
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 15000 }
         );
-
-        return;
-
     }
 
+    // ============================================================
+    //  MARKERS
+    // ============================================================
+    function setStartMarker(lat, lng) {
+        if (startMarker === null) {
+            startMarker = L.marker([lat, lng]).addTo(map).bindPopup('Starting location');
+        } else {
+            startMarker.setLatLng([lat, lng]);
+        }
+        map.setView([lat, lng], 15);
+    }
 
-    setStatus(
-        "Getting your current location..."
-    );
+    function setDestinationMarker(lat, lng, name) {
+        if (destMarker !== null) map.removeLayer(destMarker);
+        destMarker = L.marker([lat, lng]).addTo(map).bindPopup(name || 'Destination').openPopup();
+        map.setView([lat, lng], 15);
+    }
 
+    // ============================================================
+    //  SEARCH
+    // ============================================================
+    document.getElementById('startSearchButton').addEventListener('click', () => searchLocation('start'));
+    document.getElementById('destinationSearchButton').addEventListener('click', () => searchLocation('destination'));
 
-    watchId =
-        navigator.geolocation.watchPosition(
+    async function searchLocation(type) {
+        const inputId = type === 'start' ? 'startInput' : 'destinationInput';
+        const resultId = type === 'start' ? 'startResults' : 'destinationResults';
+        const query = document.getElementById(inputId).value.trim();
+        if (!query) { setStatus('Please enter a location.'); return; }
+        setStatus('Searching …');
+        try {
+            const resp = await fetch('/api/search-location?q=' + encodeURIComponent(query));
+            const data = await resp.json();
+            if (!data.success) { setStatus(data.message); return; }
+            displaySearchResults(data.locations, type, resultId);
+        } catch (e) {
+            console.error('Search error:', e);
+            setStatus('Unable to search.');
+        }
+    }
 
-            function(position) {
+    function displaySearchResults(locations, type, resultId) {
+        const container = document.getElementById(resultId);
+        container.innerHTML = '';
+        if (!locations.length) { container.innerHTML = '<div class="result" style="color:#64748b;">No locations found.</div>'; return; }
+        locations.forEach(loc => {
+            const div = document.createElement('div');
+            div.className = 'result';
+            div.textContent = loc.name;
+            div.addEventListener('click', () => selectLocation(loc, type));
+            container.appendChild(div);
+        });
+    }
 
+    function selectLocation(location, type) {
+        if (type === 'start') {
+            startLat = location.latitude;
+            startLon = location.longitude;
+            document.getElementById('startInput').value = location.name;
+            setStartMarker(startLat, startLon);
+            document.getElementById('startResults').innerHTML = '';
+            setStatus('Starting location selected.');
+        } else {
+            destLat = location.latitude;
+            destLon = location.longitude;
+            document.getElementById('destinationInput').value = location.name;
+            setDestinationMarker(destLat, destLon, location.name);
+            document.getElementById('destinationResults').innerHTML = '';
+            setStatus('Destination selected.');
+        }
+    }
 
-                const latitude =
-                    position.coords.latitude;
+    // ============================================================
+    //  SAFETY DATA
+    // ============================================================
 
+    async function loadSafetyData() {
+        try {
+            const response = await fetch('/api/safety-data', {
+                method: 'GET',
+                cache: 'no-store'
+            });
 
-                const longitude =
-                    position.coords.longitude;
+            const data = await response.json();
 
-
-                const accuracy =
-                    position.coords.accuracy;
-
-
-                // Save starting coordinates
-
-                startLatitude =
-                    latitude;
-
-
-                startLongitude =
-                    longitude;
-
-
-                // Update marker
-
-                setStartMarker(
-
-                    latitude,
-
-                    longitude
-
-                );
-
-
-                // Update input
-
-                document
-                    .getElementById(
-                        "startInput"
-                    )
-                    .value =
-                        "Current Location";
-
-
-                setStatus(
-
-                    "Current location detected. Accuracy: "
-                    + accuracy.toFixed(1)
-                    + " meters"
-
-                );
-
-
-                /*
-                    Stop GPS when we get
-                    a reasonably accurate
-                    position.
-                */
-
-                if (accuracy <= 30) {
-
-                    navigator.geolocation.clearWatch(
-                        watchId
-                    );
-
-                }
-
-            },
-
-
-            function(error) {
-
-
-                console.error(
-                    "GPS Error:",
-                    error
-                );
-
-
-                if (error.code === 1) {
-
-                    setStatus(
-                        "Location permission denied."
-                    );
-
-                }
-
-                else if (error.code === 2) {
-
-                    setStatus(
-                        "Location unavailable."
-                    );
-
-                }
-
-                else if (error.code === 3) {
-
-                    setStatus(
-                        "Location request timed out."
-                    );
-
-                }
-
-                else {
-
-                    setStatus(
-                        "Unable to get current location."
-                    );
-
-                }
-
-            },
-
-
-            {
-
-                enableHighAccuracy: true,
-
-                maximumAge: 0,
-
-                timeout: 15000
-
+            if (!data.success) {
+                console.error('Safety API error:', data.error || data.message);
+                allSafetyPoints = [];
+                return;
             }
 
-        );
-
-}
-
-
-// ======================================================
-// START MARKER
-// ======================================================
-
-function setStartMarker(
-
-    latitude,
-
-    longitude
-
-) {
-
-
-    if (startMarker === null) {
-
-
-        startMarker =
-
-            L.marker(
-
-                [
-                    latitude,
-                    longitude
-                ]
-
-            )
-
-            .addTo(map)
-
-            .bindPopup(
-                "Starting Location"
-            );
-
-
-    }
-
-    else {
-
-
-        startMarker.setLatLng(
-
-            [
-                latitude,
-                longitude
-            ]
-
-        );
-
-    }
-
-
-    map.setView(
-
-        [
-            latitude,
-            longitude
-        ],
-
-        15
-
-    );
-
-}
-
-
-// ======================================================
-// DESTINATION MARKER
-// ======================================================
-
-function setDestinationMarker(
-
-    latitude,
-
-    longitude,
-
-    name
-
-) {
-
-
-    if (destinationMarker !== null) {
-
-        map.removeLayer(
-            destinationMarker
-        );
-
-    }
-
-
-    destinationMarker =
-
-        L.marker(
-
-            [
-                latitude,
-                longitude
-            ]
-
-        )
-
-        .addTo(map)
-
-        .bindPopup(
-            name || "Destination"
-        )
-
-        .openPopup();
-
-
-    map.setView(
-
-        [
-            latitude,
-            longitude
-        ],
-
-        15
-
-    );
-
-}
-
-
-// ======================================================
-// SEARCH START LOCATION
-// ======================================================
-
-document
-    .getElementById(
-        "startSearchButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        function() {
-
-            searchLocation(
-                "start"
-            );
-
-        }
-
-    );
-
-
-// ======================================================
-// SEARCH DESTINATION
-// ======================================================
-
-document
-    .getElementById(
-        "destinationSearchButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        function() {
-
-            searchLocation(
-                "destination"
-            );
-
-        }
-
-    );
-
-
-// ======================================================
-// SEARCH LOCATION
-// ======================================================
-
-async function searchLocation(type) {
-
-
-    let inputId;
-
-    let resultId;
-
-
-    if (type === "start") {
-
-        inputId =
-            "startInput";
-
-        resultId =
-            "startResults";
-
-    }
-
-    else {
-
-        inputId =
-            "destinationInput";
-
-        resultId =
-            "destinationResults";
-
-    }
-
-
-    const query =
-
-        document
-            .getElementById(
-                inputId
-            )
-            .value
-            .trim();
-
-
-    if (!query) {
-
-        setStatus(
-            "Please enter a location."
-        );
-
-        return;
-
-    }
-
-
-    setStatus(
-        "Searching location..."
-    );
-
-
-    try {
-
-
-        const response =
-
-            await fetch(
-
-                "/api/search-location?q="
-                +
-                encodeURIComponent(query)
-
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!data.success) {
-
-            setStatus(
-                data.message
-            );
-
-            return;
-
-        }
-
-
-        displaySearchResults(
-
-            data.locations,
-
-            type,
-
-            resultId
-
-        );
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            "Search error:",
-            error
-        );
-
-
-        setStatus(
-            "Unable to search location."
-        );
-
-    }
-
-}
-
-
-// ======================================================
-// DISPLAY SEARCH RESULTS
-// ======================================================
-
-function displaySearchResults(
-
-    locations,
-
-    type,
-
-    resultId
-
-) {
-
-
-    const container =
-
-        document.getElementById(
-            resultId
-        );
-
-
-    container.innerHTML = "";
-
-
-    if (locations.length === 0) {
-
-        container.innerHTML =
-            "<p>No locations found.</p>";
-
-        return;
-
-    }
-
-
-    locations.forEach(
-
-        function(location) {
-
-
-            const result =
-
-                document.createElement(
-                    "div"
-                );
-
-
-            result.className =
-                "result";
-
-
-            result.textContent =
-                location.name;
-
-
-            result.addEventListener(
-
-                "click",
-
-                function() {
-
-                    selectLocation(
-
-                        location,
-
-                        type
-
-                    );
-
-                }
-
-            );
-
-
-            container.appendChild(
-                result
-            );
-
-        }
-
-    );
-
-}
-
-
-// ======================================================
-// SELECT START / DESTINATION
-// ======================================================
-
-function selectLocation(
-
-    location,
-
-    type
-
-) {
-
-
-    if (type === "start") {
-
-
-        startLatitude =
-            location.latitude;
-
-
-        startLongitude =
-            location.longitude;
-
-
-        document
-            .getElementById(
-                "startInput"
-            )
-            .value =
-                location.name;
-
-
-        setStartMarker(
-
-            startLatitude,
-
-            startLongitude
-
-        );
-
-
-        document
-            .getElementById(
-                "startResults"
-            )
-            .innerHTML = "";
-
-
-        setStatus(
-            "Starting location selected."
-        );
-
-    }
-
-
-    else {
-
-
-        destinationLatitude =
-            location.latitude;
-
-
-        destinationLongitude =
-            location.longitude;
-
-
-        document
-            .getElementById(
-                "destinationInput"
-            )
-            .value =
-                location.name;
-
-
-        setDestinationMarker(
-
-            destinationLatitude,
-
-            destinationLongitude,
-
-            location.name
-
-        );
-
-
-        document
-            .getElementById(
-                "destinationResults"
-            )
-            .innerHTML = "";
-
-
-        setStatus(
-            "Destination selected."
-        );
-
-    }
-
-}
-
-
-// ======================================================
-// FIND ROUTES BUTTON
-// ======================================================
-
-document
-    .getElementById(
-        "routeButton"
-    )
-    .addEventListener(
-
-        "click",
-
-        findRoutes
-
-    );
-
-
-// ======================================================
-// FIND ROUTES
-// ======================================================
-
-async function findRoutes() {
-
-
-    if (
-
-        startLatitude === null ||
-
-        startLongitude === null
-
-    ) {
-
-        setStatus(
-            "Please select a starting location."
-        );
-
-        return;
-
-    }
-
-
-    if (
-
-        destinationLatitude === null ||
-
-        destinationLongitude === null
-
-    ) {
-
-        setStatus(
-            "Please select a destination."
-        );
-
-        return;
-
-    }
-
-
-    setStatus(
-        "Finding available routes..."
-    );
-
-
-    try {
-
-
-        const response =
-
-            await fetch(
-
-                "/api/route",
-
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body: JSON.stringify({
-
-                        start_lat:
-                            startLatitude,
-
-                        start_lon:
-                            startLongitude,
-
-                        end_lat:
-                            destinationLatitude,
-
-                        end_lon:
-                            destinationLongitude
-
-                    })
-
-                }
-
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!data.success) {
-
-            setStatus(
-                data.message
-            );
-
-            return;
-
-        }
-
-
-        // Save routes
-
-        availableRoutes =
-            data.routes;
-
-
-        // Draw routes
-
-        drawRoutes(
-            data.routes
-        );
-
-
-        // Create route cards
-
-        displayRouteInformation(
-            data.routes
-        );
-
-
-        setStatus(
-
-            data.route_count
-            + " route(s) found. Click a route to select it."
-
-        );
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            "Route error:",
-            error
-        );
-
-
-        setStatus(
-            "Unable to find routes."
-        );
-
-    }
-
-}
-
-
-// ======================================================
-// DRAW ROUTES
-// ======================================================
-
-function drawRoutes(routes) {
-
-
-    console.log(
-        "Drawing routes:",
-        routes
-    );
-
-
-    // Remove previous routes
-
-    if (routeLayerGroup !== null) {
-
-        map.removeLayer(
-            routeLayerGroup
-        );
-
-    }
-
-
-    // Reset layers
-
-    routeLayers = {};
-
-
-    // Create new group
-
-    routeLayerGroup =
-        L.layerGroup()
-            .addTo(map);
-
-
-    let allBounds = null;
-
-
-    routes.forEach(
-
-        function(route) {
-
+            allSafetyPoints = Array.isArray(data.data) ? data.data : [];
 
             console.log(
-                "Creating route:",
-                route.route_id
+                'Safety points loaded for route filtering:',
+                allSafetyPoints.length
             );
 
-
-            // ======================================
-            // CREATE INDIVIDUAL ROUTE
-            // ======================================
-
-            const routeLayer =
-
-                L.geoJSON(
-
-                    route.geometry,
-
-                    {
-
-                        style: {
-
-                            color:
-                                "#87CEEB",
-
-                            weight:
-                                6,
-
-                            opacity:
-                                0.70
-
-                        }
-
-                    }
-
-                );
-
-
-            // Store layer
-
-            routeLayers[
-                route.route_id
-            ] = routeLayer;
-
-
-            // Add to map
-
-            routeLayer.addTo(
-                routeLayerGroup
-            );
-
-
-            // ======================================
-            // CLICK ROUTE
-            // ======================================
-
-            routeLayer.on(
-
-                "click",
-
-                function(event) {
-
-
-                    console.log(
-
-                        "CLICKED ROUTE:",
-                        route.route_id
-
-                    );
-
-
-                    L.DomEvent.stopPropagation(
-                        event
-                    );
-
-
-                    selectRoute(
-                        route.route_id
-                    );
-
-
-                }
-
-            );
-
-
-            // ======================================
-            // MOUSE OVER
-            // ======================================
-
-            routeLayer.on(
-
-                "mouseover",
-
-                function() {
-
-
-                    if (
-
-                        selectedRouteId !==
-                        route.route_id
-
-                    ) {
-
-
-                        routeLayer.setStyle({
-
-                            weight: 8,
-
-                            opacity: 0.9
-
-                        });
-
-
-                    }
-
-                }
-
-            );
-
-
-            // ======================================
-            // MOUSE OUT
-            // ======================================
-
-            routeLayer.on(
-
-                "mouseout",
-
-                function() {
-
-
-                    if (
-
-                        selectedRouteId !==
-                        route.route_id
-
-                    ) {
-
-
-                        routeLayer.setStyle({
-
-                            color:
-                                "#87CEEB",
-
-                            weight:
-                                6,
-
-                            opacity:
-                                0.70
-
-                        });
-
-
-                    }
-
-                }
-
-            );
-
-
-            // ======================================
-            // POPUP
-            // ======================================
-
-            routeLayer.bindPopup(
-
-                "<strong>Route "
-                + route.route_id
-                + "</strong><br><br>"
-
-                + "Distance: "
-                + route.distance_km
-                + " km<br>"
-
-                + "Estimated Time: "
-                + route.duration_minutes
-                + " minutes"
-
-            );
-
-
-            // ======================================
-            // BOUNDS
-            // ======================================
-
-            const bounds =
-                routeLayer.getBounds();
-
-
-            if (allBounds === null) {
-
-                allBounds =
-                    bounds;
-
-            }
-
-            else {
-
-                allBounds.extend(
-                    bounds
-                );
-
-            }
-
+        } catch (error) {
+            console.error('Unable to load safety data:', error);
+            allSafetyPoints = [];
+        }
+    }
+
+    // Distance between two latitude/longitude points in meters.
+    function haversineDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371000;
+
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) *
+            Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+        return 2 * R * Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+    }
+
+    // Approximate point-to-segment distance.
+    // This converts lat/lon to a local meter-based coordinate system.
+    function pointToSegmentDistance(
+        pointLat,
+        pointLon,
+        aLat,
+        aLon,
+        bLat,
+        bLon
+    ) {
+        const metersPerLat = 111320;
+        const meanLat =
+            ((pointLat + aLat + bLat) / 3) * Math.PI / 180;
+
+        const metersPerLon =
+            111320 * Math.cos(meanLat);
+
+        const px = pointLon * metersPerLon;
+        const py = pointLat * metersPerLat;
+
+        const ax = aLon * metersPerLon;
+        const ay = aLat * metersPerLat;
+
+        const bx = bLon * metersPerLon;
+        const by = bLat * metersPerLat;
+
+        const dx = bx - ax;
+        const dy = by - ay;
+
+        if (dx === 0 && dy === 0) {
+            return Math.hypot(px - ax, py - ay);
         }
 
-    );
+        const t = Math.max(
+            0,
+            Math.min(
+                1,
+                ((px - ax) * dx + (py - ay) * dy) /
+                (dx * dx + dy * dy)
+            )
+        );
 
+        const closestX = ax + t * dx;
+        const closestY = ay + t * dy;
 
-    // ==========================================
-    // FIT MAP
-    // ==========================================
+        return Math.hypot(
+            px - closestX,
+            py - closestY
+        );
+    }
 
-    if (allBounds !== null) {
+    // Find safety points within the selected route corridor.
+    // 500 meters is the current testing threshold.
+    function getSafetyPointsForRoute(route) {
 
-        map.fitBounds(
+        if (!route || !route.geometry) {
+            console.warn("No route geometry available.");
+            return [];
+        }
 
-            allBounds,
+        if (!Array.isArray(allSafetyPoints) || allSafetyPoints.length === 0) {
+            console.warn("Safety dataset is empty.");
+            return [];
+        }
 
-            {
+        const coordinates = route.geometry.coordinates;
 
-                padding: [
-                    30,
-                    30
-                ]
+        if (!Array.isArray(coordinates) || coordinates.length < 2) {
+            console.warn("Invalid route coordinates:", route.geometry);
+            return [];
+        }
 
+        // 1 km corridor for the prototype.
+        // We can reduce this later after real data is integrated.
+        const thresholdMeters = 1000;
+
+        const routeRiskPoints = [];
+
+        allSafetyPoints.forEach(point => {
+
+            const lat = Number(point.latitude);
+            const lon = Number(point.longitude);
+
+            if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+                return;
             }
 
+            let minimumDistance = Infinity;
+
+            for (let i = 0; i < coordinates.length - 1; i++) {
+
+                const a = coordinates[i];
+                const b = coordinates[i + 1];
+
+                if (!Array.isArray(a) || !Array.isArray(b)) {
+                    continue;
+                }
+
+                const aLon = Number(a[0]);
+                const aLat = Number(a[1]);
+                const bLon = Number(b[0]);
+                const bLat = Number(b[1]);
+
+                if (
+                    !Number.isFinite(aLat) ||
+                    !Number.isFinite(aLon) ||
+                    !Number.isFinite(bLat) ||
+                    !Number.isFinite(bLon)
+                ) {
+                    continue;
+                }
+
+                const distance = pointToSegmentDistance(
+                    lat,
+                    lon,
+                    aLat,
+                    aLon,
+                    bLat,
+                    bLon
+                );
+
+                if (distance < minimumDistance) {
+                    minimumDistance = distance;
+                }
+            }
+
+            if (minimumDistance <= thresholdMeters) {
+
+                routeRiskPoints.push({
+                    ...point,
+                    distance_km: Number(
+                        (minimumDistance / 1000).toFixed(3)
+                    )
+                });
+            }
+        });
+
+        routeRiskPoints.sort(
+            (a, b) =>
+                Number(a.distance_km) -
+                Number(b.distance_km)
         );
 
+        return routeRiskPoints;
     }
 
+    // ============================================================
+    //  FIND ROUTES
+    // ============================================================
+    document.getElementById('routeButton').addEventListener('click', findRoutes);
 
-    // ==========================================
-    // SELECT FIRST ROUTE
-    // ==========================================
+    async function findRoutes() {
 
-    if (routes.length > 0) {
+        if (startLat === null || startLon === null) {
+            setStatus('Please select a starting location.');
+            return;
+        }
 
-        selectRoute(
-            routes[0].route_id
-        );
+        if (destLat === null || destLon === null) {
+            setStatus('Please select a destination.');
+            return;
+        }
 
-    }
+        setStatus('Loading safety data and finding routes …');
 
-}
+        try {
 
+            // IMPORTANT:
+            // Wait for the 200 safety points before calculating
+            // route-specific risk points.
+            if (!Array.isArray(allSafetyPoints) ||
+                allSafetyPoints.length === 0) {
 
-// ======================================================
-// SELECT ROUTE
-// ======================================================
+                await loadSafetyData();
+            }
 
-function selectRoute(routeId) {
+            if (!allSafetyPoints.length) {
+                setStatus(
+                    'Safety dataset could not be loaded.'
+                );
+                return;
+            }
 
+            const resp = await fetch('/api/route', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    start_lat: startLat,
+                    start_lon: startLon,
+                    end_lat: destLat,
+                    end_lon: destLon
+                })
+            });
 
-    console.log(
-        "Selecting route:",
-        routeId
-    );
+            const data = await resp.json();
 
+            if (!data.success) {
+                setStatus(
+                    data.message ||
+                    data.error ||
+                    'Route calculation failed.'
+                );
+                return;
+            }
 
-    selectedRouteId =
-        Number(routeId);
+            availableRoutes = data.routes || [];
 
+            // Calculate route-specific safety points immediately.
+            availableRoutes.forEach(route => {
 
-    // ==========================================
-    // RESET EVERY ROUTE
-    // ==========================================
-
-    Object.keys(
-        routeLayers
-    ).forEach(
-
-        function(id) {
-
-
-            routeLayers[id].setStyle({
-
-                color:
-                    "#87CEEB",
-
-                weight:
-                    6,
-
-                opacity:
-                    0.70
+                route.frontend_risk_points =
+                    getSafetyPointsForRoute(route);
 
             });
 
+            console.log(
+                'Routes with calculated safety points:',
+                availableRoutes.map(route => ({
+                    route_id: route.route_id,
+                    risk_points:
+                        route.frontend_risk_points.length
+                }))
+            );
+
+            drawRoutes(availableRoutes);
+            displayRouteInformation(availableRoutes);
+
+            setStatus(
+                data.route_count +
+                ' route(s) found.'
+            );
+
+        } catch (e) {
+
+            console.error(
+                'Route error:',
+                e
+            );
+
+            setStatus(
+                'Unable to find routes.'
+            );
+        }
+    }
+
+    // ============================================================
+    //  DRAW ROUTES
+    // ============================================================
+    // Return a color based on the route safety score.
+    // Higher score = safer route.
+    function getRouteColor(route, safestRouteId) {
+        const score = Number(route.safety_score);
+
+        if (Number(route.route_id) === Number(safestRouteId)) {
+            return '#16a34a'; // green = safest
         }
 
-    );
+        if (!Number.isFinite(score)) {
+            return '#64748b';
+        }
 
-
-    // ==========================================
-    // SELECTED ROUTE
-    // ==========================================
-
-    const selectedLayer =
-        routeLayers[
-            selectedRouteId
-        ];
-
-
-    if (selectedLayer) {
-
-
-        selectedLayer.setStyle({
-
-            color:
-                "#28a745",
-
-            weight:
-                9,
-
-            opacity:
-                1
-
-        });
-
-
-        // Put selected route above
-        // other routes
-
-        selectedLayer.bringToFront();
-
-
+        if (score >= 70) return '#22c55e';
+        if (score >= 50) return '#2563eb';
+        if (score >= 30) return '#f59e0b';
+        return '#dc2626';
     }
 
+    function findSafestRouteId(routes) {
+        if (!Array.isArray(routes) || routes.length === 0) {
+            return null;
+        }
 
-    // ==========================================
-    // RESET ROUTE CARDS
-    // ==========================================
+        const safest = routes.reduce((best, current) => {
+            const bestScore = Number(best?.safety_score);
+            const currentScore = Number(current?.safety_score);
 
-    document
-        .querySelectorAll(
-            ".route-card"
-        )
-        .forEach(
+            if (!Number.isFinite(bestScore)) return current;
+            if (!Number.isFinite(currentScore)) return best;
 
-            function(card) {
+            return currentScore > bestScore ? current : best;
+        }, routes[0]);
 
-                card.classList.remove(
-                    "selected"
-                );
-
-            }
-
-        );
-
-
-    // ==========================================
-    // SELECT CARD
-    // ==========================================
-
-    const selectedCard =
-
-        document.getElementById(
-
-            "route-card-"
-            +
-            selectedRouteId
-
-        );
-
-
-    if (selectedCard) {
-
-
-        selectedCard.classList.add(
-            "selected"
-        );
-
-
-        // Scroll card into view
-        // when route is clicked
-
-        selectedCard.scrollIntoView({
-
-            behavior: "smooth",
-
-            block: "nearest"
-
-        });
-
+        return safest ? safest.route_id : null;
     }
 
-
-    // ==========================================
-    // FIND ROUTE DATA
-    // ==========================================
-
-    const selectedRoute =
-
-        availableRoutes.find(
-
-            function(route) {
-
-                return Number(
-                    route.route_id
-                )
-                ===
-                selectedRouteId;
-
-            }
-
-        );
-
-
-    if (!selectedRoute) {
-
-
-        console.error(
-
-            "Route data not found:",
-            routeId
-
-        );
-
-
-        return;
-
-    }
-
-
-    console.log(
-
-        "Selected route data:",
-        selectedRoute
-
-    );
-
-
-    // ==========================================
-    // SHOW SELECTED ROUTE BOX
-    // ==========================================
-
-    const selectedRouteBox =
-
-        document.getElementById(
-            "selectedRoute"
-        );
-
-
-    selectedRouteBox.style.display =
-        "block";
-
-
-    // ==========================================
-    // TITLE
-    // ==========================================
-
-    document
-        .getElementById(
-            "selectedRouteTitle"
-        )
-        .textContent =
-
-            "Route "
-            +
-            selectedRoute.route_id
-            +
-            " Selected";
-
-
-    // ==========================================
-    // DISTANCE
-    // ==========================================
-
-    document
-        .getElementById(
-            "selectedDistance"
-        )
-        .textContent =
-
-            selectedRoute.distance_km
-            +
-            " km";
-
-
-    // ==========================================
-    // TIME
-    // ==========================================
-
-    document
-        .getElementById(
-            "selectedDuration"
-        )
-        .textContent =
-
-            selectedRoute.duration_minutes
-            +
-            " minutes";
-
-
-    // ==========================================
-    // STATUS
-    // ==========================================
-
-    setStatus(
-
-        "Route "
-        +
-        selectedRoute.route_id
-        +
-        " selected | Distance: "
-        +
-        selectedRoute.distance_km
-        +
-        " km | Time: "
-        +
-        selectedRoute.duration_minutes
-        +
-        " minutes"
-
-    );
-
-}
-
-
-// ======================================================
-// DISPLAY ROUTE CARDS
-// ======================================================
-
-function displayRouteInformation(
-    routes
-) {
-
-
-    const container =
-        document.getElementById(
-            "routeResults"
-        );
-
-
-    container.innerHTML = "";
-
-
-    routes.forEach(
-
-        function(route) {
-
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "route-card";
-
-
-            card.id =
-
-                "route-card-"
-                +
-                route.route_id;
-
-
-            card.innerHTML =
-
-                "<div class='route-title'>"
-
-                +
-
-                "Route "
-                +
-                route.route_id
-
-                +
-
-                "</div>"
-
-
-                +
-
-                "<div class='route-small-info'>"
-
-                +
-
-                "Distance: "
-                +
-                route.distance_km
-                +
-                " km"
-
-                +
-
-                "&nbsp;&nbsp; | &nbsp;&nbsp;"
-
-                +
-
-                "Time: "
-                +
-                route.duration_minutes
-                +
-                " minutes"
-
-                +
-
-                "</div>";
-
-
-            // ======================================
-            // CARD CLICK
-            // ======================================
-
-            card.addEventListener(
-
-                "click",
-
-                function(event) {
-
-
-                    event.stopPropagation();
-
-
-                    console.log(
-
-                        "Clicked route card:",
-                        route.route_id
-
-                    );
-
-
-                    selectRoute(
-
-                        route.route_id
-
-                    );
-
+    function drawRoutes(routes) {
+        if (routeLayerGroup !== null) {
+            map.removeLayer(routeLayerGroup);
+        }
+
+        routeRiskLayer.clearLayers();
+        routeLayers = {};
+        routeLayerGroup = L.layerGroup().addTo(map);
+
+        if (!Array.isArray(routes) || routes.length === 0) {
+            return;
+        }
+
+        let allBounds = null;
+        const safestRouteId = findSafestRouteId(routes);
+
+        routes.forEach(route => {
+            const color = getRouteColor(route, safestRouteId);
+
+            const layer = L.geoJSON(route.geometry, {
+                style: {
+                    color: color,
+                    weight: 5,
+                    opacity: 0.85
                 }
+            });
 
+            routeLayers[route.route_id] = layer;
+            layer.addTo(routeLayerGroup);
+
+            layer.on('click', (e) => {
+                L.DomEvent.stopPropagation(e);
+                selectRoute(route.route_id);
+            });
+
+            layer.on('mouseover', () => {
+                if (selectedRouteId !== Number(route.route_id)) {
+                    layer.setStyle({
+                        weight: 8,
+                        opacity: 1
+                    });
+                }
+            });
+
+            layer.on('mouseout', () => {
+                if (selectedRouteId !== Number(route.route_id)) {
+                    layer.setStyle({
+                        color: color,
+                        weight: 5,
+                        opacity: 0.85
+                    });
+                }
+            });
+
+            const score = Number(route.safety_score);
+            const scoreText = Number.isFinite(score)
+                ? score.toFixed(1) + ' / 100'
+                : 'N/A';
+
+            const safestText =
+                Number(route.route_id) === Number(safestRouteId)
+                    ? '<br><strong style="color:#16a34a;">Safest route</strong>'
+                    : '';
+
+            layer.bindPopup(
+                `<strong>Route ${route.route_id}</strong>` +
+                `<br>Distance: ${route.distance_km} km` +
+                `<br>Time: ${route.duration_minutes} min` +
+                `<br>Safety score: ${scoreText}` +
+                safestText
             );
 
+            const bounds = layer.getBounds();
 
-            container.appendChild(
-                card
-            );
+            if (allBounds === null) {
+                allBounds = bounds;
+            } else {
+                allBounds.extend(bounds);
+            }
+        });
 
+        if (allBounds) {
+            map.fitBounds(allBounds, {
+                padding: [30, 30]
+            });
         }
 
-    );
+        // Select the safest route by default.
+        // IMPORTANT: this does NOT remove or hide the other routes.
+        if (safestRouteId !== null) {
+            selectRoute(safestRouteId);
+        }
+    }
 
-}
+    // ============================================================
+    //  SELECT ROUTE (with risk layer integration)
+    // ============================================================
+    function selectRoute(routeId) {
+        selectedRouteId = Number(routeId);
 
+        const safestRouteId = findSafestRouteId(availableRoutes);
 
-// ======================================================
-// MAP CLICK
-// ======================================================
+        // Keep ALL routes visible.
+        // Only the selected route becomes thicker.
+        Object.keys(routeLayers).forEach(id => {
+            const idNumber = Number(id);
 
-map.on(
+            const route = availableRoutes.find(
+                r => Number(r.route_id) === idNumber
+            );
 
-    "click",
+            if (!route) return;
 
-    function(event) {
+            const baseColor = getRouteColor(
+                route,
+                safestRouteId
+            );
 
+            routeLayers[id].setStyle({
+                color: baseColor,
+                weight:
+                    idNumber === selectedRouteId
+                        ? 8
+                        : 5,
+                opacity:
+                    idNumber === selectedRouteId
+                        ? 1
+                        : 0.85
+            });
+        });
+
+        // Safely bring the selected route forward when supported.
+        const selectedLayer = routeLayers[selectedRouteId];
+
+        if (
+            selectedLayer &&
+            typeof selectedLayer.bringToFront === 'function'
+        ) {
+            selectedLayer.bringToFront();
+        }
+
+        // cards
+        document.querySelectorAll('.route-card').forEach(c => c.classList.remove('selected'));
+        const card = document.getElementById('route-card-' + selectedRouteId);
+        if (card) card.classList.add('selected');
+
+        // find route data
+        const route = availableRoutes.find(r => Number(r.route_id) === selectedRouteId);
+        if (!route) return;
+
+        // update detail panel
+        document.getElementById('selectedRoute').style.display = 'block';
+        document.getElementById('selectedRouteTitle').textContent = 'Route ' + route.route_id + ' selected';
+        document.getElementById('selectedDistance').textContent = route.distance_km + ' km';
+        document.getElementById('selectedDuration').textContent = route.duration_minutes + ' min';
+        const routeRiskPoints =
+            Array.isArray(route.frontend_risk_points)
+                ? route.frontend_risk_points
+                : getSafetyPointsForRoute(route);
+
+        document.getElementById('selectedSafetyCount').textContent =
+            routeRiskPoints.length;
+
+        const safetyScore = Number(route.safety_score);
+        const routeRisk = Number(route.route_risk);
+
+        document.getElementById('selectedSafetyScore').textContent =
+            Number.isFinite(safetyScore)
+                ? safetyScore.toFixed(1) + ' / 100'
+                : 'N/A';
+
+        document.getElementById('selectedRouteRisk').textContent =
+            Number.isFinite(routeRisk)
+                ? routeRisk.toFixed(1)
+                : 'N/A';
+
+        // ----- Show ONLY risk points affecting this route -----
+        showRouteRiskPoints(route);
+
+        setStatus('Route ' + route.route_id + ' selected.');
+    }
+
+    // ============================================================
+    //  SHOW ROUTE RISK POINTS (new function)
+    // ============================================================
+    function showRouteRiskPoints(route) {
+
+        routeRiskLayer.clearLayers();
+
+        if (!route) {
+            return;
+        }
+
+        // Use the points calculated when routes were loaded.
+        // Recalculate only if they are not available.
+        let routeRiskPoints =
+            Array.isArray(route.frontend_risk_points)
+                ? route.frontend_risk_points
+                : getSafetyPointsForRoute(route);
 
         console.log(
-
-            "Map clicked:",
-
-            event.latlng.lat,
-
-            event.latlng.lng
-
+            `Route ${route.route_id}: ${routeRiskPoints.length} risk point(s) within 1 km`,
+            routeRiskPoints
         );
+
+        // Keep this route's points available to the rest of the UI.
+        route.frontend_risk_points = routeRiskPoints;
+
+        const seen = new Set();
+
+        routeRiskPoints.forEach(function(point) {
+
+            const lat = Number(point.latitude);
+            const lon = Number(point.longitude);
+
+            if (!Number.isFinite(lat) ||
+                !Number.isFinite(lon)) {
+                return;
+            }
+
+            const key =
+                `${lat.toFixed(6)},${lon.toFixed(6)}`;
+
+            if (seen.has(key)) {
+                return;
+            }
+
+            seen.add(key);
+
+            const riskScore =
+                Number(
+                    point.risk_score ??
+                    point.crime_risk ??
+                    0
+                );
+
+            let riskLevel =
+                point.risk_level || 'Low';
+
+            if (!point.risk_level) {
+
+                if (riskScore >= 65) {
+                    riskLevel = 'High';
+
+                } else if (riskScore >= 35) {
+                    riskLevel = 'Medium';
+                }
+            }
+
+            let markerColor = '#eab308';
+            let fillColor = '#facc15';
+
+            if (
+                riskLevel.toLowerCase() === 'high'
+            ) {
+                markerColor = '#dc2626';
+                fillColor = '#ef4444';
+
+            } else if (
+                riskLevel.toLowerCase() === 'medium'
+            ) {
+                markerColor = '#ea580c';
+                fillColor = '#fb923c';
+            }
+
+            const marker = L.circleMarker(
+                [lat, lon],
+                {
+                    radius: 8,
+                    color: markerColor,
+                    fillColor: fillColor,
+                    fillOpacity: 0.9,
+                    weight: 2
+                }
+            );
+
+            const areaName =
+                point.area_name ||
+                point.location_name ||
+                'Safety Area';
+
+            const distanceKm =
+                Number(point.distance_km);
+
+            marker.bindPopup(`
+                <div class="safety-popup">
+                    <h4>Route Risk Point</h4>
+
+                    <p>
+                        <b>Area:</b>
+                        ${areaName}
+                    </p>
+
+                    <p>
+                        <b>Risk Score:</b>
+                        ${
+                            Number.isFinite(riskScore)
+                            ? riskScore.toFixed(1)
+                            : 'N/A'
+                        }
+                    </p>
+
+                    <p>
+                        <b>Risk Level:</b>
+                        ${riskLevel}
+                    </p>
+
+                    <p>
+                        <b>Distance from Route:</b>
+                        ${
+                            Number.isFinite(distanceKm)
+                            ? distanceKm.toFixed(3) + ' km'
+                            : 'N/A'
+                        }
+                    </p>
+
+                    <p>
+                        <b>Lighting:</b>
+                        ${point.lighting_level ?? 'N/A'}
+                    </p>
+
+                    <p>
+                        <b>Crowd:</b>
+                        ${point.crowd_density ?? 'N/A'}
+                    </p>
+
+                    <p>
+                        <b>Traffic:</b>
+                        ${point.traffic_level ?? 'N/A'}
+                    </p>
+
+                    <p>
+                        <b>Police Presence:</b>
+                        ${point.police_presence ?? 'N/A'}
+                    </p>
+
+                    <p style="
+                        font-size:11px;
+                        color:#64748b;
+                        margin-top:8px;
+                    ">
+                        ${
+                            point.data_status ||
+                            'Route risk data'
+                        }
+                    </p>
+                </div>
+            `);
+
+            routeRiskLayer.addLayer(marker);
+        });
+
+        // Make sure the risk markers are above the route lines.
+        if (!map.hasLayer(routeRiskLayer)) {
+            routeRiskLayer.addTo(map);
+        }
 
     }
 
-);
+    // ============================================================
+    //  ROUTE CARDS
+    // ============================================================
+    function displayRouteInformation(routes) {
+        const container = document.getElementById('routeResults');
+        container.innerHTML = '';
+        routes.forEach(route => {
+            const card = document.createElement('div');
+            card.className = 'route-card';
+            card.id = 'route-card-' + route.route_id;
+            const riskCount =
+                Array.isArray(route.frontend_risk_points)
+                    ? route.frontend_risk_points.length
+                    : getSafetyPointsForRoute(route).length;
 
+            const safetyScore = Number(route.safety_score);
+            const routeRisk = Number(route.route_risk);
 
+            const safestRouteId = findSafestRouteId(routes);
+            const isSafest =
+                Number(route.route_id) === Number(safestRouteId);
+
+            card.innerHTML = `
+                <span class="route-title">
+                    Route ${route.route_id}
+                    ${
+                        isSafest
+                            ? '<span style="color:#16a34a; font-size:12px; margin-left:8px;">● SAFEST</span>'
+                            : ''
+                    }
+                </span>
+
+                <div class="route-meta">
+                    <span>${route.distance_km} km</span>
+
+                    <span>${route.duration_minutes} min</span>
+
+                    <span>
+                        Safety:
+                        ${
+                            Number.isFinite(safetyScore)
+                                ? safetyScore.toFixed(1) + ' / 100'
+                                : 'N/A'
+                        }
+                    </span>
+
+                    <span>
+                        Risk:
+                        ${
+                            Number.isFinite(routeRisk)
+                                ? routeRisk.toFixed(1)
+                                : 'N/A'
+                        }
+                    </span>
+
+                    <span class="safety-count">
+                        ⚠️ ${riskCount} risk points
+                    </span>
+                </div>
+            `;
+            card.addEventListener('click', (e) => { e.stopPropagation(); selectRoute(route.route_id); });
+            container.appendChild(card);
+        });
+    }
+
+    // ============================================================
+    //  LEGEND (leaflet control)
+    // ============================================================
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function() {
+        const div = L.DomUtil.create('div', 'map-legend');
+        div.innerHTML = `
+            <strong>Legend</strong>
+            <div class="legend-item"><span class="legend-dot risk-dot"></span> Risk points affecting selected route</div>
+            <div class="legend-item"><span class="legend-dot start-dot"></span> Start</div>
+            <div class="legend-item"><span class="legend-dot destination-dot"></span> Destination</div>
+        `;
+        return div;
+    };
+    legend.addTo(map);
+
+    // Load the 200-point safety dataset when the page opens.
+    loadSafetyData();
 </script>
-
 
 </body>
 
