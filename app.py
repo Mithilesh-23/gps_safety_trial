@@ -212,8 +212,10 @@ def load_area_risk():
 
         df = pd.read_csv(AREA_RISK_FILE)
 
+        # area_risk.csv uses "location_name", not "police_station".
+        # The name is only descriptive, so the route-risk calculation
+        # actually requires only coordinates and risk_score.
         required_columns = [
-            "police_station",
             "latitude",
             "longitude",
             "risk_score"
@@ -286,6 +288,13 @@ def load_area_risk():
 
 
 area_risk_data = load_area_risk()
+
+print(
+    "Area risk columns:",
+    list(area_risk_data.columns)
+    if not area_risk_data.empty
+    else "NO AREA RISK DATA"
+)
 
 # =========================================================
 # CALCULATE DISTANCE WEIGHT
@@ -472,12 +481,12 @@ def calculate_route_risk(
 
         risk_points.append({
 
-            "police_station":
+            "location_name":
                 str(
                     row.get(
-                        "police_station",
+                        "location_name",
                         row.get(
-                            "location_name",
+                            "police_station",
                             "Risk area"
                         )
                     )
