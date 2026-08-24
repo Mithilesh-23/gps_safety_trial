@@ -12,7 +12,7 @@ app = Flask(__name__)
 # FILES
 # =========================================================
 
-SAFETY_FILE = "amravati_safety_data.csv"
+SAFETY_FILE = "safety_data.csv"
 
 IMPORTANT_PLACES_FILE = "important_places.csv"
 
@@ -31,8 +31,7 @@ def load_safety_data():
 
         required = [
             "latitude",
-            "longitude",
-            "risk_score"
+            "longitude"
         ]
 
         missing = [
@@ -61,11 +60,6 @@ def load_safety_data():
             errors="coerce"
         )
 
-        df["risk_score"] = pd.to_numeric(
-            df["risk_score"],
-            errors="coerce"
-        )
-
 
         df = df.dropna(
             subset=[
@@ -79,11 +73,6 @@ def load_safety_data():
             "Safety data loaded:",
             len(df),
             "records"
-        )
-
-        print(
-            "Safety data columns:",
-            list(df.columns)
         )
 
 
@@ -209,67 +198,58 @@ safety_data = load_safety_data()
 important_places = load_important_places()
 
 # =========================================================
-# UNIFIED SAFETY DATA FOR ROUTE RISK
-# =========================================================
-#
-# We intentionally use the same dataset as the safety points
-# shown on the map. This keeps the current route mechanism
-# unchanged while making the safety score and displayed
-# safety points use one source of truth.
-#
-# The unified CSV contains:
-# latitude
-# longitude
-# risk_score
-# location_name
-# area_name
-# place_type
-# crime_risk
-# lighting_level
-# crowd_density
-# traffic_level
-# police_presence
-# risk_level
-# data_status
-#
+# LOAD AREA RISK DATA
 # =========================================================
 
-MAX_RISK_DISTANCE_KM = SAFETY_RADIUS_KM
+AREA_RISK_FILE = "area_risk.csv"
 
-area_risk_data = safety_data.copy()
+MAX_RISK_DISTANCE_KM = 0.5
 
-if area_risk_data.empty:
-    print(
-        "Unified safety data is empty."
-    )
-else:
-    required_risk_columns = [
-        "latitude",
-        "longitude",
-        "risk_score"
-    ]
 
-    missing_risk_columns = [
-        column
-        for column in required_risk_columns
-        if column not in area_risk_data.columns
-    ]
+def load_area_risk():
 
-    if missing_risk_columns:
-        print(
-            "Unified safety dataset missing risk columns:",
-            missing_risk_columns
-        )
+    try:
 
-        area_risk_data = pd.DataFrame()
+        df = pd.read_csv(AREA_RISK_FILE)
 
-    else:
-        area_risk_data["risk_score"] = pd.to_numeric(
-            area_risk_data["risk_score"],
+        # area_risk.csv uses "location_name", not "police_station".
+        # The name is only descriptive, so the route-risk calculation
+        # actually requires only coordinates and risk_score.
+        required_columns = [
+            "latitude",
+            "longitude",
+            "risk_score"
+        ]
+
+        for column in required_columns:
+
+            if column not in df.columns:
+
+                print(
+                    "Missing column:",
+                    column
+                )
+
+                return pd.DataFrame()
+
+
+        df["latitude"] = pd.to_numeric(
+            df["latitude"],
             errors="coerce"
         )
 
-        area_risk_data = area_risk_data.dropna(
+        df["longitude"] = pd.to_numeric(
+            df["longitude"],
+            errors="coerce"
+        )
+
+        df["risk_score"] = pd.to_numeric(
+            df["risk_score"],
+            errors="coerce"
+        )
+
+
+        df = df.dropna(
             subset=[
                 "latitude",
                 "longitude",
@@ -277,17 +257,44 @@ else:
             ]
         )
 
+
         print(
-            "Unified safety data used for route risk:",
-            len(area_risk_data),
+            "Area risk data loaded:",
+            len(df),
             "records"
         )
 
+
+        return df
+
+
+    except FileNotFoundError:
+
         print(
-            "Unified safety columns:",
-            list(area_risk_data.columns)
+            "WARNING: area_risk.csv not found"
         )
 
+        return pd.DataFrame()
+
+
+    except Exception as error:
+
+        print(
+            "Area risk loading error:",
+            error
+        )
+
+        return pd.DataFrame()
+
+
+area_risk_data = load_area_risk()
+
+print(
+    "Area risk columns:",
+    list(area_risk_data.columns)
+    if not area_risk_data.empty
+    else "NO AREA RISK DATA"
+)
 
 # =========================================================
 # CALCULATE DISTANCE WEIGHT
@@ -368,6 +375,10 @@ def calculate_route_risk(
                 row["longitude"]
             )
 
+            risk_score = float(
+                row["risk_score"]
+            )
+
         except (
             TypeError,
             ValueError
@@ -377,7 +388,7 @@ def calculate_route_risk(
 
 
         # -------------------------------------------------
-        # Find nearest point of this risk location
+        # Find the nearest point of this risk location
         # to the route geometry.
         # -------------------------------------------------
 
@@ -419,7 +430,7 @@ def calculate_route_risk(
 
 
         # -------------------------------------------------
-        # Ignore locations farther than safety radius.
+        # Ignore risk locations farther than 500 metres.
         # -------------------------------------------------
 
         if minimum_distance > MAX_RISK_DISTANCE_KM:
@@ -427,158 +438,36 @@ def calculate_route_risk(
             continue
 
 
-        # =================================================
-        # NORMALIZE HELPER
-        # =================================================
-
-        def normalize(value):
-
-            try:
-
-                value = float(value)
-
-            except (
-                TypeError,
-                ValueError
-            ):
-
-                return 0.0
-
-
-            return max(
-                0.0,
-                min(
-                    100.0,
-                    value
-                )
-            )
-
-
-        # =================================================
-        # READ MULTI-FACTOR DATA
-        # =================================================
-
-        crime_risk = normalize(
-            row.get(
-                "crime_risk",
-                0
-            )
-        )
-
-        lighting_level = normalize(
-            row.get(
-                "lighting_level",
-                0
-            )
-        )
-
-        crowd_density = normalize(
-            row.get(
-                "crowd_density",
-                0
-            )
-        )
-
-        traffic_level = normalize(
-            row.get(
-                "traffic_level",
-                0
-            )
-        )
-
-        police_presence = normalize(
-            row.get(
-                "police_presence",
-                0
-            )
-        )
-
-        existing_risk = normalize(
-            row.get(
-                "risk_score",
-                0
-            )
-        )
-
-
-        # =================================================
-        # CONVERT SAFETY-POSITIVE FACTORS TO RISK
-        # =================================================
+        # -------------------------------------------------
+        # Normalize risk score.
         #
-        # Higher lighting = safer
-        # Higher police presence = safer
-        #
-        # We therefore convert them to risk values.
-        #
-        # Crowd density is kept as a risk factor in this
-        # model because very high density can increase
-        # congestion/exposure in the current prototype.
-        # =================================================
+        # Dataset may contain either:
+        #     0 - 1
+        # or:
+        #     0 - 100
+        # -------------------------------------------------
 
-        lighting_risk = (
-            100.0 - lighting_level
-        )
+        if 0 <= risk_score <= 1:
 
-        police_risk = (
-            100.0 - police_presence
-        )
-
-        crowd_risk = crowd_density
+            risk_score *= 100
 
 
-        # =================================================
-        # MULTI-FACTOR POINT RISK
-        # =================================================
-        #
-        # Crime Risk       = 30%
-        # Lighting Risk    = 20%
-        # Crowd Density    = 15%
-        # Traffic Level    = 10%
-        # Police Risk      = 15%
-        # Existing Risk    = 10%
-        #
-        # Total            = 100%
-        # =================================================
-
-        point_risk = (
-
-            crime_risk * 0.30
-
-            +
-
-            lighting_risk * 0.20
-
-            +
-
-            crowd_risk * 0.15
-
-            +
-
-            traffic_level * 0.10
-
-            +
-
-            police_risk * 0.15
-
-            +
-
-            existing_risk * 0.10
-
-        )
-
-
-        point_risk = max(
-            0.0,
+        risk_score = max(
+            0,
             min(
-                100.0,
-                point_risk
+                100,
+                risk_score
             )
         )
 
 
-        # =================================================
-        # EXISTING DISTANCE WEIGHTING
-        # =================================================
+        # -------------------------------------------------
+        # Distance weight
+        #
+        # 0 - 100 m  -> 1.0
+        # 100-300 m  -> 0.7
+        # 300-500 m  -> 0.3
+        # -------------------------------------------------
 
         weight = calculate_distance_weight(
             minimum_distance
@@ -586,13 +475,9 @@ def calculate_route_risk(
 
 
         weighted_risk = (
-            point_risk * weight
+            risk_score * weight
         )
 
-
-        # =================================================
-        # STORE ROUTE RISK POINT
-        # =================================================
 
         risk_points.append({
 
@@ -621,13 +506,7 @@ def calculate_route_risk(
 
             "risk_score":
                 round(
-                    existing_risk,
-                    2
-                ),
-
-            "calculated_point_risk":
-                round(
-                    point_risk,
+                    risk_score,
                     2
                 ),
 
@@ -638,44 +517,6 @@ def calculate_route_risk(
                 round(
                     weighted_risk,
                     2
-                ),
-
-            "crime_risk":
-                round(
-                    crime_risk,
-                    2
-                ),
-
-            "lighting_level":
-                round(
-                    lighting_level,
-                    2
-                ),
-
-            "crowd_density":
-                round(
-                    crowd_density,
-                    2
-                ),
-
-            "traffic_level":
-                round(
-                    traffic_level,
-                    2
-                ),
-
-            "police_presence":
-                round(
-                    police_presence,
-                    2
-                ),
-
-            "risk_level":
-                str(
-                    row.get(
-                        "risk_level",
-                        "Unknown"
-                    )
                 )
 
         })
@@ -750,6 +591,22 @@ def calculate_route_risk(
     # =====================================================
     # RISK-DENSITY COMPONENT
     # =====================================================
+    #
+    # The old calculation used only the average severity.
+    # Therefore:
+    #
+    # 111 risk points + average risk 40
+    # and
+    # 10 risk points  + average risk 40
+    #
+    # could receive almost the same score.
+    #
+    # This component makes the number of nearby risk
+    # locations matter as well.
+    #
+    # Exponential saturation prevents the count from
+    # making the score exceed 100.
+    # =====================================================
 
     risk_point_count = len(
         risk_points
@@ -774,13 +631,8 @@ def calculate_route_risk(
     # FINAL ROUTE RISK
     # =====================================================
     #
-    # Keep the existing mechanism:
-    #
-    # 70% -> severity of nearby risk
-    # 30% -> density of nearby risk points
-    #
-    # Only the severity calculation above has been upgraded
-    # to use the CSV's individual safety factors.
+    # 70% -> severity of nearby risk locations
+    # 30% -> density/number of nearby risk locations
     # =====================================================
 
     route_risk = (
@@ -831,7 +683,7 @@ def calculate_route_risk(
         "Route risk calculation:",
         "points =",
         risk_point_count,
-        "| average multi-factor risk =",
+        "| average risk =",
         round(
             average_risk,
             2
@@ -876,282 +728,6 @@ def calculate_route_risk(
             risk_points
 
     }
-
-
-# =========================================================
-# BUILD SAFETY BREAKDOWN
-# =========================================================
-#
-# This function only summarizes the risk_points already calculated
-# by calculate_route_risk(). It does NOT calculate a second safety
-# score and does NOT change the existing scoring mechanism.
-# =========================================================
-
-def build_safety_breakdown(
-    risk_points
-):
-
-    if not risk_points:
-        return {
-            "crime_risk": None,
-            "lighting_level": None,
-            "crowd_density": None,
-            "traffic_level": None,
-            "police_presence": None,
-            "existing_risk_score": None
-        }
-
-
-    fields = [
-        "crime_risk",
-        "lighting_level",
-        "crowd_density",
-        "traffic_level",
-        "police_presence",
-        "risk_score"
-    ]
-
-
-    breakdown = {}
-
-
-    for field in fields:
-
-        values = []
-
-        for point in risk_points:
-
-            try:
-                value = float(
-                    point.get(field)
-                )
-            except (
-                TypeError,
-                ValueError
-            ):
-                continue
-
-            if math.isfinite(value):
-                values.append(value)
-
-
-        if values:
-
-            breakdown[field] = round(
-                sum(values) / len(values),
-                2
-            )
-
-        else:
-
-            breakdown[field] = None
-
-
-    return {
-        "crime_risk":
-            breakdown.get("crime_risk"),
-
-        "lighting_level":
-            breakdown.get("lighting_level"),
-
-        "crowd_density":
-            breakdown.get("crowd_density"),
-
-        "traffic_level":
-            breakdown.get("traffic_level"),
-
-        "police_presence":
-            breakdown.get("police_presence"),
-
-        "existing_risk_score":
-            breakdown.get("risk_score")
-    }
-
-
-# =========================================================
-# ROUTE RECOMMENDATION SCORE
-# =========================================================
-# Separate decision layer. Existing safety calculation is unchanged.
-# =========================================================
-
-RECOMMENDATION_WEIGHTS = {
-    "safety": 0.50,
-    "time": 0.20,
-    "distance": 0.20,
-    "risk_points": 0.10
-}
-
-
-def normalize_inverse(value, minimum, maximum):
-    """Lower value is better: convert it to a 0-100 score."""
-
-    try:
-        value = float(value)
-        minimum = float(minimum)
-        maximum = float(maximum)
-    except (TypeError, ValueError):
-        return 0.0
-
-    if maximum <= minimum:
-        return 100.0
-
-    score = (
-        (maximum - value)
-        / (maximum - minimum)
-    ) * 100.0
-
-    return max(0.0, min(100.0, score))
-
-
-def calculate_recommendation_scores(routes):
-    """
-    Add an overall recommendation score to every route.
-
-    Safety remains the strongest factor. Time, distance and
-    risk-point count are secondary factors.
-    """
-
-    if not routes:
-        return routes
-
-    times = []
-    distances = []
-    risk_counts = []
-
-    for route in routes:
-
-        try:
-            times.append(
-                float(route.get("duration_minutes", 0))
-            )
-        except (TypeError, ValueError):
-            times.append(0.0)
-
-        try:
-            distances.append(
-                float(route.get("distance_km", 0))
-            )
-        except (TypeError, ValueError):
-            distances.append(0.0)
-
-        try:
-            risk_counts.append(
-                float(
-                    route.get(
-                        "risk_point_count",
-                        len(route.get("risk_points", []))
-                    )
-                )
-            )
-        except (TypeError, ValueError):
-            risk_counts.append(0.0)
-
-    min_time = min(times)
-    max_time = max(times)
-
-    min_distance = min(distances)
-    max_distance = max(distances)
-
-    min_risk_points = min(risk_counts)
-    max_risk_points = max(risk_counts)
-
-    for index, route in enumerate(routes):
-
-        try:
-            safety_score = float(
-                route.get("safety_score", 0)
-            )
-        except (TypeError, ValueError):
-            safety_score = 0.0
-
-        time_score = normalize_inverse(
-            times[index],
-            min_time,
-            max_time
-        )
-
-        distance_score = normalize_inverse(
-            distances[index],
-            min_distance,
-            max_distance
-        )
-
-        risk_point_score = normalize_inverse(
-            risk_counts[index],
-            min_risk_points,
-            max_risk_points
-        )
-
-        recommendation_score = (
-            safety_score * RECOMMENDATION_WEIGHTS["safety"]
-            + time_score * RECOMMENDATION_WEIGHTS["time"]
-            + distance_score * RECOMMENDATION_WEIGHTS["distance"]
-            + risk_point_score * RECOMMENDATION_WEIGHTS["risk_points"]
-        )
-
-        recommendation_score = max(
-            0.0,
-            min(100.0, recommendation_score)
-        )
-
-        route["time_score"] = round(time_score, 2)
-        route["distance_score"] = round(distance_score, 2)
-        route["risk_point_score"] = round(risk_point_score, 2)
-        route["recommendation_score"] = round(
-            recommendation_score,
-            2
-        )
-
-    ranked_routes = sorted(
-        routes,
-        key=lambda route: route.get(
-            "recommendation_score",
-            0
-        ),
-        reverse=True
-    )
-
-    for rank, route in enumerate(
-        ranked_routes,
-        start=1
-    ):
-        route["recommendation_rank"] = rank
-
-        if rank == 1:
-            route["recommendation_level"] = "Recommended"
-        elif rank == 2:
-            route["recommendation_level"] = "Good Alternative"
-        else:
-            route["recommendation_level"] = "Alternative"
-
-    return routes
-
-
-# =========================================================
-# SAFETY RISK LEVEL
-# =========================================================
-
-def get_risk_level(safety_score):
-
-    try:
-        score = float(safety_score)
-    except (TypeError, ValueError):
-        return "Unknown"
-
-    if score >= 80:
-        return "Very Safe"
-
-    elif score >= 60:
-        return "Safe"
-
-    elif score >= 40:
-        return "Moderate"
-
-    elif score >= 20:
-        return "Risky"
-
-    else:
-        return "High Risk"
 
 
 # =========================================================
@@ -2214,23 +1790,6 @@ def get_multiple_routes():
         print(
             "Route",
             index + 1,
-            "| displayed safety points:",
-            len(
-                nearby_safety_data
-            ),
-            "| calculated risk points:",
-            len(
-                route_risk_data["risk_points"]
-            ),
-            "| route risk:",
-            route_risk_data["route_risk"],
-            "| safety score:",
-            route_risk_data["safety_score"]
-        )
-
-        print(
-            "Route",
-            index + 1,
             "| risk points:",
             len(
                 route_risk_data["risk_points"]
@@ -2239,25 +1798,6 @@ def get_multiple_routes():
             route_risk_data["route_risk"],
             "| safety score:",
             route_risk_data["safety_score"]
-        )
-
-        print(
-            "Route",
-            index + 1,
-            "| backend safety breakdown:",
-            build_safety_breakdown(
-                route_risk_data["risk_points"]
-            )
-        )
-
-        # The backend calculation is now the single source of
-        # truth for all route-safety values sent to the frontend.
-        calculated_risk_points = (
-            route_risk_data["risk_points"]
-        )
-
-        safety_breakdown = build_safety_breakdown(
-            calculated_risk_points
         )
 
         routes.append({
@@ -2280,18 +1820,12 @@ def get_multiple_routes():
                 "geometry":
                     route["geometry"],
 
-                # Keep this for existing map/display behaviour.
                 "safety_data":
                     nearby_safety_data,
 
                 "safety_point_count":
                     len(
-                        calculated_risk_points
-                    ),
-
-                "risk_point_count":
-                    len(
-                        calculated_risk_points
+                        nearby_safety_data
                     ),
 
                 "route_risk":
@@ -2304,53 +1838,12 @@ def get_multiple_routes():
                         "safety_score"
                     ],
 
-                "risk_level":
-                    get_risk_level(
-                        route_risk_data[
-                            "safety_score"
-                        ]
-                    ),
-
-                # Single backend-calculated risk-point list.
                 "risk_points":
-                    calculated_risk_points,
-
-                # Breakdown is derived from the same backend
-                # risk-point list; no frontend recalculation needed.
-                "safety_breakdown":
-                    safety_breakdown
+                    route_risk_data[
+                        "risk_points"
+                    ]
 
             })
-
-
-    # =====================================================
-    # CALCULATE OVERALL ROUTE RECOMMENDATION
-    # =====================================================
-    # This is a new ranking layer. Existing safety scoring is unchanged.
-
-    routes = calculate_recommendation_scores(routes)
-
-    print("\n=========== RECOMMENDATION DEBUG ===========")
-
-    for route in routes:
-        print(
-            "Route",
-            route["route_id"],
-            "| Safety:",
-            route["safety_score"],
-            "| Time:",
-            route["duration_minutes"],
-            "| Distance:",
-            route["distance_km"],
-            "| Risk points:",
-            route["risk_point_count"],
-            "| Recommendation:",
-            route["recommendation_score"],
-            "| Rank:",
-            route["recommendation_rank"]
-        )
-
-    print("=============================================\n")
 
 
     # =====================================================
@@ -2392,20 +1885,6 @@ def get_multiple_routes():
         # It does NOT remove the other routes.
         "safest_route_id":
             safest_route_id,
-
-        # Overall recommendation from the new ranking layer.
-        "recommended_route_id":
-            (
-                max(
-                    routes,
-                    key=lambda route: route.get(
-                        "recommendation_score",
-                        0
-                    )
-                )["route_id"]
-                if routes
-                else None
-            ),
 
         # Return ALL generated routes.
         "routes":
@@ -2481,9 +1960,8 @@ def get_safety_data():
 
     try:
 
-        # Reload the same unified dataset used by route-risk
-        # calculation and map safety-point detection.
-        df = pd.read_csv(SAFETY_FILE)
+        # Reload the same dataset used by route-risk calculation
+        df = pd.read_csv("area_risk.csv")
 
         # Convert numeric fields
         numeric_columns = [
@@ -2545,7 +2023,7 @@ def get_safety_data():
 
             "success": False,
 
-            "error": "amravati_safety_data.csv not found",
+            "error": "area_risk.csv not found",
 
             "data": []
 

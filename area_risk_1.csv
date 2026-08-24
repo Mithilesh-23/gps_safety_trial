@@ -1,0 +1,201 @@
+id,location_name,area_name,place_type,latitude,longitude,crime_risk,lighting_level,crowd_density,traffic_level,police_presence,risk_score,risk_level,data_status
+1,Rajapeth - Safety Point 1,Rajapeth,residential_area,20.923215,77.755232,74.75,50.22,57.79,61.09,78.18,57.91,Medium,SYNTHETIC_DEMO_ONLY
+2,City Kotwali - Safety Point 2,City Kotwali,market_area,20.930035,77.752912,89.31,86.15,70.2,26.32,51.48,58.93,Medium,SYNTHETIC_DEMO_ONLY
+3,Gadge Nagar - Safety Point 3,Gadge Nagar,commercial_area,20.944138,77.767449,23.47,44.26,41.77,20.27,34.97,38.58,Medium,SYNTHETIC_DEMO_ONLY
+4,Frezarpura - Safety Point 4,Frezarpura,road_junction,20.931827,77.776938,19.34,61.92,85.97,64.93,90.01,36.24,Medium,SYNTHETIC_DEMO_ONLY
+5,Dastur Nagar - Safety Point 5,Dastur Nagar,public_place,20.904497,77.767837,27.25,63.56,92.87,33.85,77.49,38.88,Medium,SYNTHETIC_DEMO_ONLY
+6,Gokul Market - Safety Point 6,Gokul Market,transport_area,20.9304,77.768564,47.94,85.92,29.21,45.5,67.0,35.87,Medium,SYNTHETIC_DEMO_ONLY
+7,Jawahar Road - Safety Point 7,Jawahar Road,college_area,20.930296,77.747009,23.04,50.55,37.42,31.54,87.07,29.81,Low,SYNTHETIC_DEMO_ONLY
+8,Camp Area - Safety Point 8,Camp Area,park_area,20.919816,77.770494,80.11,72.31,51.21,47.92,73.95,53.96,Medium,SYNTHETIC_DEMO_ONLY
+9,Saturna - Safety Point 9,Saturna,residential_area,20.915306,77.759255,41.31,29.39,21.44,67.97,82.96,43.22,Medium,SYNTHETIC_DEMO_ONLY
+10,Parmal Layout - Safety Point 10,Parmal Layout,market_area,20.92037,77.758394,63.54,37.54,30.36,19.61,38.4,53.66,Medium,SYNTHETIC_DEMO_ONLY
+11,Pushpak Colony - Safety Point 11,Pushpak Colony,commercial_area,20.913905,77.751263,53.04,90.96,45.51,68.87,42.44,45.37,Medium,SYNTHETIC_DEMO_ONLY
+12,Rana Nagar - Safety Point 12,Rana Nagar,road_junction,20.938777,77.781382,54.8,76.73,74.75,44.81,52.61,49.38,Medium,SYNTHETIC_DEMO_ONLY
+13,Mahajanpura - Safety Point 13,Mahajanpura,public_place,20.935669,77.750075,21.97,36.86,73.04,55.98,55.12,44.7,Medium,SYNTHETIC_DEMO_ONLY
+14,Prabhat Colony - Safety Point 14,Prabhat Colony,transport_area,20.929624,77.765214,79.44,47.26,70.43,23.18,88.98,56.86,Medium,SYNTHETIC_DEMO_ONLY
+15,Krishnarpan Colony - Safety Point 15,Krishnarpan Colony,college_area,20.924853,77.756517,51.27,91.77,39.99,25.57,67.51,35.58,Medium,SYNTHETIC_DEMO_ONLY
+16,New Ganesh Colony - Safety Point 16,New Ganesh Colony,park_area,20.925211,77.75734,59.93,34.46,70.88,32.12,88.37,52.67,Medium,SYNTHETIC_DEMO_ONLY
+17,Javad Nagar - Safety Point 17,Javad Nagar,residential_area,20.928204,77.785492,23.72,76.43,51.68,89.24,66.59,35.89,Medium,SYNTHETIC_DEMO_ONLY
+18,Walgaon Road - Safety Point 18,Walgaon Road,market_area,20.917236,77.792702,64.21,85.57,61.17,54.99,89.35,44.84,Medium,SYNTHETIC_DEMO_ONLY
+19,Badnera Road - Safety Point 19,Badnera Road,commercial_area,20.90201,77.775271,80.16,45.97,46.66,92.05,47.59,66.94,High,SYNTHETIC_DEMO_ONLY
+20,Rahatgaon - Safety Point 20,Rahatgaon,road_junction,20.950956,77.749482,77.56,41.63,78.94,40.63,39.68,67.65,High,SYNTHETIC_DEMO_ONLY
+21,Transport Nagar - Safety Point 21,Transport Nagar,public_place,20.957451,77.755475,15.15,26.12,61.12,77.88,60.04,43.79,Medium,SYNTHETIC_DEMO_ONLY
+22,Cotton Market - Safety Point 22,Cotton Market,transport_area,20.933636,77.746287,66.66,48.11,51.07,35.06,56.07,54.8,Medium,SYNTHETIC_DEMO_ONLY
+23,Sarafa - Safety Point 23,Sarafa,college_area,20.92904,77.744963,74.34,89.06,33.46,78.29,72.36,48.92,Medium,SYNTHETIC_DEMO_ONLY
+24,Maltekdi - Safety Point 24,Maltekdi,park_area,20.930593,77.768981,68.76,47.66,28.07,17.29,53.83,50.84,Medium,SYNTHETIC_DEMO_ONLY
+25,Wadali - Safety Point 25,Wadali,residential_area,20.925714,77.796979,24.38,43.54,78.18,25.17,41.48,44.07,Medium,SYNTHETIC_DEMO_ONLY
+26,Rahatgaon Road - Safety Point 26,Rahatgaon Road,market_area,20.947825,77.748154,18.07,82.88,54.2,68.48,36.71,35.12,Medium,SYNTHETIC_DEMO_ONLY
+27,MIDC Area - Safety Point 27,MIDC Area,commercial_area,20.912798,77.803703,60.4,40.95,38.76,40.12,57.79,52.13,Medium,SYNTHETIC_DEMO_ONLY
+28,Chandur Road Area - Safety Point 28,Chandur Road Area,road_junction,20.901198,77.74053,60.72,82.97,59.64,31.13,87.39,41.64,Medium,SYNTHETIC_DEMO_ONLY
+29,Paranjape Nagar - Safety Point 29,Paranjape Nagar,public_place,20.935191,77.749629,42.91,85.66,31.4,67.92,68.63,36.24,Medium,SYNTHETIC_DEMO_ONLY
+30,Panchsheel Nagar - Safety Point 30,Panchsheel Nagar,transport_area,20.944923,77.750152,38.11,41.76,55.6,27.4,85.38,40.16,Medium,SYNTHETIC_DEMO_ONLY
+31,Rajapeth - Safety Point 31,Rajapeth,college_area,20.926246,77.756034,49.3,69.23,67.21,35.05,36.24,49.02,Medium,SYNTHETIC_DEMO_ONLY
+32,City Kotwali - Safety Point 32,City Kotwali,park_area,20.931593,77.7562,87.88,74.72,70.61,51.58,72.71,60.05,Medium,SYNTHETIC_DEMO_ONLY
+33,Gadge Nagar - Safety Point 33,Gadge Nagar,residential_area,20.944593,77.754693,39.48,88.22,33.37,53.29,45.54,36.65,Medium,SYNTHETIC_DEMO_ONLY
+34,Frezarpura - Safety Point 34,Frezarpura,market_area,20.932466,77.777713,53.07,52.85,20.31,62.7,74.1,43.86,Medium,SYNTHETIC_DEMO_ONLY
+35,Dastur Nagar - Safety Point 35,Dastur Nagar,commercial_area,20.90701,77.770132,87.68,77.34,68.71,85.89,43.69,66.95,High,SYNTHETIC_DEMO_ONLY
+36,Gokul Market - Safety Point 36,Gokul Market,road_junction,20.934056,77.758637,48.55,64.7,43.85,73.23,66.93,45.34,Medium,SYNTHETIC_DEMO_ONLY
+37,Jawahar Road - Safety Point 37,Jawahar Road,public_place,20.932425,77.75338,44.16,30.28,53.65,34.51,31.55,53.37,Medium,SYNTHETIC_DEMO_ONLY
+38,Camp Area - Safety Point 38,Camp Area,transport_area,20.925213,77.770679,89.13,94.21,35.7,76.93,85.38,52.05,Medium,SYNTHETIC_DEMO_ONLY
+39,Saturna - Safety Point 39,Saturna,college_area,20.914205,77.758012,20.99,52.26,42.54,25.55,42.6,35.49,Medium,SYNTHETIC_DEMO_ONLY
+40,Parmal Layout - Safety Point 40,Parmal Layout,park_area,20.921985,77.758386,15.75,30.25,93.13,77.34,67.83,46.78,Medium,SYNTHETIC_DEMO_ONLY
+41,Pushpak Colony - Safety Point 41,Pushpak Colony,residential_area,20.911319,77.74819,60.95,30.67,39.94,89.3,88.37,54.91,Medium,SYNTHETIC_DEMO_ONLY
+42,Rana Nagar - Safety Point 42,Rana Nagar,market_area,20.940842,77.782447,63.04,39.89,79.21,84.54,60.04,63.57,Medium,SYNTHETIC_DEMO_ONLY
+43,Mahajanpura - Safety Point 43,Mahajanpura,commercial_area,20.929999,77.758397,30.18,62.17,68.07,37.5,37.43,42.98,Medium,SYNTHETIC_DEMO_ONLY
+44,Prabhat Colony - Safety Point 44,Prabhat Colony,road_junction,20.932341,77.76056,62.74,66.4,50.84,69.35,59.78,52.41,Medium,SYNTHETIC_DEMO_ONLY
+45,Krishnarpan Colony - Safety Point 45,Krishnarpan Colony,public_place,20.922679,77.763405,68.2,38.06,77.91,20.96,66.87,58.42,Medium,SYNTHETIC_DEMO_ONLY
+46,New Ganesh Colony - Safety Point 46,New Ganesh Colony,transport_area,20.922008,77.757052,54.77,63.7,46.51,35.62,94.03,40.6,Medium,SYNTHETIC_DEMO_ONLY
+47,Javad Nagar - Safety Point 47,Javad Nagar,college_area,20.924182,77.786072,72.81,61.82,29.21,81.23,39.63,58.32,Medium,SYNTHETIC_DEMO_ONLY
+48,Walgaon Road - Safety Point 48,Walgaon Road,park_area,20.918026,77.795825,41.8,26.62,21.55,45.67,51.91,46.41,Medium,SYNTHETIC_DEMO_ONLY
+49,Badnera Road - Safety Point 49,Badnera Road,residential_area,20.90006,77.776657,60.09,80.94,47.51,90.93,78.7,47.26,Medium,SYNTHETIC_DEMO_ONLY
+50,Rahatgaon - Safety Point 50,Rahatgaon,market_area,20.951458,77.746725,55.58,42.46,82.36,64.43,71.82,56.76,Medium,SYNTHETIC_DEMO_ONLY
+51,Transport Nagar - Safety Point 51,Transport Nagar,commercial_area,20.959994,77.756265,79.42,81.58,49.68,74.4,68.43,55.08,Medium,SYNTHETIC_DEMO_ONLY
+52,Cotton Market - Safety Point 52,Cotton Market,road_junction,20.932926,77.746459,64.33,59.86,59.06,90.66,62.06,57.38,Medium,SYNTHETIC_DEMO_ONLY
+53,Sarafa - Safety Point 53,Sarafa,public_place,20.93049,77.747512,84.94,59.65,94.17,32.07,87.86,61.2,Medium,SYNTHETIC_DEMO_ONLY
+54,Maltekdi - Safety Point 54,Maltekdi,transport_area,20.931511,77.766336,67.26,88.67,88.65,42.45,83.96,49.12,Medium,SYNTHETIC_DEMO_ONLY
+55,Wadali - Safety Point 55,Wadali,college_area,20.925918,77.801463,66.83,44.57,56.96,25.04,37.68,58.21,Medium,SYNTHETIC_DEMO_ONLY
+56,Rahatgaon Road - Safety Point 56,Rahatgaon Road,park_area,20.946037,77.750902,56.65,65.09,22.0,86.28,77.77,44.9,Medium,SYNTHETIC_DEMO_ONLY
+57,MIDC Area - Safety Point 57,MIDC Area,residential_area,20.912297,77.807148,50.05,61.75,74.27,23.66,75.04,44.92,Medium,SYNTHETIC_DEMO_ONLY
+58,Chandur Road Area - Safety Point 58,Chandur Road Area,market_area,20.897681,77.739396,63.83,72.86,55.65,30.54,55.0,49.11,Medium,SYNTHETIC_DEMO_ONLY
+59,Paranjape Nagar - Safety Point 59,Paranjape Nagar,commercial_area,20.935192,77.753086,52.16,82.1,85.96,58.64,49.39,50.79,Medium,SYNTHETIC_DEMO_ONLY
+60,Panchsheel Nagar - Safety Point 60,Panchsheel Nagar,road_junction,20.941923,77.75004,20.91,25.88,58.0,66.31,72.14,42.7,Medium,SYNTHETIC_DEMO_ONLY
+61,Rajapeth - Safety Point 61,Rajapeth,public_place,20.922668,77.753069,66.46,32.5,29.88,17.88,38.95,55.51,Medium,SYNTHETIC_DEMO_ONLY
+62,City Kotwali - Safety Point 62,City Kotwali,transport_area,20.9275,77.755562,16.29,75.36,49.66,37.12,63.28,28.11,Low,SYNTHETIC_DEMO_ONLY
+63,Gadge Nagar - Safety Point 63,Gadge Nagar,college_area,20.943639,77.762005,30.29,65.69,41.82,63.78,55.05,38.37,Medium,SYNTHETIC_DEMO_ONLY
+64,Frezarpura - Safety Point 64,Frezarpura,park_area,20.934675,77.777789,42.88,37.68,27.29,60.4,30.26,50.21,Medium,SYNTHETIC_DEMO_ONLY
+65,Dastur Nagar - Safety Point 65,Dastur Nagar,residential_area,20.909512,77.768603,33.95,54.52,35.37,50.99,59.22,39.2,Medium,SYNTHETIC_DEMO_ONLY
+66,Gokul Market - Safety Point 66,Gokul Market,market_area,20.934736,77.764341,77.0,55.83,72.47,34.19,76.99,57.38,Medium,SYNTHETIC_DEMO_ONLY
+67,Jawahar Road - Safety Point 67,Jawahar Road,commercial_area,20.927936,77.749243,36.81,60.43,62.45,55.37,71.6,41.8,Medium,SYNTHETIC_DEMO_ONLY
+68,Camp Area - Safety Point 68,Camp Area,road_junction,20.920081,77.772334,35.77,67.06,91.4,49.84,89.66,41.14,Medium,SYNTHETIC_DEMO_ONLY
+69,Saturna - Safety Point 69,Saturna,public_place,20.920148,77.764875,56.77,58.69,64.57,60.26,86.32,48.73,Medium,SYNTHETIC_DEMO_ONLY
+70,Parmal Layout - Safety Point 70,Parmal Layout,transport_area,20.922879,77.7555,32.64,34.97,68.84,59.02,63.39,47.78,Medium,SYNTHETIC_DEMO_ONLY
+71,Pushpak Colony - Safety Point 71,Pushpak Colony,college_area,20.908488,77.749323,42.08,56.51,28.91,89.09,46.36,46.82,Medium,SYNTHETIC_DEMO_ONLY
+72,Rana Nagar - Safety Point 72,Rana Nagar,park_area,20.940831,77.777921,47.48,73.79,87.48,71.94,53.74,51.49,Medium,SYNTHETIC_DEMO_ONLY
+73,Mahajanpura - Safety Point 73,Mahajanpura,residential_area,20.933186,77.752523,75.63,34.46,49.07,81.96,40.72,67.81,High,SYNTHETIC_DEMO_ONLY
+74,Prabhat Colony - Safety Point 74,Prabhat Colony,market_area,20.928006,77.762024,83.62,35.27,49.44,45.5,61.06,64.2,Medium,SYNTHETIC_DEMO_ONLY
+75,Krishnarpan Colony - Safety Point 75,Krishnarpan Colony,commercial_area,20.924971,77.764263,38.19,67.79,60.04,52.67,63.81,41.42,Medium,SYNTHETIC_DEMO_ONLY
+76,New Ganesh Colony - Safety Point 76,New Ganesh Colony,road_junction,20.924882,77.752807,73.81,86.1,68.04,39.23,62.77,52.02,Medium,SYNTHETIC_DEMO_ONLY
+77,Javad Nagar - Safety Point 77,Javad Nagar,public_place,20.921424,77.788357,31.83,57.68,58.58,91.93,66.75,44.16,Medium,SYNTHETIC_DEMO_ONLY
+78,Walgaon Road - Safety Point 78,Walgaon Road,transport_area,20.919014,77.794582,72.96,35.61,51.31,33.35,82.77,55.68,Medium,SYNTHETIC_DEMO_ONLY
+79,Badnera Road - Safety Point 79,Badnera Road,college_area,20.900514,77.776647,30.06,34.11,66.7,33.11,50.51,45.94,Medium,SYNTHETIC_DEMO_ONLY
+80,Rahatgaon - Safety Point 80,Rahatgaon,park_area,20.954457,77.737618,17.0,88.34,80.64,56.04,41.05,35.67,Medium,SYNTHETIC_DEMO_ONLY
+81,Transport Nagar - Safety Point 81,Transport Nagar,residential_area,20.956478,77.754645,45.65,92.96,67.81,49.65,71.38,39.1,Medium,SYNTHETIC_DEMO_ONLY
+82,Cotton Market - Safety Point 82,Cotton Market,market_area,20.935591,77.748467,34.32,42.08,62.33,77.13,72.01,46.57,Medium,SYNTHETIC_DEMO_ONLY
+83,Sarafa - Safety Point 83,Sarafa,commercial_area,20.931434,77.748999,51.45,88.13,48.26,23.17,45.11,40.74,Medium,SYNTHETIC_DEMO_ONLY
+84,Maltekdi - Safety Point 84,Maltekdi,road_junction,20.937716,77.769044,56.5,41.48,35.91,80.85,80.31,50.73,Medium,SYNTHETIC_DEMO_ONLY
+85,Wadali - Safety Point 85,Wadali,public_place,20.926042,77.796479,89.68,37.35,24.33,72.48,40.48,68.23,High,SYNTHETIC_DEMO_ONLY
+86,Rahatgaon Road - Safety Point 86,Rahatgaon Road,transport_area,20.944937,77.754904,16.83,88.42,56.57,49.82,68.31,27.27,Low,SYNTHETIC_DEMO_ONLY
+87,MIDC Area - Safety Point 87,MIDC Area,college_area,20.909598,77.809555,17.05,40.81,62.02,80.45,49.6,43.57,Medium,SYNTHETIC_DEMO_ONLY
+88,Chandur Road Area - Safety Point 88,Chandur Road Area,park_area,20.900294,77.742324,54.9,89.42,36.4,55.51,77.21,38.51,Medium,SYNTHETIC_DEMO_ONLY
+89,Paranjape Nagar - Safety Point 89,Paranjape Nagar,residential_area,20.938671,77.751837,75.19,47.49,26.11,89.26,45.39,61.61,Medium,SYNTHETIC_DEMO_ONLY
+90,Panchsheel Nagar - Safety Point 90,Panchsheel Nagar,market_area,20.940002,77.748902,20.27,34.16,47.66,56.23,45.67,42.2,Medium,SYNTHETIC_DEMO_ONLY
+91,Rajapeth - Safety Point 91,Rajapeth,commercial_area,20.921086,77.755103,28.46,65.6,66.24,27.35,71.84,35.16,Medium,SYNTHETIC_DEMO_ONLY
+92,City Kotwali - Safety Point 92,City Kotwali,road_junction,20.927585,77.756055,52.89,65.91,43.5,47.82,63.19,44.8,Medium,SYNTHETIC_DEMO_ONLY
+93,Gadge Nagar - Safety Point 93,Gadge Nagar,public_place,20.944128,77.760453,29.64,92.59,29.04,37.67,66.57,26.48,Low,SYNTHETIC_DEMO_ONLY
+94,Frezarpura - Safety Point 94,Frezarpura,transport_area,20.93311,77.773848,30.86,68.85,89.35,68.89,30.45,49.3,Medium,SYNTHETIC_DEMO_ONLY
+95,Dastur Nagar - Safety Point 95,Dastur Nagar,college_area,20.911212,77.769995,79.06,93.89,37.8,88.0,33.82,57.24,Medium,SYNTHETIC_DEMO_ONLY
+96,Gokul Market - Safety Point 96,Gokul Market,park_area,20.933767,77.759155,75.4,45.52,89.07,76.09,58.96,68.18,High,SYNTHETIC_DEMO_ONLY
+97,Jawahar Road - Safety Point 97,Jawahar Road,residential_area,20.9293,77.748524,50.49,26.61,41.35,73.85,86.89,50.43,Medium,SYNTHETIC_DEMO_ONLY
+98,Camp Area - Safety Point 98,Camp Area,market_area,20.924115,77.770964,88.58,67.39,62.48,19.49,57.16,59.7,Medium,SYNTHETIC_DEMO_ONLY
+99,Saturna - Safety Point 99,Saturna,commercial_area,20.919038,77.759986,54.38,83.1,58.79,71.3,59.08,47.22,Medium,SYNTHETIC_DEMO_ONLY
+100,Parmal Layout - Safety Point 100,Parmal Layout,road_junction,20.921123,77.75838,58.04,54.91,29.85,55.74,51.57,49.55,Medium,SYNTHETIC_DEMO_ONLY
+101,Pushpak Colony - Safety Point 101,Pushpak Colony,public_place,20.908809,77.750989,77.99,39.19,26.45,75.36,39.3,63.97,Medium,SYNTHETIC_DEMO_ONLY
+102,Rana Nagar - Safety Point 102,Rana Nagar,transport_area,20.942143,77.778625,28.45,40.95,55.18,45.08,69.15,40.6,Medium,SYNTHETIC_DEMO_ONLY
+103,Mahajanpura - Safety Point 103,Mahajanpura,college_area,20.933267,77.755171,28.12,53.07,21.47,51.81,71.79,33.27,Low,SYNTHETIC_DEMO_ONLY
+104,Prabhat Colony - Safety Point 104,Prabhat Colony,park_area,20.928565,77.763131,78.07,77.58,51.02,88.79,32.59,62.36,Medium,SYNTHETIC_DEMO_ONLY
+105,Krishnarpan Colony - Safety Point 105,Krishnarpan Colony,residential_area,20.922638,77.760307,35.11,74.03,45.77,36.38,40.61,38.65,Medium,SYNTHETIC_DEMO_ONLY
+106,New Ganesh Colony - Safety Point 106,New Ganesh Colony,market_area,20.924752,77.755064,78.19,75.01,48.57,38.51,44.29,55.77,Medium,SYNTHETIC_DEMO_ONLY
+107,Javad Nagar - Safety Point 107,Javad Nagar,commercial_area,20.928045,77.784434,62.15,94.22,51.33,19.43,78.87,38.83,Medium,SYNTHETIC_DEMO_ONLY
+108,Walgaon Road - Safety Point 108,Walgaon Road,road_junction,20.916063,77.791357,27.64,84.65,63.81,49.97,53.87,35.61,Medium,SYNTHETIC_DEMO_ONLY
+109,Badnera Road - Safety Point 109,Badnera Road,public_place,20.899758,77.773459,49.31,47.77,37.46,47.27,71.62,44.77,Medium,SYNTHETIC_DEMO_ONLY
+110,Rahatgaon - Safety Point 110,Rahatgaon,transport_area,20.951178,77.744399,79.02,93.16,84.66,15.28,86.41,49.24,Medium,SYNTHETIC_DEMO_ONLY
+111,Transport Nagar - Safety Point 111,Transport Nagar,college_area,20.953794,77.751879,31.35,58.78,68.7,56.81,77.85,40.09,Medium,SYNTHETIC_DEMO_ONLY
+112,Cotton Market - Safety Point 112,Cotton Market,park_area,20.933677,77.747291,54.75,39.05,89.59,22.84,71.35,54.11,Medium,SYNTHETIC_DEMO_ONLY
+113,Sarafa - Safety Point 113,Sarafa,residential_area,20.932814,77.74506,17.1,68.31,54.01,94.68,38.19,40.02,Medium,SYNTHETIC_DEMO_ONLY
+114,Maltekdi - Safety Point 114,Maltekdi,market_area,20.934549,77.76643,77.11,25.49,70.08,70.74,56.78,69.81,High,SYNTHETIC_DEMO_ONLY
+115,Wadali - Safety Point 115,Wadali,commercial_area,20.926475,77.79454,64.85,39.05,62.42,84.95,43.44,64.47,Medium,SYNTHETIC_DEMO_ONLY
+116,Rahatgaon Road - Safety Point 116,Rahatgaon Road,road_junction,20.94807,77.752976,60.6,38.68,75.42,65.78,37.44,63.78,Medium,SYNTHETIC_DEMO_ONLY
+117,MIDC Area - Safety Point 117,MIDC Area,public_place,20.905463,77.805327,24.53,50.29,69.71,65.94,89.14,38.43,Medium,SYNTHETIC_DEMO_ONLY
+118,Chandur Road Area - Safety Point 118,Chandur Road Area,transport_area,20.902344,77.739691,49.96,68.57,82.48,22.75,36.67,50.42,Medium,SYNTHETIC_DEMO_ONLY
+119,Paranjape Nagar - Safety Point 119,Paranjape Nagar,college_area,20.94031,77.754699,77.7,30.9,70.52,85.81,73.26,68.07,High,SYNTHETIC_DEMO_ONLY
+120,Panchsheel Nagar - Safety Point 120,Panchsheel Nagar,park_area,20.940757,77.750532,74.02,43.52,30.1,52.72,65.97,55.8,Medium,SYNTHETIC_DEMO_ONLY
+121,Rajapeth - Safety Point 121,Rajapeth,residential_area,20.924772,77.752771,67.31,79.44,94.4,29.17,76.85,51.59,Medium,SYNTHETIC_DEMO_ONLY
+122,City Kotwali - Safety Point 122,City Kotwali,market_area,20.930607,77.756599,28.88,75.68,32.2,25.76,46.17,31.9,Low,SYNTHETIC_DEMO_ONLY
+123,Gadge Nagar - Safety Point 123,Gadge Nagar,commercial_area,20.94626,77.760627,79.28,87.45,89.43,35.21,76.66,54.66,Medium,SYNTHETIC_DEMO_ONLY
+124,Frezarpura - Safety Point 124,Frezarpura,road_junction,20.929633,77.777081,28.8,39.3,77.63,86.81,33.96,53.89,Medium,SYNTHETIC_DEMO_ONLY
+125,Dastur Nagar - Safety Point 125,Dastur Nagar,public_place,20.909765,77.768916,38.61,29.93,64.43,42.13,35.52,53.01,Medium,SYNTHETIC_DEMO_ONLY
+126,Gokul Market - Safety Point 126,Gokul Market,transport_area,20.931797,77.763357,16.15,90.25,62.05,88.52,66.64,31.57,Low,SYNTHETIC_DEMO_ONLY
+127,Jawahar Road - Safety Point 127,Jawahar Road,college_area,20.929176,77.752924,65.05,47.7,94.88,65.23,54.01,64.13,Medium,SYNTHETIC_DEMO_ONLY
+128,Camp Area - Safety Point 128,Camp Area,park_area,20.918553,77.767899,31.15,42.32,51.48,35.83,47.17,43.23,Medium,SYNTHETIC_DEMO_ONLY
+129,Saturna - Safety Point 129,Saturna,residential_area,20.917152,77.759668,22.01,81.26,71.99,78.03,76.89,34.62,Low,SYNTHETIC_DEMO_ONLY
+130,Parmal Layout - Safety Point 130,Parmal Layout,market_area,20.921777,77.75592,73.11,61.12,91.57,86.14,75.02,63.12,Medium,SYNTHETIC_DEMO_ONLY
+131,Pushpak Colony - Safety Point 131,Pushpak Colony,commercial_area,20.912189,77.749934,60.81,88.69,42.34,72.67,91.18,41.53,Medium,SYNTHETIC_DEMO_ONLY
+132,Rana Nagar - Safety Point 132,Rana Nagar,road_junction,20.940994,77.778189,33.0,31.97,72.7,24.78,37.63,49.54,Medium,SYNTHETIC_DEMO_ONLY
+133,Mahajanpura - Safety Point 133,Mahajanpura,public_place,20.935234,77.752969,35.45,26.8,83.72,74.57,60.08,54.82,Medium,SYNTHETIC_DEMO_ONLY
+134,Prabhat Colony - Safety Point 134,Prabhat Colony,transport_area,20.929823,77.763744,20.51,47.89,50.48,86.67,90.5,36.29,Medium,SYNTHETIC_DEMO_ONLY
+135,Krishnarpan Colony - Safety Point 135,Krishnarpan Colony,college_area,20.926068,77.757252,80.35,79.41,80.95,50.73,76.34,57.02,Medium,SYNTHETIC_DEMO_ONLY
+136,New Ganesh Colony - Safety Point 136,New Ganesh Colony,park_area,20.926065,77.756697,32.93,31.59,91.48,74.63,30.54,58.46,Medium,SYNTHETIC_DEMO_ONLY
+137,Javad Nagar - Safety Point 137,Javad Nagar,residential_area,20.922497,77.782967,46.92,73.94,33.81,34.65,37.83,41.84,Medium,SYNTHETIC_DEMO_ONLY
+138,Walgaon Road - Safety Point 138,Walgaon Road,market_area,20.916399,77.790885,16.79,79.74,36.8,46.05,58.78,27.08,Low,SYNTHETIC_DEMO_ONLY
+139,Badnera Road - Safety Point 139,Badnera Road,commercial_area,20.899907,77.771758,60.1,40.97,60.45,78.09,52.21,59.89,Medium,SYNTHETIC_DEMO_ONLY
+140,Rahatgaon - Safety Point 140,Rahatgaon,road_junction,20.949033,77.743759,15.73,77.76,92.26,79.73,78.47,35.78,Medium,SYNTHETIC_DEMO_ONLY
+141,Transport Nagar - Safety Point 141,Transport Nagar,public_place,20.954919,77.757318,52.53,74.81,65.05,74.25,63.32,48.73,Medium,SYNTHETIC_DEMO_ONLY
+142,Cotton Market - Safety Point 142,Cotton Market,transport_area,20.932433,77.74189,40.23,59.61,93.42,18.1,44.3,48.35,Medium,SYNTHETIC_DEMO_ONLY
+143,Sarafa - Safety Point 143,Sarafa,college_area,20.934446,77.751414,65.69,70.53,88.7,37.14,76.85,52.66,Medium,SYNTHETIC_DEMO_ONLY
+144,Maltekdi - Safety Point 144,Maltekdi,park_area,20.93184,77.763896,33.21,87.22,64.64,79.81,69.26,38.13,Medium,SYNTHETIC_DEMO_ONLY
+145,Wadali - Safety Point 145,Wadali,residential_area,20.924544,77.794638,26.01,68.68,79.64,66.61,90.83,36.65,Medium,SYNTHETIC_DEMO_ONLY
+146,Rahatgaon Road - Safety Point 146,Rahatgaon Road,market_area,20.944898,77.75201,26.06,49.66,94.42,50.28,69.34,44.28,Medium,SYNTHETIC_DEMO_ONLY
+147,MIDC Area - Safety Point 147,MIDC Area,commercial_area,20.912024,77.804795,30.72,47.5,30.28,51.41,73.52,36.44,Medium,SYNTHETIC_DEMO_ONLY
+148,Chandur Road Area - Safety Point 148,Chandur Road Area,road_junction,20.89834,77.737688,16.82,74.5,91.47,46.37,85.97,32.29,Low,SYNTHETIC_DEMO_ONLY
+149,Paranjape Nagar - Safety Point 149,Paranjape Nagar,public_place,20.940258,77.748826,39.34,66.05,64.17,68.53,37.17,48.43,Medium,SYNTHETIC_DEMO_ONLY
+150,Panchsheel Nagar - Safety Point 150,Panchsheel Nagar,transport_area,20.941495,77.753614,65.93,83.77,64.7,51.1,38.89,53.6,Medium,SYNTHETIC_DEMO_ONLY
+151,Rajapeth - Safety Point 151,Rajapeth,college_area,20.927202,77.757695,62.61,31.12,44.3,18.16,37.6,56.64,Medium,SYNTHETIC_DEMO_ONLY
+152,City Kotwali - Safety Point 152,City Kotwali,park_area,20.929971,77.754129,58.94,41.25,66.97,83.61,84.71,56.03,Medium,SYNTHETIC_DEMO_ONLY
+153,Gadge Nagar - Safety Point 153,Gadge Nagar,residential_area,20.942506,77.758465,24.87,67.89,66.64,41.65,78.59,33.74,Low,SYNTHETIC_DEMO_ONLY
+154,Frezarpura - Safety Point 154,Frezarpura,market_area,20.930626,77.771255,23.22,94.51,69.52,27.99,49.4,31.2,Low,SYNTHETIC_DEMO_ONLY
+155,Dastur Nagar - Safety Point 155,Dastur Nagar,commercial_area,20.908035,77.770951,46.46,41.85,56.35,43.02,30.75,53.36,Medium,SYNTHETIC_DEMO_ONLY
+156,Gokul Market - Safety Point 156,Gokul Market,road_junction,20.93259,77.763137,69.58,36.41,73.08,53.86,74.03,60.79,Medium,SYNTHETIC_DEMO_ONLY
+157,Jawahar Road - Safety Point 157,Jawahar Road,public_place,20.928708,77.749016,57.52,37.84,58.69,61.55,64.88,55.67,Medium,SYNTHETIC_DEMO_ONLY
+158,Camp Area - Safety Point 158,Camp Area,transport_area,20.926163,77.772148,26.89,61.62,80.96,69.71,52.01,44.75,Medium,SYNTHETIC_DEMO_ONLY
+159,Saturna - Safety Point 159,Saturna,college_area,20.918106,77.75799,59.24,85.89,21.15,45.53,62.38,39.89,Medium,SYNTHETIC_DEMO_ONLY
+160,Parmal Layout - Safety Point 160,Parmal Layout,park_area,20.919753,77.758514,57.34,65.19,38.68,27.82,42.45,47.11,Medium,SYNTHETIC_DEMO_ONLY
+161,Pushpak Colony - Safety Point 161,Pushpak Colony,residential_area,20.91244,77.749211,18.47,73.79,69.95,19.24,59.24,31.16,Low,SYNTHETIC_DEMO_ONLY
+162,Rana Nagar - Safety Point 162,Rana Nagar,market_area,20.939816,77.775396,46.86,50.24,61.33,34.44,53.66,48.29,Medium,SYNTHETIC_DEMO_ONLY
+163,Mahajanpura - Safety Point 163,Mahajanpura,commercial_area,20.933464,77.75888,37.54,86.51,70.94,73.63,74.08,39.61,Medium,SYNTHETIC_DEMO_ONLY
+164,Prabhat Colony - Safety Point 164,Prabhat Colony,road_junction,20.927678,77.761481,31.99,94.79,80.28,28.89,55.18,35.49,Medium,SYNTHETIC_DEMO_ONLY
+165,Krishnarpan Colony - Safety Point 165,Krishnarpan Colony,public_place,20.925087,77.761725,36.77,80.94,47.66,26.03,59.62,34.33,Low,SYNTHETIC_DEMO_ONLY
+166,New Ganesh Colony - Safety Point 166,New Ganesh Colony,transport_area,20.922937,77.757327,79.11,25.4,60.76,46.85,94.11,61.25,Medium,SYNTHETIC_DEMO_ONLY
+167,Javad Nagar - Safety Point 167,Javad Nagar,college_area,20.924788,77.778524,43.28,52.17,23.34,92.74,31.58,49.92,Medium,SYNTHETIC_DEMO_ONLY
+168,Walgaon Road - Safety Point 168,Walgaon Road,park_area,20.915963,77.793097,17.86,28.37,65.6,53.17,32.66,46.73,Medium,SYNTHETIC_DEMO_ONLY
+169,Badnera Road - Safety Point 169,Badnera Road,residential_area,20.898602,77.773343,44.81,36.38,81.71,82.78,92.67,52.28,Medium,SYNTHETIC_DEMO_ONLY
+170,Rahatgaon - Safety Point 170,Rahatgaon,market_area,20.951113,77.744962,31.77,92.85,94.28,50.18,38.21,42.57,Medium,SYNTHETIC_DEMO_ONLY
+171,Transport Nagar - Safety Point 171,Transport Nagar,commercial_area,20.95593,77.757938,51.0,61.32,39.76,86.67,50.57,50.18,Medium,SYNTHETIC_DEMO_ONLY
+172,Cotton Market - Safety Point 172,Cotton Market,road_junction,20.93483,77.746104,40.02,31.88,75.29,77.72,49.65,56.25,Medium,SYNTHETIC_DEMO_ONLY
+173,Sarafa - Safety Point 173,Sarafa,public_place,20.932868,77.750323,42.47,25.59,44.09,59.35,84.96,46.67,Medium,SYNTHETIC_DEMO_ONLY
+174,Maltekdi - Safety Point 174,Maltekdi,transport_area,20.928935,77.771895,46.61,69.71,42.18,50.59,80.07,39.08,Medium,SYNTHETIC_DEMO_ONLY
+175,Wadali - Safety Point 175,Wadali,college_area,20.924648,77.793359,62.5,86.07,86.04,33.43,91.64,45.29,Medium,SYNTHETIC_DEMO_ONLY
+176,Rahatgaon Road - Safety Point 176,Rahatgaon Road,park_area,20.948354,77.753675,42.51,46.02,40.76,93.66,85.25,45.49,Medium,SYNTHETIC_DEMO_ONLY
+177,MIDC Area - Safety Point 177,MIDC Area,residential_area,20.909624,77.803815,30.42,81.39,49.29,46.55,83.67,30.39,Low,SYNTHETIC_DEMO_ONLY
+178,Chandur Road Area - Safety Point 178,Chandur Road Area,market_area,20.896107,77.73802,88.81,65.37,58.47,70.64,86.35,60.33,Medium,SYNTHETIC_DEMO_ONLY
+179,Paranjape Nagar - Safety Point 179,Paranjape Nagar,commercial_area,20.938469,77.752655,77.48,66.21,35.49,83.33,40.84,60.28,Medium,SYNTHETIC_DEMO_ONLY
+180,Panchsheel Nagar - Safety Point 180,Panchsheel Nagar,road_junction,20.944647,77.75008,39.81,71.75,91.08,47.25,56.68,46.46,Medium,SYNTHETIC_DEMO_ONLY
+181,Rajapeth - Safety Point 181,Rajapeth,public_place,20.926579,77.752183,20.5,85.66,92.75,21.38,41.31,35.92,Medium,SYNTHETIC_DEMO_ONLY
+182,City Kotwali - Safety Point 182,City Kotwali,transport_area,20.92756,77.757128,81.96,91.07,75.06,62.39,49.19,59.69,Medium,SYNTHETIC_DEMO_ONLY
+183,Gadge Nagar - Safety Point 183,Gadge Nagar,college_area,20.948064,77.763613,17.82,58.92,57.25,52.08,87.48,31.02,Low,SYNTHETIC_DEMO_ONLY
+184,Frezarpura - Safety Point 184,Frezarpura,park_area,20.933352,77.773202,26.06,74.76,22.64,92.52,56.92,34.58,Low,SYNTHETIC_DEMO_ONLY
+185,Dastur Nagar - Safety Point 185,Dastur Nagar,residential_area,20.912324,77.767674,84.03,28.0,93.88,87.76,62.66,76.47,High,SYNTHETIC_DEMO_ONLY
+186,Gokul Market - Safety Point 186,Gokul Market,market_area,20.9315,77.763492,17.37,43.25,75.39,89.09,50.43,45.95,Medium,SYNTHETIC_DEMO_ONLY
+187,Jawahar Road - Safety Point 187,Jawahar Road,commercial_area,20.929997,77.748926,72.3,35.41,67.94,37.26,32.86,65.83,High,SYNTHETIC_DEMO_ONLY
+188,Camp Area - Safety Point 188,Camp Area,road_junction,20.92588,77.7719,55.06,37.88,70.46,90.96,54.02,61.01,Medium,SYNTHETIC_DEMO_ONLY
+189,Saturna - Safety Point 189,Saturna,public_place,20.919596,77.761942,31.71,42.87,67.16,53.3,94.68,40.31,Medium,SYNTHETIC_DEMO_ONLY
+190,Parmal Layout - Safety Point 190,Parmal Layout,transport_area,20.922239,77.754292,78.02,91.64,25.14,20.2,95.0,39.42,Medium,SYNTHETIC_DEMO_ONLY
+191,Pushpak Colony - Safety Point 191,Pushpak Colony,college_area,20.908673,77.748543,40.47,26.13,36.08,79.8,40.69,53.25,Medium,SYNTHETIC_DEMO_ONLY
+192,Rana Nagar - Safety Point 192,Rana Nagar,park_area,20.944099,77.777816,61.66,65.66,65.0,45.84,94.04,46.76,Medium,SYNTHETIC_DEMO_ONLY
+193,Mahajanpura - Safety Point 193,Mahajanpura,residential_area,20.9378,77.752858,17.07,38.21,43.26,43.34,50.63,37.41,Medium,SYNTHETIC_DEMO_ONLY
+194,Prabhat Colony - Safety Point 194,Prabhat Colony,market_area,20.931795,77.765237,68.43,29.98,51.61,79.76,93.8,58.02,Medium,SYNTHETIC_DEMO_ONLY
+195,Krishnarpan Colony - Safety Point 195,Krishnarpan Colony,commercial_area,20.922609,77.760179,72.34,30.77,81.56,71.99,71.31,66.52,High,SYNTHETIC_DEMO_ONLY
+196,New Ganesh Colony - Safety Point 196,New Ganesh Colony,road_junction,20.928023,77.754279,17.4,38.28,23.08,17.53,48.62,32.23,Low,SYNTHETIC_DEMO_ONLY
+197,Javad Nagar - Safety Point 197,Javad Nagar,public_place,20.925361,77.78491,86.67,50.18,54.13,17.76,43.51,63.0,Medium,SYNTHETIC_DEMO_ONLY
+198,Walgaon Road - Safety Point 198,Walgaon Road,transport_area,20.916636,77.792554,88.15,58.43,49.01,87.61,57.75,66.02,High,SYNTHETIC_DEMO_ONLY
+199,Badnera Road - Safety Point 199,Badnera Road,college_area,20.900928,77.778406,86.71,83.59,90.48,18.28,71.16,57.69,Medium,SYNTHETIC_DEMO_ONLY
+200,Rahatgaon - Safety Point 200,Rahatgaon,park_area,20.948926,77.743183,81.72,91.16,61.74,20.91,58.26,52.07,Medium,SYNTHETIC_DEMO_ONLY

@@ -1,0 +1,11 @@
+id,location_name,area_name,place_type,latitude,longitude,crime_risk,lighting_level,crowd_density,traffic_level,police_presence,risk_score,risk_level,data_status
+1,Rajapeth Area,Rajapeth,Market Area,20.929,77.752,55,60,80,75,45,58,Medium,DEMO
+2,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941,77.765,35,70,55,50,60,42,Medium,DEMO
+3,Camp Area,Camp,Commercial Area,20.925,77.755,48,55,75,70,50,55,Medium,DEMO
+4,Badnera Road,Badnera Road,Main Road,20.91,77.735,62,45,65,85,35,64,High,DEMO
+5,University Area,University Area,Educational Area,20.945,77.77,25,80,60,45,70,32,Low,DEMO
+6,Bus Stand Area,Central Amravati,Transport Hub,20.933,77.7525,70,50,95,90,40,70,High,DEMO
+7,Railway Station Area,Amravati,Transport Hub,20.926,77.758,65,55,90,85,45,66,High,DEMO
+8,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937,77.76,30,72,50,45,65,38,Low,DEMO
+9,Panchwati Square,Panchwati,Junction,20.918,77.75,50,58,78,80,48,57,Medium,DEMO
+10,Morshi Road,Morshi Road,Main Road,20.95,77.78,45,62,65,70,55,50,Medium,DEMO

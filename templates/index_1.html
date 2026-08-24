@@ -344,166 +344,6 @@
             border-radius: 30px;
         }
 
-
-        /* ----- route risk level ----- */
-        .risk-level {
-            font-size: 13px;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .risk-level.very-safe,
-        .risk-level.safe {
-            color: #166534;
-            background: #dcfce7;
-        }
-
-        .risk-level.moderate {
-            color: #92400e;
-            background: #fef3c7;
-        }
-
-        .risk-level.risky {
-            color: #9a3412;
-            background: #ffedd5;
-        }
-
-        .risk-level.high-risk {
-            color: #991b1b;
-            background: #fee2e2;
-        }
-
-        .risk-level.unknown {
-            color: #475569;
-            background: #f1f5f9;
-        }
-
-        .route-breakdown {
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 10px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-        }
-
-        /* ----- safest vs fastest comparison ----- */
-        .route-comparison {
-            margin-top: 14px;
-            padding: 14px 16px;
-            border-radius: 12px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-        }
-
-        .route-comparison-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 10px;
-        }
-
-        .route-comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-        }
-
-        .comparison-card {
-            padding: 11px;
-            border-radius: 10px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-        }
-
-        .comparison-label {
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .comparison-route {
-            font-size: 14px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .comparison-details {
-            margin-top: 5px;
-            font-size: 12px;
-            line-height: 1.5;
-            color: #475569;
-        }
-
-        .comparison-tradeoff {
-            margin-top: 10px;
-            padding: 9px 10px;
-            border-radius: 8px;
-            background: #f8fafc;
-            color: #475569;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 600px) {
-            .route-comparison-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ----- why this route is recommended ----- */
-        .route-explanation {
-            margin-top: 14px;
-            padding: 14px 16px;
-            border-radius: 12px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-        }
-
-        .route-explanation-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-
-        .route-explanation ul {
-            margin: 0;
-            padding-left: 20px;
-            color: #475569;
-            font-size: 13px;
-        }
-
-        .route-explanation li {
-            margin: 5px 0;
-        }
-
-        .route-explanation .positive {
-            color: #166534;
-        }
-
-        .route-explanation .warning {
-            color: #92400e;
-        }
-
-        .route-explanation .neutral {
-            color: #475569;
-        }
-
-        .breakdown-grid {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 7px 14px;
-            margin-top: 9px;
-            font-size: 13px;
-        }
-
-        .breakdown-grid span:nth-child(even) {
-            font-weight: 600;
-        }
-
         /* ----- legend (leaflet) ----- */
         .map-legend {
             background: white;
@@ -739,55 +579,6 @@
                 Route risk
                 <div id="selectedRouteRisk" class="detail-value">—</div>
             </div>
-            <div class="detail-item">
-                Risk level
-                <div id="selectedRiskLevel" class="detail-value">—</div>
-            </div>
-
-            <div class="route-breakdown" id="selectedSafetyBreakdown">
-                <strong>Safety Breakdown</strong>
-                <div class="breakdown-grid">
-                    <span>Crime Risk</span><span id="breakdownCrime">—</span>
-                    <span>Lighting</span><span id="breakdownLighting">—</span>
-                    <span>Crowd Density</span><span id="breakdownCrowd">—</span>
-                    <span>Traffic</span><span id="breakdownTraffic">—</span>
-                    <span>Police Presence</span><span id="breakdownPolice">—</span>
-                    <span>Existing Risk</span><span id="breakdownExistingRisk">—</span>
-                </div>
-            </div>
-
-            <div class="route-comparison" id="routeComparison">
-                <div class="route-comparison-title">
-                    Safest vs Fastest
-                </div>
-
-                <div class="route-comparison-grid">
-                    <div class="comparison-card safest">
-                        <div class="comparison-label">⭐ SAFEST ROUTE</div>
-                        <div class="comparison-route" id="comparisonSafestRoute">—</div>
-                        <div class="comparison-details" id="comparisonSafestDetails">—</div>
-                    </div>
-
-                    <div class="comparison-card fastest">
-                        <div class="comparison-label">⚡ FASTEST ROUTE</div>
-                        <div class="comparison-route" id="comparisonFastestRoute">—</div>
-                        <div class="comparison-details" id="comparisonFastestDetails">—</div>
-                    </div>
-                </div>
-
-                <div class="comparison-tradeoff" id="comparisonTradeoff">
-                    Select routes to see the safety/time trade-off.
-                </div>
-            </div>
-
-            <div class="route-explanation" id="routeExplanation">
-                <div class="route-explanation-title" id="routeExplanationTitle">
-                    Route safety explanation
-                </div>
-                <ul id="routeExplanationList">
-                    <li class="neutral">Select a route to see the safety explanation.</li>
-                </ul>
-            </div>
         </div>
     </div>
 
@@ -827,7 +618,7 @@
     let availableRoutes = [];
     let selectedRouteId = null;
 
-    // All safety data loaded from amravati_safety_data.csv through /api/safety-data.
+    // All safety data loaded from area_risk.csv through /api/safety-data.
     // We use this as the source for route-specific risk points.
     let allSafetyPoints = [];
     // safetyMarkerGroup removed — we now use routeRiskLayer
@@ -1162,7 +953,7 @@
         try {
 
             // IMPORTANT:
-            // Wait for the safety dataset before calculating
+            // Wait for the 200 safety points before calculating
             // route-specific risk points.
             if (!Array.isArray(allSafetyPoints) ||
                 allSafetyPoints.length === 0) {
@@ -1203,22 +994,25 @@
 
             availableRoutes = data.routes || [];
 
-            // Safety values are calculated by app.py.
-            // Frontend only displays the backend result.
+            // Calculate route-specific safety points immediately.
+            availableRoutes.forEach(route => {
+
+                route.frontend_risk_points =
+                    getSafetyPointsForRoute(route);
+
+            });
+
             console.log(
-                'Backend route safety data:',
+                'Routes with calculated safety points:',
                 availableRoutes.map(route => ({
                     route_id: route.route_id,
-                    risk_points: Array.isArray(route.risk_points)
-                        ? route.risk_points.length
-                        : 0,
-                    safety_score: route.safety_score,
-                    route_risk: route.route_risk
+                    risk_points:
+                        route.frontend_risk_points.length
                 }))
             );
 
-            displayRouteInformation(availableRoutes);
             drawRoutes(availableRoutes);
+            displayRouteInformation(availableRoutes);
 
             setStatus(
                 data.route_count +
@@ -1308,7 +1102,6 @@
             routeLayers[route.route_id] = layer;
             layer.addTo(routeLayerGroup);
 
-
             layer.on('click', (e) => {
                 L.DomEvent.stopPropagation(e);
                 selectRoute(route.route_id);
@@ -1373,672 +1166,6 @@
         }
     }
 
-
-    function getRiskLevel(route) {
-        if (route && route.risk_level) {
-            return String(route.risk_level);
-        }
-
-        const score = Number(route?.safety_score);
-
-        if (!Number.isFinite(score)) {
-            return 'Unknown';
-        }
-
-        if (score >= 80) return 'Very Safe';
-        if (score >= 60) return 'Safe';
-        if (score >= 40) return 'Moderate';
-        if (score >= 20) return 'Risky';
-        return 'High Risk';
-    }
-
-    function getRiskLevelClass(riskLevel) {
-        return String(riskLevel || 'Unknown')
-            .toLowerCase()
-            .replace(/\s+/g, '-');
-    }
-
-    // ============================================================
-    //  ROUTE SAFETY EXPLANATION
-    // ============================================================
-
-    function getAverageRouteValue(route, field) {
-        const points =
-            Array.isArray(route?.risk_points)
-                ? route.risk_points
-                : [];
-
-        const values = points
-            .map(point => Number(point[field]))
-            .filter(value => Number.isFinite(value));
-
-        if (values.length === 0) {
-            return null;
-        }
-
-        return values.reduce(
-            (sum, value) => sum + value,
-            0
-        ) / values.length;
-    }
-
-
-    // ============================================================
-    //  SAFEST VS FASTEST COMPARISON
-    // ============================================================
-
-    function updateRouteComparison(routes) {
-
-        if (!Array.isArray(routes) || routes.length === 0) {
-            return;
-        }
-
-        const safest = [...routes].sort((a, b) => {
-            const scoreA = Number(a.safety_score);
-            const scoreB = Number(b.safety_score);
-
-            const safeA = Number.isFinite(scoreA) ? scoreA : -Infinity;
-            const safeB = Number.isFinite(scoreB) ? scoreB : -Infinity;
-
-            if (safeA !== safeB) {
-                return safeB - safeA;
-            }
-
-            const riskA = Number(a.route_risk);
-            const riskB = Number(b.route_risk);
-
-            return (
-                (Number.isFinite(riskA) ? riskA : Infinity) -
-                (Number.isFinite(riskB) ? riskB : Infinity)
-            );
-        })[0];
-
-        const fastest = [...routes].sort((a, b) => {
-            const timeA = Number(a.duration_minutes);
-            const timeB = Number(b.duration_minutes);
-
-            return (
-                (Number.isFinite(timeA) ? timeA : Infinity) -
-                (Number.isFinite(timeB) ? timeB : Infinity)
-            );
-        })[0];
-
-        const safestRoute =
-            document.getElementById('comparisonSafestRoute');
-
-        const safestDetails =
-            document.getElementById('comparisonSafestDetails');
-
-        const fastestRoute =
-            document.getElementById('comparisonFastestRoute');
-
-        const fastestDetails =
-            document.getElementById('comparisonFastestDetails');
-
-        const tradeoff =
-            document.getElementById('comparisonTradeoff');
-
-        if (!safest || !fastest) {
-            return;
-        }
-
-        safestRoute.textContent =
-            `Route ${safest.route_id}`;
-
-        safestDetails.textContent =
-            `Safety ${Number(safest.safety_score).toFixed(1)}/100 • ` +
-            `${safest.distance_km} km • ` +
-            `${safest.duration_minutes} min`;
-
-        fastestRoute.textContent =
-            `Route ${fastest.route_id}`;
-
-        fastestDetails.textContent =
-            `Safety ${Number(fastest.safety_score).toFixed(1)}/100 • ` +
-            `${fastest.distance_km} km • ` +
-            `${fastest.duration_minutes} min`;
-
-        if (
-            Number(safest.route_id) ===
-            Number(fastest.route_id)
-        ) {
-
-            tradeoff.textContent =
-                `Route ${safest.route_id} is both the safest and fastest available route.`;
-
-            return;
-        }
-
-        const extraTime =
-            Number(safest.duration_minutes) -
-            Number(fastest.duration_minutes);
-
-        const extraDistance =
-            Number(safest.distance_km) -
-            Number(fastest.distance_km);
-
-        const safetyDifference =
-            Number(safest.safety_score) -
-            Number(fastest.safety_score);
-
-        const timeText =
-            extraTime >= 0
-                ? `${extraTime.toFixed(1)} more min`
-                : `${Math.abs(extraTime).toFixed(1)} fewer min`;
-
-        const distanceText =
-            extraDistance >= 0
-                ? `${extraDistance.toFixed(2)} km longer`
-                : `${Math.abs(extraDistance).toFixed(2)} km shorter`;
-
-        const safetyText =
-            safetyDifference >= 0
-                ? `${safetyDifference.toFixed(1)} safety points higher`
-                : `${Math.abs(safetyDifference).toFixed(1)} safety points lower`;
-
-        tradeoff.textContent =
-            `Choosing Route ${safest.route_id} gives ` +
-            `${safetyText}, but it is ${timeText} and ` +
-            `${distanceText} than the fastest route.`;
-    }
-
-
-    function buildRouteExplanation(route) {
-
-        const list =
-            document.getElementById(
-                'routeExplanationList'
-            );
-
-        if (!list) {
-            return;
-        }
-
-        list.innerHTML = '';
-
-        const safestRouteId =
-            findSafestRouteId(
-                availableRoutes
-            );
-
-        const isSafest =
-            Number(route.route_id) ===
-            Number(safestRouteId);
-
-        const explanationTitle =
-            document.getElementById('routeExplanationTitle');
-
-        if (explanationTitle) {
-            explanationTitle.textContent = isSafest
-                ? "⭐ Why is this route recommended?"
-                : "⚠️ Why isn't this the safest route?";
-        }
-
-        const safetyScore =
-            Number(route.safety_score);
-
-        const routeRisk =
-            Number(route.route_risk);
-
-        const riskPoints =
-            Array.isArray(route.risk_points)
-                ? route.risk_points
-                : [];
-
-        const crime =
-            getAverageRouteValue(
-                route,
-                'crime_risk'
-            );
-
-        const lighting =
-            getAverageRouteValue(
-                route,
-                'lighting_level'
-            );
-
-        const police =
-            getAverageRouteValue(
-                route,
-                'police_presence'
-            );
-
-        const traffic =
-            getAverageRouteValue(
-                route,
-                'traffic_level'
-            );
-
-        const crowd =
-            getAverageRouteValue(
-                route,
-                'crowd_density'
-            );
-
-
-        function addReason(
-            text,
-            className = 'neutral'
-        ) {
-
-            const li =
-                document.createElement(
-                    'li'
-                );
-
-            li.className =
-                className;
-
-            li.textContent = text;
-
-            list.appendChild(li);
-        }
-
-
-        // ---------------------------------------------
-        // Main recommendation
-        // ---------------------------------------------
-
-        if (isSafest) {
-
-            addReason(
-                'This is currently the safest available route.',
-                'positive'
-            );
-
-        } else {
-
-            const safest =
-                availableRoutes.find(
-                    r =>
-                        Number(r.route_id) ===
-                        Number(safestRouteId)
-                );
-
-            if (safest) {
-
-                const safestScore =
-                    Number(
-                        safest.safety_score
-                    );
-
-                if (
-                    Number.isFinite(safetyScore) &&
-                    Number.isFinite(safestScore)
-                ) {
-
-                    const difference =
-                        safetyScore -
-                        safestScore;
-
-                    if (difference < 0) {
-
-                        addReason(
-                            `Safety score is ${Math.abs(difference).toFixed(1)} points lower than the safest route.`,
-                            'warning'
-                        );
-
-                    } else {
-
-                        addReason(
-                            'Safety conditions are comparable to the safest route.',
-                            'neutral'
-                        );
-                    }
-                }
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Crime
-        // ---------------------------------------------
-
-        if (crime !== null) {
-
-            if (crime <= 35) {
-
-                addReason(
-                    `Low average crime risk (${crime.toFixed(1)}/100).`,
-                    'positive'
-                );
-
-            } else if (crime >= 65) {
-
-                addReason(
-                    `Higher average crime risk (${crime.toFixed(1)}/100).`,
-                    'warning'
-                );
-
-            } else {
-
-                addReason(
-                    `Moderate average crime risk (${crime.toFixed(1)}/100).`,
-                    'neutral'
-                );
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Lighting
-        // ---------------------------------------------
-
-        if (lighting !== null) {
-
-            if (lighting >= 70) {
-
-                addReason(
-                    `Good lighting conditions (${lighting.toFixed(1)}/100).`,
-                    'positive'
-                );
-
-            } else if (lighting < 40) {
-
-                addReason(
-                    `Lighting is relatively low (${lighting.toFixed(1)}/100).`,
-                    'warning'
-                );
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Police presence
-        // ---------------------------------------------
-
-        if (police !== null) {
-
-            if (police >= 65) {
-
-                addReason(
-                    `Strong police presence (${police.toFixed(1)}/100).`,
-                    'positive'
-                );
-
-            } else if (police < 40) {
-
-                addReason(
-                    `Police presence is relatively low (${police.toFixed(1)}/100).`,
-                    'warning'
-                );
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Traffic
-        // ---------------------------------------------
-
-        if (traffic !== null) {
-
-            if (traffic <= 40) {
-
-                addReason(
-                    `Lower traffic level (${traffic.toFixed(1)}/100).`,
-                    'positive'
-                );
-
-            } else if (traffic >= 70) {
-
-                addReason(
-                    `Higher traffic level (${traffic.toFixed(1)}/100).`,
-                    'warning'
-                );
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Crowd
-        // ---------------------------------------------
-
-        if (crowd !== null) {
-
-            if (crowd >= 75) {
-
-                addReason(
-                    `Good crowd activity (${crowd.toFixed(1)}/100).`,
-                    'positive'
-                );
-
-            } else if (crowd < 35) {
-
-                addReason(
-                    `Low crowd activity (${crowd.toFixed(1)}/100).`,
-                    'warning'
-                );
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Risk-point count
-        // ---------------------------------------------
-
-        if (riskPoints.length === 0) {
-
-            addReason(
-                'No safety risk points were detected near this route.',
-                'positive'
-            );
-
-        } else {
-
-            addReason(
-                `${riskPoints.length} safety risk point(s) detected within the route safety corridor.`,
-                riskPoints.length <= 2
-                    ? 'positive'
-                    : 'warning'
-            );
-        }
-
-
-        // ---------------------------------------------
-        // Route risk
-        // ---------------------------------------------
-
-        if (
-            Number.isFinite(routeRisk)
-        ) {
-
-            if (routeRisk <= 20) {
-
-                addReason(
-                    `Overall route risk is low (${routeRisk.toFixed(1)}/100).`,
-                    'positive'
-                );
-
-            } else if (routeRisk >= 60) {
-
-                addReason(
-                    `Overall route risk is high (${routeRisk.toFixed(1)}/100).`,
-                    'warning'
-                );
-            }
-        }
-
-
-        // ---------------------------------------------
-        // Safety score
-        // ---------------------------------------------
-
-        if (
-            Number.isFinite(safetyScore)
-        ) {
-
-            addReason(
-                `Final safety score: ${safetyScore.toFixed(1)}/100.`,
-                safetyScore >= 70
-                    ? 'positive'
-                    : safetyScore >= 40
-                        ? 'neutral'
-                        : 'warning'
-            );
-        }
-    }
-
-
-
-    // ============================================================
-    //  RISK POINT DETAILS
-    // ============================================================
-
-    function showRiskPointDetails(point) {
-
-        const value = (field) => {
-
-            const value = Number(point?.[field]);
-
-            return Number.isFinite(value)
-                ? value.toFixed(1)
-                : 'N/A';
-        };
-
-
-        const riskScore = Number(point?.risk_score);
-
-        const riskLevel =
-            point?.risk_level ||
-            (
-                Number.isFinite(riskScore)
-                    ? riskScore >= 60
-                        ? 'High'
-                        : riskScore >= 40
-                            ? 'Medium'
-                            : 'Low'
-                    : 'Unknown'
-            );
-
-
-        const location =
-            point?.location_name ||
-            point?.area_name ||
-            'Risk Area';
-
-
-        const distance =
-            Number(point?.distance_from_route_km);
-
-
-        const distanceText =
-            Number.isFinite(distance)
-                ? `${distance.toFixed(3)} km`
-                : 'N/A';
-
-
-        const popupHtml = `
-
-            <div style="
-                min-width:230px;
-                max-width:280px;
-                font-family:Arial,sans-serif;
-            ">
-
-                <div style="
-                    font-size:16px;
-                    font-weight:700;
-                    margin-bottom:8px;
-                ">
-                    ⚠️ ${escapeHtml(String(location))}
-                </div>
-
-
-                <div style="
-                    margin-bottom:10px;
-                    font-weight:600;
-                ">
-                    Risk Level:
-                    ${escapeHtml(String(riskLevel))}
-                </div>
-
-
-                <div style="
-                    margin-bottom:10px;
-                    padding:8px;
-                    background:#f8fafc;
-                    border-radius:8px;
-                ">
-                    <b>Risk Score:</b>
-                    ${Number.isFinite(riskScore)
-                        ? riskScore.toFixed(1)
-                        : 'N/A'
-                    } / 100
-
-                    <br>
-
-                    <b>Distance from route:</b>
-                    ${distanceText}
-                </div>
-
-
-                <div style="
-                    font-weight:700;
-                    margin-bottom:6px;
-                ">
-                    Safety Factors
-                </div>
-
-
-                <div style="
-                    display:grid;
-                    grid-template-columns:1fr auto;
-                    gap:5px 12px;
-                    font-size:13px;
-                ">
-
-                    <span>Crime Risk</span>
-                    <b>${value('crime_risk')}</b>
-
-                    <span>Lighting</span>
-                    <b>${value('lighting_level')}</b>
-
-                    <span>Crowd Density</span>
-                    <b>${value('crowd_density')}</b>
-
-                    <span>Traffic Level</span>
-                    <b>${value('traffic_level')}</b>
-
-                    <span>Police Presence</span>
-                    <b>${value('police_presence')}</b>
-
-                </div>
-
-            </div>
-        `;
-
-
-        // Use the existing Leaflet map if available.
-        if (
-            typeof L !== 'undefined' &&
-            typeof map !== 'undefined' &&
-            map
-        ) {
-
-            L.popup()
-                .setLatLng([
-                    Number(point.latitude),
-                    Number(point.longitude)
-                ])
-                .setContent(popupHtml)
-                .openOn(map);
-
-        }
-    }
-
-
-    function escapeHtml(value) {
-
-        return value
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-
-    }
-
-
     // ============================================================
     //  SELECT ROUTE (with risk layer integration)
     // ============================================================
@@ -2086,19 +1213,10 @@
             selectedLayer.bringToFront();
         }
 
-        // ----- Keep exactly one route card selected -----
-        document
-            .querySelectorAll('.route-card.selected')
-            .forEach(card => card.classList.remove('selected'));
-
-        const selectedCard =
-            document.getElementById(
-                'route-card-' + selectedRouteId
-            );
-
-        if (selectedCard) {
-            selectedCard.classList.add('selected');
-        }
+        // cards
+        document.querySelectorAll('.route-card').forEach(c => c.classList.remove('selected'));
+        const card = document.getElementById('route-card-' + selectedRouteId);
+        if (card) card.classList.add('selected');
 
         // find route data
         const route = availableRoutes.find(r => Number(r.route_id) === selectedRouteId);
@@ -2110,9 +1228,9 @@
         document.getElementById('selectedDistance').textContent = route.distance_km + ' km';
         document.getElementById('selectedDuration').textContent = route.duration_minutes + ' min';
         const routeRiskPoints =
-            Array.isArray(route.risk_points)
-                ? route.risk_points
-                : [];
+            Array.isArray(route.frontend_risk_points)
+                ? route.frontend_risk_points
+                : getSafetyPointsForRoute(route);
 
         document.getElementById('selectedSafetyCount').textContent =
             routeRiskPoints.length;
@@ -2129,68 +1247,6 @@
             Number.isFinite(routeRisk)
                 ? routeRisk.toFixed(1)
                 : 'N/A';
-
-        const selectedRiskLevel =
-            route.risk_level ||
-            getRiskLevel(route);
-        const selectedRiskLevelElement =
-            document.getElementById('selectedRiskLevel');
-
-        selectedRiskLevelElement.textContent =
-            selectedRiskLevel;
-
-        selectedRiskLevelElement.className =
-            'detail-value risk-level ' +
-            getRiskLevelClass(selectedRiskLevel);
-
-        // ----- Safety breakdown -----
-        // Always use the backend-calculated breakdown.
-        const breakdown =
-            route.safety_breakdown &&
-            typeof route.safety_breakdown === 'object'
-                ? route.safety_breakdown
-                : {};
-
-        const displayBreakdownValue = (value) => {
-            const number = Number(value);
-
-            return Number.isFinite(number)
-                ? number.toFixed(1)
-                : 'N/A';
-        };
-
-        document.getElementById('breakdownCrime').textContent =
-            displayBreakdownValue(
-                breakdown.crime_risk
-            );
-
-        document.getElementById('breakdownLighting').textContent =
-            displayBreakdownValue(
-                breakdown.lighting_level
-            );
-
-        document.getElementById('breakdownCrowd').textContent =
-            displayBreakdownValue(
-                breakdown.crowd_density
-            );
-
-        document.getElementById('breakdownTraffic').textContent =
-            displayBreakdownValue(
-                breakdown.traffic_level
-            );
-
-        document.getElementById('breakdownPolice').textContent =
-            displayBreakdownValue(
-                breakdown.police_presence
-            );
-
-        document.getElementById('breakdownExistingRisk').textContent =
-            displayBreakdownValue(
-                breakdown.existing_risk_score
-            );
-
-        // ----- Explain why this route is recommended -----
-        buildRouteExplanation(route);
 
         // ----- Show ONLY risk points affecting this route -----
         showRouteRiskPoints(route);
@@ -2212,9 +1268,9 @@
         // Use the points calculated when routes were loaded.
         // Recalculate only if they are not available.
         let routeRiskPoints =
-            Array.isArray(route.risk_points)
-                ? route.risk_points
-                : [];
+            Array.isArray(route.frontend_risk_points)
+                ? route.frontend_risk_points
+                : getSafetyPointsForRoute(route);
 
         console.log(
             `Route ${route.route_id}: ${routeRiskPoints.length} risk point(s) within 1 km`,
@@ -2222,6 +1278,8 @@
         );
 
         // Keep this route's points available to the rest of the UI.
+        route.frontend_risk_points = routeRiskPoints;
+
         const seen = new Set();
 
         routeRiskPoints.forEach(function(point) {
@@ -2379,93 +1437,25 @@
     function displayRouteInformation(routes) {
         const container = document.getElementById('routeResults');
         container.innerHTML = '';
-
-        if (!Array.isArray(routes) || routes.length === 0) {
-            return;
-        }
-
-        // ========================================================
-        // ROUTE RANKING
-        // ========================================================
-        // Only the order of the route cards is changed.
-        // Original route_id values and map layers remain unchanged.
-        //
-        // Priority:
-        // 1. Higher safety score
-        // 2. Lower route risk
-        // 3. Shorter distance
-        const rankedRoutes = [...routes].sort((a, b) => {
-
-            const aScore = Number(a.safety_score);
-            const bScore = Number(b.safety_score);
-
-            const safeA = Number.isFinite(aScore) ? aScore : -Infinity;
-            const safeB = Number.isFinite(bScore) ? bScore : -Infinity;
-
-            if (safeA !== safeB) {
-                return safeB - safeA;
-            }
-
-            const aRisk = Number(a.route_risk);
-            const bRisk = Number(b.route_risk);
-
-            const riskA = Number.isFinite(aRisk) ? aRisk : Infinity;
-            const riskB = Number.isFinite(bRisk) ? bRisk : Infinity;
-
-            if (riskA !== riskB) {
-                return riskA - riskB;
-            }
-
-            const aDistance = Number(a.distance_km);
-            const bDistance = Number(b.distance_km);
-
-            const distanceA =
-                Number.isFinite(aDistance) ? aDistance : Infinity;
-
-            const distanceB =
-                Number.isFinite(bDistance) ? bDistance : Infinity;
-
-            return distanceA - distanceB;
-        });
-
-        const safestRouteId = findSafestRouteId(routes);
-
-        updateRouteComparison(routes);
-
-        rankedRoutes.forEach((route, index) => {
-
+        routes.forEach(route => {
             const card = document.createElement('div');
-
             card.className = 'route-card';
             card.id = 'route-card-' + route.route_id;
-
             const riskCount =
-                Number.isFinite(Number(route.risk_point_count))
-                    ? Number(route.risk_point_count)
-                    : (Array.isArray(route.risk_points)
-                        ? route.risk_points.length
-                        : 0);
+                Array.isArray(route.frontend_risk_points)
+                    ? route.frontend_risk_points.length
+                    : getSafetyPointsForRoute(route).length;
 
             const safetyScore = Number(route.safety_score);
             const routeRisk = Number(route.route_risk);
 
+            const safestRouteId = findSafestRouteId(routes);
             const isSafest =
                 Number(route.route_id) === Number(safestRouteId);
 
-            const rankNumber = index + 1;
-
-            const rankLabel =
-                rankNumber === 1
-                    ? '🥇 #1 BEST'
-                    : '#' + rankNumber;
-
             card.innerHTML = `
                 <span class="route-title">
-                    ${rankLabel}
-                    <span style="margin-left:10px;">
-                        Route ${route.route_id}
-                    </span>
-
+                    Route ${route.route_id}
                     ${
                         isSafest
                             ? '<span style="color:#16a34a; font-size:12px; margin-left:8px;">● SAFEST</span>'
@@ -2474,7 +1464,6 @@
                 </span>
 
                 <div class="route-meta">
-
                     <span>${route.distance_km} km</span>
 
                     <span>${route.duration_minutes} min</span>
@@ -2497,37 +1486,14 @@
                         }
                     </span>
 
-                    <span class="risk-level ${
-                        getRiskLevelClass(getRiskLevel(route))
-                    }">
-                        ${getRiskLevel(route)}
-                    </span>
-
                     <span class="safety-count">
                         ⚠️ ${riskCount} risk points
                     </span>
-
                 </div>
             `;
-
-            card.addEventListener('click', (e) => {
-                e.stopPropagation();
-                selectRoute(route.route_id);
-            });
-
+            card.addEventListener('click', (e) => { e.stopPropagation(); selectRoute(route.route_id); });
             container.appendChild(card);
         });
-
-        console.log(
-            'Routes ranked by safety:',
-            rankedRoutes.map((route, index) => ({
-                rank: index + 1,
-                route_id: route.route_id,
-                safety_score: route.safety_score,
-                route_risk: route.route_risk,
-                distance_km: route.distance_km
-            }))
-        );
     }
 
     // ============================================================
@@ -2546,7 +1512,7 @@
     };
     legend.addTo(map);
 
-    // Load the unified safety dataset when the page opens.
+    // Load the 200-point safety dataset when the page opens.
     loadSafetyData();
 </script>
 
