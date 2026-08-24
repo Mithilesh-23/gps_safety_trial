@@ -1,0 +1,301 @@
+id,location_name,area_name,place_type,latitude,longitude,day_of_week,hour,crime_risk,lighting_level,crowd_density,traffic_level,police_presence,risk_score,risk_level,data_status
+1,Rajapeth Area,Rajapeth,Market Area,20.929,77.752,BASELINE,-1,55.0,60.0,80.0,75.0,45.0,58.0,Medium,DEMO
+2,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941,77.765,BASELINE,-1,35.0,70.0,55.0,50.0,60.0,42.0,Medium,DEMO
+3,Camp Area,Camp,Commercial Area,20.925,77.755,BASELINE,-1,48.0,55.0,75.0,70.0,50.0,55.0,Medium,DEMO
+4,Badnera Road,Badnera Road,Main Road,20.91,77.735,BASELINE,-1,62.0,45.0,65.0,85.0,35.0,64.0,High,DEMO
+5,University Area,University Area,Educational Area,20.945,77.77,BASELINE,-1,25.0,80.0,60.0,45.0,70.0,32.0,Low,DEMO
+6,Bus Stand Area,Central Amravati,Transport Hub,20.933,77.7525,BASELINE,-1,70.0,50.0,95.0,90.0,40.0,70.0,High,DEMO
+7,Railway Station Area,Amravati,Transport Hub,20.926,77.758,BASELINE,-1,65.0,55.0,90.0,85.0,45.0,66.0,High,DEMO
+8,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937,77.76,BASELINE,-1,30.0,72.0,50.0,45.0,65.0,38.0,Low,DEMO
+9,Panchwati Square,Panchwati,Junction,20.918,77.75,BASELINE,-1,50.0,58.0,78.0,80.0,48.0,57.0,Medium,DEMO
+10,Morshi Road,Morshi Road,Main Road,20.95,77.78,BASELINE,-1,45.0,62.0,65.0,70.0,55.0,50.0,Medium,DEMO
+11,Rajapeth Area,Rajapeth,Market Area,20.928975,77.75072,Monday,8,57.13,53.76,92.57,92.35,33.29,65.33,High,SYNTHETIC_ML
+12,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941553,77.763562,Monday,13,41.16,74.67,55.53,59.02,62.81,39.08,Low,SYNTHETIC_ML
+13,Camp Area,Camp,Commercial Area,20.925798,77.755548,Monday,18,54.15,54.7,80.19,73.8,57.34,56.76,Medium,SYNTHETIC_ML
+14,Badnera Road,Badnera Road,Main Road,20.909829,77.73374,Monday,21,68.18,43.36,82.13,81.75,31.93,74.09,High,SYNTHETIC_ML
+15,University Area,University Area,Educational Area,20.946307,77.770335,Tuesday,8,19.23,83.9,70.27,57.98,66.01,35.7,Low,SYNTHETIC_ML
+16,Bus Stand Area,Central Amravati,Transport Hub,20.932294,77.751542,Tuesday,13,74.75,50.41,97.31,95.05,31.26,73.79,High,SYNTHETIC_ML
+17,Railway Station Area,Amravati,Transport Hub,20.927067,77.75919,Tuesday,18,63.07,63.97,88.88,100.0,34.9,69.92,High,SYNTHETIC_ML
+18,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937214,77.761036,Tuesday,21,27.97,65.82,56.86,43.47,57.35,40.33,Medium,SYNTHETIC_ML
+19,Panchwati Square,Panchwati,Junction,20.916206,77.75073,Wednesday,8,47.01,58.95,85.14,81.69,50.74,56.44,Medium,SYNTHETIC_ML
+20,Morshi Road,Morshi Road,Main Road,20.949365,77.77988,Wednesday,13,41.71,62.07,68.85,73.57,58.99,50.17,Medium,SYNTHETIC_ML
+21,Rajapeth Area,Rajapeth,Market Area,20.928466,77.753106,Wednesday,18,43.19,51.32,73.01,74.92,47.4,61.14,Medium,SYNTHETIC_ML
+22,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940109,77.762831,Wednesday,21,30.61,65.55,47.4,47.29,65.04,38.92,Low,SYNTHETIC_ML
+23,Camp Area,Camp,Commercial Area,20.92533,77.757039,Thursday,8,48.5,51.82,79.37,77.72,59.61,58.01,Medium,SYNTHETIC_ML
+24,Badnera Road,Badnera Road,Main Road,20.909415,77.732935,Thursday,13,67.85,47.14,76.71,75.49,31.16,63.33,Medium,SYNTHETIC_ML
+25,University Area,University Area,Educational Area,20.945622,77.768516,Thursday,18,29.45,78.67,53.15,40.45,71.88,44.81,Medium,SYNTHETIC_ML
+26,Bus Stand Area,Central Amravati,Transport Hub,20.932762,77.750947,Thursday,21,60.86,49.48,88.5,86.68,36.33,68.63,High,SYNTHETIC_ML
+27,Railway Station Area,Amravati,Transport Hub,20.929193,77.756768,Friday,8,53.28,52.08,100.0,100.0,45.78,64.69,Medium,SYNTHETIC_ML
+28,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936318,77.758162,Friday,13,35.87,66.58,61.5,55.7,64.06,44.2,Medium,SYNTHETIC_ML
+29,Panchwati Square,Panchwati,Junction,20.918643,77.752304,Friday,18,41.05,59.04,100.0,93.88,47.29,64.99,Medium,SYNTHETIC_ML
+30,Morshi Road,Morshi Road,Main Road,20.948658,77.780965,Friday,21,47.54,51.73,60.85,90.45,65.34,60.7,Medium,SYNTHETIC_ML
+31,Rajapeth Area,Rajapeth,Market Area,20.928927,77.750735,Saturday,10,52.24,59.97,81.75,83.77,53.44,50.76,Medium,SYNTHETIC_ML
+32,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940274,77.764508,Saturday,15,26.47,64.73,55.38,60.07,52.04,43.26,Medium,SYNTHETIC_ML
+33,Camp Area,Camp,Commercial Area,20.927815,77.75372,Saturday,19,58.91,56.08,91.46,80.72,45.82,73.27,High,SYNTHETIC_ML
+34,Badnera Road,Badnera Road,Main Road,20.909206,77.733685,Saturday,22,65.57,29.24,64.14,92.71,42.24,65.27,High,SYNTHETIC_ML
+35,University Area,University Area,Educational Area,20.947755,77.774358,Sunday,10,24.34,69.45,48.26,62.03,62.28,32.54,Low,SYNTHETIC_ML
+36,Bus Stand Area,Central Amravati,Transport Hub,20.934166,77.753152,Sunday,15,61.8,47.79,97.73,100.0,34.08,71.25,High,SYNTHETIC_ML
+37,Railway Station Area,Amravati,Transport Hub,20.926528,77.75808,Sunday,19,62.74,51.15,85.09,90.23,43.4,67.77,High,SYNTHETIC_ML
+38,Shivaji Nagar,Shivaji Nagar,Residential Area,20.935331,77.761787,Sunday,22,32.91,62.24,52.53,44.22,77.56,34.93,Low,SYNTHETIC_ML
+39,Panchwati Square,Panchwati,Junction,20.918079,77.749562,Monday,8,51.84,60.88,70.86,97.28,50.73,60.28,Medium,SYNTHETIC_ML
+40,Morshi Road,Morshi Road,Main Road,20.950265,77.780444,Monday,13,44.28,60.49,66.22,81.77,39.6,53.48,Medium,SYNTHETIC_ML
+41,Rajapeth Area,Rajapeth,Market Area,20.927421,77.751498,Monday,18,52.4,49.46,86.59,94.38,35.8,64.95,Medium,SYNTHETIC_ML
+42,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940555,77.7651,Monday,21,48.67,66.4,68.86,59.42,62.63,51.81,Medium,SYNTHETIC_ML
+43,Camp Area,Camp,Commercial Area,20.926096,77.752642,Tuesday,8,43.12,60.94,68.14,83.56,48.86,61.4,Medium,SYNTHETIC_ML
+44,Badnera Road,Badnera Road,Main Road,20.908479,77.735049,Tuesday,13,61.53,37.97,60.85,97.09,38.83,64.28,Medium,SYNTHETIC_ML
+45,University Area,University Area,Educational Area,20.945621,77.772424,Tuesday,18,16.48,75.97,67.63,60.5,73.65,35.09,Low,SYNTHETIC_ML
+46,Bus Stand Area,Central Amravati,Transport Hub,20.934221,77.754103,Tuesday,21,58.49,40.51,99.73,77.35,48.86,65.84,High,SYNTHETIC_ML
+47,Railway Station Area,Amravati,Transport Hub,20.924412,77.757812,Wednesday,8,66.63,56.41,95.05,82.2,44.11,71.48,High,SYNTHETIC_ML
+48,Shivaji Nagar,Shivaji Nagar,Residential Area,20.938993,77.761285,Wednesday,13,40.37,67.54,43.42,46.62,70.07,38.95,Low,SYNTHETIC_ML
+49,Panchwati Square,Panchwati,Junction,20.919964,77.747597,Wednesday,18,55.89,61.32,100.0,85.48,35.98,64.86,Medium,SYNTHETIC_ML
+50,Morshi Road,Morshi Road,Main Road,20.950082,77.779292,Wednesday,21,37.01,45.7,58.65,73.52,58.15,41.73,Medium,SYNTHETIC_ML
+51,Rajapeth Area,Rajapeth,Market Area,20.929295,77.753231,Thursday,8,58.22,64.21,84.55,84.28,46.38,60.39,Medium,SYNTHETIC_ML
+52,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939055,77.762777,Thursday,13,32.24,73.13,52.87,49.06,64.98,30.07,Low,SYNTHETIC_ML
+53,Camp Area,Camp,Commercial Area,20.92703,77.755138,Thursday,18,31.66,50.93,88.02,75.61,51.19,53.96,Medium,SYNTHETIC_ML
+54,Badnera Road,Badnera Road,Main Road,20.910589,77.733439,Thursday,21,63.0,35.17,53.16,77.89,32.85,59.11,Medium,SYNTHETIC_ML
+55,University Area,University Area,Educational Area,20.945493,77.770543,Friday,8,28.32,79.21,58.9,63.42,66.37,36.81,Low,SYNTHETIC_ML
+56,Bus Stand Area,Central Amravati,Transport Hub,20.933523,77.755427,Friday,13,79.24,47.94,92.71,100.0,38.01,75.77,High,SYNTHETIC_ML
+57,Railway Station Area,Amravati,Transport Hub,20.922891,77.756324,Friday,18,79.54,55.42,100.0,100.0,39.93,69.03,High,SYNTHETIC_ML
+58,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936491,77.761596,Friday,21,31.7,64.85,72.68,59.76,59.23,46.76,Medium,SYNTHETIC_ML
+59,Panchwati Square,Panchwati,Junction,20.917744,77.748831,Saturday,10,42.01,58.04,100.0,89.31,56.6,59.2,Medium,SYNTHETIC_ML
+60,Morshi Road,Morshi Road,Main Road,20.951403,77.777253,Saturday,15,48.01,56.89,74.57,82.69,57.2,54.66,Medium,SYNTHETIC_ML
+61,Rajapeth Area,Rajapeth,Market Area,20.929698,77.749659,Saturday,19,53.49,42.45,85.75,98.1,50.37,63.66,Medium,SYNTHETIC_ML
+62,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939668,77.767004,Saturday,22,34.08,67.61,63.0,64.26,62.07,39.9,Low,SYNTHETIC_ML
+63,Camp Area,Camp,Commercial Area,20.927347,77.754457,Sunday,10,46.66,63.42,71.46,81.64,50.79,55.73,Medium,SYNTHETIC_ML
+64,Badnera Road,Badnera Road,Main Road,20.911722,77.731409,Sunday,15,55.41,42.31,68.62,72.47,38.82,59.69,Medium,SYNTHETIC_ML
+65,University Area,University Area,Educational Area,20.945994,77.770578,Sunday,19,24.83,63.86,57.59,50.39,68.92,40.01,Medium,SYNTHETIC_ML
+66,Bus Stand Area,Central Amravati,Transport Hub,20.931667,77.752394,Sunday,22,79.85,46.26,100.0,89.3,38.16,71.3,High,SYNTHETIC_ML
+67,Railway Station Area,Amravati,Transport Hub,20.926282,77.755828,Monday,8,67.34,55.31,91.44,95.38,49.44,71.01,High,SYNTHETIC_ML
+68,Shivaji Nagar,Shivaji Nagar,Residential Area,20.938872,77.759621,Monday,13,29.52,73.57,42.8,46.52,56.27,41.06,Medium,SYNTHETIC_ML
+69,Panchwati Square,Panchwati,Junction,20.916744,77.750353,Monday,18,52.54,43.54,75.14,81.45,41.57,57.38,Medium,SYNTHETIC_ML
+70,Morshi Road,Morshi Road,Main Road,20.951219,77.780362,Monday,21,61.72,52.42,66.99,84.57,45.09,59.17,Medium,SYNTHETIC_ML
+71,Rajapeth Area,Rajapeth,Market Area,20.929672,77.749472,Tuesday,8,42.58,63.09,82.93,93.81,41.23,61.39,Medium,SYNTHETIC_ML
+72,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939076,77.766071,Tuesday,13,38.77,63.79,56.88,38.61,62.68,37.9,Low,SYNTHETIC_ML
+73,Camp Area,Camp,Commercial Area,20.9242,77.754383,Tuesday,18,49.69,51.32,92.67,73.08,50.19,61.87,Medium,SYNTHETIC_ML
+74,Badnera Road,Badnera Road,Main Road,20.909571,77.734715,Tuesday,21,75.67,34.96,45.7,97.89,50.3,67.37,High,SYNTHETIC_ML
+75,University Area,University Area,Educational Area,20.944787,77.770923,Wednesday,8,17.21,83.48,67.97,43.04,74.2,29.55,Low,SYNTHETIC_ML
+76,Bus Stand Area,Central Amravati,Transport Hub,20.931344,77.753381,Wednesday,13,57.89,50.99,91.88,100.0,38.95,75.73,High,SYNTHETIC_ML
+77,Railway Station Area,Amravati,Transport Hub,20.925486,77.757878,Wednesday,18,67.24,49.79,97.93,100.0,43.06,68.59,High,SYNTHETIC_ML
+78,Shivaji Nagar,Shivaji Nagar,Residential Area,20.935025,77.761254,Wednesday,21,22.63,56.76,53.86,40.82,49.61,35.62,Low,SYNTHETIC_ML
+79,Panchwati Square,Panchwati,Junction,20.917218,77.749347,Thursday,8,52.45,72.3,86.22,89.17,47.0,63.59,Medium,SYNTHETIC_ML
+80,Morshi Road,Morshi Road,Main Road,20.949631,77.781428,Thursday,13,41.65,66.74,76.99,66.33,52.45,51.65,Medium,SYNTHETIC_ML
+81,Rajapeth Area,Rajapeth,Market Area,20.928632,77.750454,Thursday,18,39.24,55.04,78.84,62.62,39.22,58.31,Medium,SYNTHETIC_ML
+82,Gadge Nagar Area,Gadge Nagar,Residential Area,20.942052,77.763447,Thursday,21,37.52,71.93,47.19,42.72,63.35,38.17,Low,SYNTHETIC_ML
+83,Camp Area,Camp,Commercial Area,20.922755,77.753616,Friday,8,47.92,53.74,76.4,69.89,54.11,46.54,Medium,SYNTHETIC_ML
+84,Badnera Road,Badnera Road,Main Road,20.909718,77.735417,Friday,13,72.23,46.7,78.83,78.78,28.28,71.74,High,SYNTHETIC_ML
+85,University Area,University Area,Educational Area,20.946396,77.772696,Friday,18,26.11,84.67,78.59,43.83,56.52,37.21,Low,SYNTHETIC_ML
+86,Bus Stand Area,Central Amravati,Transport Hub,20.934283,77.753459,Friday,21,77.84,43.04,97.73,94.26,38.2,73.04,High,SYNTHETIC_ML
+87,Railway Station Area,Amravati,Transport Hub,20.925166,77.75608,Saturday,10,68.1,62.5,97.32,95.0,48.82,68.83,High,SYNTHETIC_ML
+88,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937595,77.760091,Saturday,15,41.77,82.37,63.88,49.9,73.1,35.24,Low,SYNTHETIC_ML
+89,Panchwati Square,Panchwati,Junction,20.916125,77.750767,Saturday,19,47.16,54.93,89.55,100.0,53.37,58.97,Medium,SYNTHETIC_ML
+90,Morshi Road,Morshi Road,Main Road,20.950569,77.781931,Saturday,22,49.51,44.04,70.9,83.29,61.36,59.42,Medium,SYNTHETIC_ML
+91,Rajapeth Area,Rajapeth,Market Area,20.928133,77.752379,Sunday,10,62.7,59.21,70.05,72.45,46.3,58.7,Medium,SYNTHETIC_ML
+92,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939291,77.764278,Sunday,15,31.47,66.23,57.49,46.78,61.46,40.98,Medium,SYNTHETIC_ML
+93,Camp Area,Camp,Commercial Area,20.927342,77.753308,Sunday,19,61.68,43.75,64.45,63.3,50.17,60.98,Medium,SYNTHETIC_ML
+94,Badnera Road,Badnera Road,Main Road,20.910053,77.737631,Sunday,22,59.5,34.02,57.85,82.39,43.56,71.75,High,SYNTHETIC_ML
+95,University Area,University Area,Educational Area,20.944265,77.771363,Monday,8,24.35,80.79,68.53,76.29,75.11,37.11,Low,SYNTHETIC_ML
+96,Bus Stand Area,Central Amravati,Transport Hub,20.934,77.751027,Monday,13,70.22,51.67,95.11,92.69,42.55,63.9,Medium,SYNTHETIC_ML
+97,Railway Station Area,Amravati,Transport Hub,20.92593,77.758418,Monday,18,54.9,54.65,95.8,83.75,49.99,61.74,Medium,SYNTHETIC_ML
+98,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936958,77.760338,Monday,21,25.01,72.83,50.5,29.86,53.25,33.05,Low,SYNTHETIC_ML
+99,Panchwati Square,Panchwati,Junction,20.915444,77.74875,Tuesday,8,56.63,51.33,73.94,76.38,49.73,49.99,Medium,SYNTHETIC_ML
+100,Morshi Road,Morshi Road,Main Road,20.948707,77.780718,Tuesday,13,41.1,59.55,65.31,67.51,61.3,46.51,Medium,SYNTHETIC_ML
+101,Rajapeth Area,Rajapeth,Market Area,20.927084,77.752105,Tuesday,18,44.25,62.34,83.54,83.41,54.53,55.3,Medium,SYNTHETIC_ML
+102,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941794,77.767045,Tuesday,21,33.43,59.23,58.18,54.44,56.27,49.39,Medium,SYNTHETIC_ML
+103,Camp Area,Camp,Commercial Area,20.925621,77.754652,Wednesday,8,34.83,53.09,73.01,77.58,46.57,52.58,Medium,SYNTHETIC_ML
+104,Badnera Road,Badnera Road,Main Road,20.910884,77.733274,Wednesday,13,62.53,45.04,68.59,94.32,44.88,67.34,High,SYNTHETIC_ML
+105,University Area,University Area,Educational Area,20.944466,77.770504,Wednesday,18,24.38,85.64,71.72,53.95,75.32,35.86,Low,SYNTHETIC_ML
+106,Bus Stand Area,Central Amravati,Transport Hub,20.935056,77.751774,Wednesday,21,51.88,44.77,65.81,76.21,42.71,57.79,Medium,SYNTHETIC_ML
+107,Railway Station Area,Amravati,Transport Hub,20.923953,77.757616,Thursday,8,80.7,54.99,99.1,100.0,45.79,74.96,High,SYNTHETIC_ML
+108,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937925,77.7585,Thursday,13,24.8,77.55,50.28,42.74,64.36,34.14,Low,SYNTHETIC_ML
+109,Panchwati Square,Panchwati,Junction,20.919103,77.750562,Thursday,18,42.71,64.63,78.76,78.32,50.66,55.0,Medium,SYNTHETIC_ML
+110,Morshi Road,Morshi Road,Main Road,20.951972,77.779835,Thursday,21,56.06,49.76,67.65,67.58,52.1,64.12,Medium,SYNTHETIC_ML
+111,Rajapeth Area,Rajapeth,Market Area,20.92951,77.753005,Friday,8,57.47,64.6,90.29,88.22,49.94,61.91,Medium,SYNTHETIC_ML
+112,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939468,77.765078,Friday,13,32.38,74.54,66.26,47.29,68.65,34.99,Low,SYNTHETIC_ML
+113,Camp Area,Camp,Commercial Area,20.925054,77.754993,Friday,18,46.08,52.98,92.82,84.85,51.9,51.47,Medium,SYNTHETIC_ML
+114,Badnera Road,Badnera Road,Main Road,20.911016,77.733568,Friday,21,75.44,47.73,73.5,85.66,37.91,72.79,High,SYNTHETIC_ML
+115,University Area,University Area,Educational Area,20.945656,77.768137,Saturday,10,31.82,84.19,70.12,46.44,64.84,33.08,Low,SYNTHETIC_ML
+116,Bus Stand Area,Central Amravati,Transport Hub,20.933667,77.752269,Saturday,15,68.57,50.66,100.0,82.72,48.83,70.44,High,SYNTHETIC_ML
+117,Railway Station Area,Amravati,Transport Hub,20.923611,77.756631,Saturday,19,80.76,48.24,100.0,91.41,44.64,74.51,High,SYNTHETIC_ML
+118,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936388,77.757903,Saturday,22,32.55,77.5,80.8,43.93,73.61,39.86,Low,SYNTHETIC_ML
+119,Panchwati Square,Panchwati,Junction,20.918271,77.749016,Sunday,10,39.19,61.92,75.79,75.23,48.05,56.1,Medium,SYNTHETIC_ML
+120,Morshi Road,Morshi Road,Main Road,20.950921,77.780898,Sunday,15,53.58,71.48,68.96,77.79,62.45,57.07,Medium,SYNTHETIC_ML
+121,Rajapeth Area,Rajapeth,Market Area,20.928639,77.752153,Sunday,19,60.89,48.92,92.41,72.4,40.23,60.37,Medium,SYNTHETIC_ML
+122,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940646,77.764724,Sunday,22,35.56,74.49,52.11,52.82,54.07,37.3,Low,SYNTHETIC_ML
+123,Camp Area,Camp,Commercial Area,20.927073,77.754753,Monday,8,46.11,65.63,79.45,76.81,37.42,53.16,Medium,SYNTHETIC_ML
+124,Badnera Road,Badnera Road,Main Road,20.906521,77.731998,Monday,13,71.02,45.37,65.3,84.29,35.02,74.44,High,SYNTHETIC_ML
+125,University Area,University Area,Educational Area,20.946444,77.770409,Monday,18,21.2,80.09,72.46,53.01,67.69,36.33,Low,SYNTHETIC_ML
+126,Bus Stand Area,Central Amravati,Transport Hub,20.932455,77.752118,Monday,21,67.42,46.95,95.88,90.01,48.84,66.09,High,SYNTHETIC_ML
+127,Railway Station Area,Amravati,Transport Hub,20.923138,77.757825,Tuesday,8,54.45,49.09,85.41,100.0,55.81,60.75,Medium,SYNTHETIC_ML
+128,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937626,77.758019,Tuesday,13,23.02,71.49,37.2,38.9,65.89,32.7,Low,SYNTHETIC_ML
+129,Panchwati Square,Panchwati,Junction,20.917789,77.752298,Tuesday,18,55.98,53.2,88.94,89.18,39.74,67.05,High,SYNTHETIC_ML
+130,Morshi Road,Morshi Road,Main Road,20.948413,77.778016,Tuesday,21,56.81,57.29,71.0,85.47,66.76,63.32,Medium,SYNTHETIC_ML
+131,Rajapeth Area,Rajapeth,Market Area,20.929446,77.75333,Wednesday,8,51.6,62.52,81.51,75.32,40.95,67.33,High,SYNTHETIC_ML
+132,Gadge Nagar Area,Gadge Nagar,Residential Area,20.937625,77.763207,Wednesday,13,31.58,68.88,49.29,28.79,51.73,29.19,Low,SYNTHETIC_ML
+133,Camp Area,Camp,Commercial Area,20.924135,77.755839,Wednesday,18,57.27,54.73,89.73,76.6,54.7,64.13,Medium,SYNTHETIC_ML
+134,Badnera Road,Badnera Road,Main Road,20.910856,77.735927,Wednesday,21,70.06,37.32,56.02,75.53,35.52,66.24,High,SYNTHETIC_ML
+135,University Area,University Area,Educational Area,20.942288,77.769743,Thursday,8,35.86,87.66,57.79,64.49,66.81,36.44,Low,SYNTHETIC_ML
+136,Bus Stand Area,Central Amravati,Transport Hub,20.932057,77.753662,Thursday,13,59.08,55.8,100.0,83.62,41.81,64.03,Medium,SYNTHETIC_ML
+137,Railway Station Area,Amravati,Transport Hub,20.925827,77.756746,Thursday,18,64.73,65.44,91.52,97.5,45.58,66.53,High,SYNTHETIC_ML
+138,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937035,77.7591,Thursday,21,41.1,71.55,54.75,57.3,73.7,38.76,Low,SYNTHETIC_ML
+139,Panchwati Square,Panchwati,Junction,20.917965,77.753005,Friday,8,61.34,60.18,83.09,100.0,34.98,60.73,Medium,SYNTHETIC_ML
+140,Morshi Road,Morshi Road,Main Road,20.949008,77.778264,Friday,13,50.77,63.02,67.78,74.64,42.22,48.46,Medium,SYNTHETIC_ML
+141,Rajapeth Area,Rajapeth,Market Area,20.928479,77.75023,Friday,18,48.24,60.32,78.08,91.41,49.52,47.57,Medium,SYNTHETIC_ML
+142,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940159,77.764967,Friday,21,44.28,63.81,63.94,60.66,71.02,43.27,Medium,SYNTHETIC_ML
+143,Camp Area,Camp,Commercial Area,20.923388,77.756315,Saturday,10,37.06,56.37,85.86,75.47,40.47,47.98,Medium,SYNTHETIC_ML
+144,Badnera Road,Badnera Road,Main Road,20.910642,77.735658,Saturday,15,63.89,47.47,88.85,94.55,38.95,66.5,High,SYNTHETIC_ML
+145,University Area,University Area,Educational Area,20.947869,77.770699,Saturday,19,27.63,70.0,94.79,53.64,65.61,46.08,Medium,SYNTHETIC_ML
+146,Bus Stand Area,Central Amravati,Transport Hub,20.93131,77.754493,Saturday,22,74.15,44.58,96.2,91.1,37.73,76.16,High,SYNTHETIC_ML
+147,Railway Station Area,Amravati,Transport Hub,20.925964,77.758547,Sunday,10,73.72,60.76,77.88,91.63,47.43,60.83,Medium,SYNTHETIC_ML
+148,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936524,77.759753,Sunday,15,33.89,73.06,52.33,56.79,72.36,27.02,Low,SYNTHETIC_ML
+149,Panchwati Square,Panchwati,Junction,20.915193,77.752793,Sunday,19,44.25,53.89,90.2,78.59,50.02,60.36,Medium,SYNTHETIC_ML
+150,Morshi Road,Morshi Road,Main Road,20.949129,77.781042,Sunday,22,50.29,58.61,69.6,58.72,62.1,49.44,Medium,SYNTHETIC_ML
+151,Rajapeth Area,Rajapeth,Market Area,20.931052,77.750722,Monday,8,56.79,63.91,87.11,86.43,42.49,66.88,High,SYNTHETIC_ML
+152,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941586,77.767102,Monday,13,50.6,75.97,62.77,50.22,58.7,44.43,Medium,SYNTHETIC_ML
+153,Camp Area,Camp,Commercial Area,20.923698,77.752547,Monday,18,49.27,49.53,89.22,81.55,53.93,56.88,Medium,SYNTHETIC_ML
+154,Badnera Road,Badnera Road,Main Road,20.907914,77.737158,Monday,21,66.61,39.63,61.48,61.36,27.52,65.57,High,SYNTHETIC_ML
+155,University Area,University Area,Educational Area,20.944842,77.769407,Tuesday,8,23.99,81.74,80.97,63.46,68.16,40.94,Medium,SYNTHETIC_ML
+156,Bus Stand Area,Central Amravati,Transport Hub,20.934444,77.751413,Tuesday,13,80.27,49.31,100.0,90.73,50.71,76.19,High,SYNTHETIC_ML
+157,Railway Station Area,Amravati,Transport Hub,20.926164,77.759688,Tuesday,18,59.02,57.76,100.0,91.54,37.28,60.69,Medium,SYNTHETIC_ML
+158,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937675,77.760845,Tuesday,21,30.99,50.7,48.47,43.7,77.58,45.85,Medium,SYNTHETIC_ML
+159,Panchwati Square,Panchwati,Junction,20.917076,77.749966,Wednesday,8,50.8,59.98,87.11,79.87,53.27,59.38,Medium,SYNTHETIC_ML
+160,Morshi Road,Morshi Road,Main Road,20.951068,77.778228,Wednesday,13,40.64,55.57,62.17,61.17,56.94,44.29,Medium,SYNTHETIC_ML
+161,Rajapeth Area,Rajapeth,Market Area,20.931996,77.752199,Wednesday,18,51.04,56.25,94.05,83.39,43.73,61.93,Medium,SYNTHETIC_ML
+162,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940527,77.762098,Wednesday,21,41.99,66.71,62.16,34.02,49.91,48.14,Medium,SYNTHETIC_ML
+163,Camp Area,Camp,Commercial Area,20.921798,77.755926,Thursday,8,39.12,38.5,75.61,74.72,47.45,56.66,Medium,SYNTHETIC_ML
+164,Badnera Road,Badnera Road,Main Road,20.911124,77.732469,Thursday,13,65.89,46.86,72.85,75.68,47.05,60.53,Medium,SYNTHETIC_ML
+165,University Area,University Area,Educational Area,20.942329,77.768795,Thursday,18,18.49,89.1,63.55,56.6,71.42,30.86,Low,SYNTHETIC_ML
+166,Bus Stand Area,Central Amravati,Transport Hub,20.931907,77.753657,Thursday,21,79.7,47.96,82.46,84.21,36.51,70.15,High,SYNTHETIC_ML
+167,Railway Station Area,Amravati,Transport Hub,20.927095,77.755619,Friday,8,70.66,54.13,94.48,100.0,40.1,72.79,High,SYNTHETIC_ML
+168,Shivaji Nagar,Shivaji Nagar,Residential Area,20.933679,77.760519,Friday,13,30.18,70.68,56.44,46.92,56.28,42.71,Medium,SYNTHETIC_ML
+169,Panchwati Square,Panchwati,Junction,20.91592,77.747885,Friday,18,58.33,57.08,90.14,85.78,47.28,61.62,Medium,SYNTHETIC_ML
+170,Morshi Road,Morshi Road,Main Road,20.951897,77.777867,Friday,21,45.5,50.08,75.86,80.15,56.93,60.87,Medium,SYNTHETIC_ML
+171,Rajapeth Area,Rajapeth,Market Area,20.928936,77.752118,Saturday,10,52.81,68.15,92.49,80.16,43.69,58.53,Medium,SYNTHETIC_ML
+172,Gadge Nagar Area,Gadge Nagar,Residential Area,20.942143,77.766763,Saturday,15,30.25,73.19,80.59,38.76,61.94,40.53,Medium,SYNTHETIC_ML
+173,Camp Area,Camp,Commercial Area,20.922352,77.756461,Saturday,19,51.49,54.59,65.83,96.74,52.25,63.53,Medium,SYNTHETIC_ML
+174,Badnera Road,Badnera Road,Main Road,20.909732,77.733959,Saturday,22,63.73,41.07,59.25,94.06,20.52,72.93,High,SYNTHETIC_ML
+175,University Area,University Area,Educational Area,20.945583,77.76736,Sunday,10,21.45,87.64,64.29,41.91,68.58,24.91,Low,SYNTHETIC_ML
+176,Bus Stand Area,Central Amravati,Transport Hub,20.934787,77.751456,Sunday,15,75.26,50.77,100.0,81.2,39.38,79.86,High,SYNTHETIC_ML
+177,Railway Station Area,Amravati,Transport Hub,20.927483,77.758547,Sunday,19,72.75,47.13,98.88,84.52,44.46,65.6,High,SYNTHETIC_ML
+178,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936193,77.760372,Sunday,22,25.3,65.34,37.99,36.8,61.77,35.93,Low,SYNTHETIC_ML
+179,Panchwati Square,Panchwati,Junction,20.918615,77.749301,Monday,8,49.01,63.24,81.04,75.64,39.71,52.29,Medium,SYNTHETIC_ML
+180,Morshi Road,Morshi Road,Main Road,20.946512,77.780355,Monday,13,61.62,51.57,66.63,60.98,52.04,57.67,Medium,SYNTHETIC_ML
+181,Rajapeth Area,Rajapeth,Market Area,20.92883,77.750481,Monday,18,68.32,57.28,86.18,91.88,44.02,69.71,High,SYNTHETIC_ML
+182,Gadge Nagar Area,Gadge Nagar,Residential Area,20.943884,77.766691,Monday,21,36.73,63.96,50.77,54.85,51.97,40.42,Medium,SYNTHETIC_ML
+183,Camp Area,Camp,Commercial Area,20.922837,77.754225,Tuesday,8,48.68,49.36,76.6,79.76,50.23,57.81,Medium,SYNTHETIC_ML
+184,Badnera Road,Badnera Road,Main Road,20.912216,77.73576,Tuesday,13,68.4,36.79,63.48,78.44,35.67,65.73,High,SYNTHETIC_ML
+185,University Area,University Area,Educational Area,20.944072,77.769015,Tuesday,18,15.82,84.03,57.1,45.54,71.88,26.25,Low,SYNTHETIC_ML
+186,Bus Stand Area,Central Amravati,Transport Hub,20.931834,77.751555,Tuesday,21,66.99,50.85,100.0,100.0,53.61,66.86,High,SYNTHETIC_ML
+187,Railway Station Area,Amravati,Transport Hub,20.926108,77.756057,Wednesday,8,57.6,48.69,95.3,81.35,50.05,63.83,Medium,SYNTHETIC_ML
+188,Shivaji Nagar,Shivaji Nagar,Residential Area,20.939194,77.761214,Wednesday,13,41.94,78.72,52.38,34.23,66.26,32.52,Low,SYNTHETIC_ML
+189,Panchwati Square,Panchwati,Junction,20.919523,77.747512,Wednesday,18,50.67,43.38,74.84,95.24,55.28,63.41,Medium,SYNTHETIC_ML
+190,Morshi Road,Morshi Road,Main Road,20.949335,77.77994,Wednesday,21,46.02,58.22,62.59,55.18,53.05,47.27,Medium,SYNTHETIC_ML
+191,Rajapeth Area,Rajapeth,Market Area,20.930441,77.749071,Thursday,8,58.1,58.17,81.72,85.08,33.47,63.43,Medium,SYNTHETIC_ML
+192,Gadge Nagar Area,Gadge Nagar,Residential Area,20.942399,77.765726,Thursday,13,21.18,71.64,54.94,51.36,57.23,39.11,Low,SYNTHETIC_ML
+193,Camp Area,Camp,Commercial Area,20.927338,77.753686,Thursday,18,46.17,42.35,84.97,88.6,53.87,64.97,Medium,SYNTHETIC_ML
+194,Badnera Road,Badnera Road,Main Road,20.909612,77.737217,Thursday,21,63.95,44.12,65.46,76.06,37.49,65.12,High,SYNTHETIC_ML
+195,University Area,University Area,Educational Area,20.945992,77.769038,Friday,8,18.7,76.48,71.53,63.48,61.02,36.12,Low,SYNTHETIC_ML
+196,Bus Stand Area,Central Amravati,Transport Hub,20.930905,77.753483,Friday,13,71.62,48.2,100.0,100.0,35.85,76.83,High,SYNTHETIC_ML
+197,Railway Station Area,Amravati,Transport Hub,20.925157,77.757076,Friday,18,57.41,63.48,100.0,94.47,45.94,69.19,High,SYNTHETIC_ML
+198,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937152,77.756988,Friday,21,23.21,61.46,37.74,54.95,75.85,32.96,Low,SYNTHETIC_ML
+199,Panchwati Square,Panchwati,Junction,20.914766,77.7496,Saturday,10,51.87,51.62,82.42,72.36,51.26,54.48,Medium,SYNTHETIC_ML
+200,Morshi Road,Morshi Road,Main Road,20.949805,77.780929,Saturday,15,40.93,52.69,78.03,69.61,48.55,56.44,Medium,SYNTHETIC_ML
+201,Rajapeth Area,Rajapeth,Market Area,20.930538,77.751524,Saturday,19,50.73,52.37,95.19,80.48,47.61,59.67,Medium,SYNTHETIC_ML
+202,Gadge Nagar Area,Gadge Nagar,Residential Area,20.942099,77.762421,Saturday,22,26.92,58.38,72.97,41.03,66.77,44.49,Medium,SYNTHETIC_ML
+203,Camp Area,Camp,Commercial Area,20.923257,77.753984,Sunday,10,45.17,49.82,85.35,59.2,59.63,54.67,Medium,SYNTHETIC_ML
+204,Badnera Road,Badnera Road,Main Road,20.907296,77.733872,Sunday,15,56.39,37.35,65.76,75.18,21.92,63.28,Medium,SYNTHETIC_ML
+205,University Area,University Area,Educational Area,20.943196,77.76957,Sunday,19,24.56,70.76,83.06,52.09,71.47,43.17,Medium,SYNTHETIC_ML
+206,Bus Stand Area,Central Amravati,Transport Hub,20.932867,77.751854,Sunday,22,66.23,44.86,89.88,87.83,38.58,71.65,High,SYNTHETIC_ML
+207,Railway Station Area,Amravati,Transport Hub,20.926326,77.760363,Monday,8,70.58,53.58,93.45,91.45,55.18,61.7,Medium,SYNTHETIC_ML
+208,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936565,77.760298,Monday,13,33.42,73.02,45.52,45.25,63.49,33.34,Low,SYNTHETIC_ML
+209,Panchwati Square,Panchwati,Junction,20.918588,77.750456,Monday,18,44.63,53.16,72.73,86.28,51.27,57.53,Medium,SYNTHETIC_ML
+210,Morshi Road,Morshi Road,Main Road,20.951684,77.779859,Monday,21,45.39,53.53,82.71,66.38,51.0,49.55,Medium,SYNTHETIC_ML
+211,Rajapeth Area,Rajapeth,Market Area,20.928958,77.75101,Tuesday,8,47.22,67.13,87.79,71.21,55.66,55.46,Medium,SYNTHETIC_ML
+212,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939,77.762792,Tuesday,13,39.07,72.86,55.12,43.68,60.78,39.81,Low,SYNTHETIC_ML
+213,Camp Area,Camp,Commercial Area,20.925171,77.756105,Tuesday,18,51.96,39.39,80.45,70.48,57.85,58.48,Medium,SYNTHETIC_ML
+214,Badnera Road,Badnera Road,Main Road,20.907931,77.733508,Tuesday,21,63.78,46.89,57.05,87.36,40.54,60.71,Medium,SYNTHETIC_ML
+215,University Area,University Area,Educational Area,20.94555,77.770875,Wednesday,8,29.62,82.99,63.56,42.48,74.6,45.37,Medium,SYNTHETIC_ML
+216,Bus Stand Area,Central Amravati,Transport Hub,20.933409,77.75307,Wednesday,13,66.55,39.14,90.18,81.26,31.32,78.61,High,SYNTHETIC_ML
+217,Railway Station Area,Amravati,Transport Hub,20.923033,77.757608,Wednesday,18,62.84,53.96,99.95,89.59,48.18,62.64,Medium,SYNTHETIC_ML
+218,Shivaji Nagar,Shivaji Nagar,Residential Area,20.935269,77.760238,Wednesday,21,31.02,60.32,49.72,45.43,52.06,41.66,Medium,SYNTHETIC_ML
+219,Panchwati Square,Panchwati,Junction,20.918198,77.751228,Thursday,8,57.16,62.66,83.83,84.67,44.22,63.68,Medium,SYNTHETIC_ML
+220,Morshi Road,Morshi Road,Main Road,20.950385,77.777428,Thursday,13,45.66,66.71,71.97,63.56,44.15,57.45,Medium,SYNTHETIC_ML
+221,Rajapeth Area,Rajapeth,Market Area,20.929586,77.752745,Thursday,18,50.0,64.63,80.35,79.9,53.41,57.42,Medium,SYNTHETIC_ML
+222,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941833,77.765066,Thursday,21,47.63,67.57,58.92,47.93,60.38,48.06,Medium,SYNTHETIC_ML
+223,Camp Area,Camp,Commercial Area,20.924433,77.755486,Friday,8,42.34,55.41,87.85,82.05,63.24,65.63,High,SYNTHETIC_ML
+224,Badnera Road,Badnera Road,Main Road,20.914056,77.735591,Friday,13,56.41,42.89,73.66,95.35,36.91,65.08,High,SYNTHETIC_ML
+225,University Area,University Area,Educational Area,20.945336,77.770901,Friday,18,19.96,75.83,63.31,61.79,67.81,31.7,Low,SYNTHETIC_ML
+226,Bus Stand Area,Central Amravati,Transport Hub,20.933907,77.754371,Friday,21,79.33,42.52,100.0,91.28,36.87,79.83,High,SYNTHETIC_ML
+227,Railway Station Area,Amravati,Transport Hub,20.926503,77.758078,Saturday,10,84.69,44.74,89.71,84.57,39.9,70.34,High,SYNTHETIC_ML
+228,Shivaji Nagar,Shivaji Nagar,Residential Area,20.934389,77.760026,Saturday,15,33.37,75.05,62.07,44.58,77.73,33.02,Low,SYNTHETIC_ML
+229,Panchwati Square,Panchwati,Junction,20.917677,77.74878,Saturday,19,51.73,52.83,100.0,92.75,52.36,64.39,Medium,SYNTHETIC_ML
+230,Morshi Road,Morshi Road,Main Road,20.951186,77.781469,Saturday,22,47.59,55.81,74.08,77.19,61.49,52.92,Medium,SYNTHETIC_ML
+231,Rajapeth Area,Rajapeth,Market Area,20.928026,77.749772,Sunday,10,64.04,70.67,73.07,75.11,45.07,58.21,Medium,SYNTHETIC_ML
+232,Gadge Nagar Area,Gadge Nagar,Residential Area,20.941226,77.765869,Sunday,15,35.65,65.39,55.69,43.65,53.4,42.31,Medium,SYNTHETIC_ML
+233,Camp Area,Camp,Commercial Area,20.923646,77.754543,Sunday,19,64.73,50.44,86.21,65.03,42.28,62.93,Medium,SYNTHETIC_ML
+234,Badnera Road,Badnera Road,Main Road,20.909918,77.736749,Sunday,22,75.71,37.93,53.85,92.54,37.95,66.71,High,SYNTHETIC_ML
+235,University Area,University Area,Educational Area,20.946627,77.770826,Monday,8,17.74,79.49,70.53,31.22,76.2,31.25,Low,SYNTHETIC_ML
+236,Bus Stand Area,Central Amravati,Transport Hub,20.933913,77.752179,Monday,13,53.36,45.29,96.11,88.44,42.87,70.5,High,SYNTHETIC_ML
+237,Railway Station Area,Amravati,Transport Hub,20.924083,77.760829,Monday,18,52.08,52.27,96.91,79.84,48.79,51.15,Medium,SYNTHETIC_ML
+238,Shivaji Nagar,Shivaji Nagar,Residential Area,20.938046,77.763416,Monday,21,29.17,57.26,59.88,45.11,71.63,41.14,Medium,SYNTHETIC_ML
+239,Panchwati Square,Panchwati,Junction,20.921859,77.748875,Tuesday,8,56.8,48.52,87.92,94.15,55.22,68.53,High,SYNTHETIC_ML
+240,Morshi Road,Morshi Road,Main Road,20.950554,77.77926,Tuesday,13,41.45,60.16,61.08,62.88,38.42,48.41,Medium,SYNTHETIC_ML
+241,Rajapeth Area,Rajapeth,Market Area,20.929744,77.752549,Tuesday,18,68.55,60.08,95.19,80.45,49.96,65.92,High,SYNTHETIC_ML
+242,Gadge Nagar Area,Gadge Nagar,Residential Area,20.937425,77.765775,Tuesday,21,35.12,68.47,72.88,47.84,62.52,42.94,Medium,SYNTHETIC_ML
+243,Camp Area,Camp,Commercial Area,20.924263,77.755127,Wednesday,8,32.46,63.82,79.26,82.66,44.59,52.17,Medium,SYNTHETIC_ML
+244,Badnera Road,Badnera Road,Main Road,20.906918,77.734717,Wednesday,13,81.37,50.01,73.4,91.75,43.88,70.43,High,SYNTHETIC_ML
+245,University Area,University Area,Educational Area,20.944944,77.770296,Wednesday,18,30.68,74.18,64.17,46.35,79.01,38.73,Low,SYNTHETIC_ML
+246,Bus Stand Area,Central Amravati,Transport Hub,20.932472,77.753221,Wednesday,21,66.48,29.29,96.2,92.59,47.26,70.69,High,SYNTHETIC_ML
+247,Railway Station Area,Amravati,Transport Hub,20.925828,77.760389,Thursday,8,82.72,63.88,100.0,91.42,39.7,72.43,High,SYNTHETIC_ML
+248,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936589,77.761186,Thursday,13,27.52,57.36,54.04,39.41,65.26,37.73,Low,SYNTHETIC_ML
+249,Panchwati Square,Panchwati,Junction,20.915059,77.751059,Thursday,18,39.27,54.9,88.1,82.74,38.35,58.11,Medium,SYNTHETIC_ML
+250,Morshi Road,Morshi Road,Main Road,20.949331,77.78147,Thursday,21,37.46,59.43,57.9,60.72,52.35,49.27,Medium,SYNTHETIC_ML
+251,Rajapeth Area,Rajapeth,Market Area,20.926446,77.749838,Friday,8,56.97,55.81,87.74,71.05,46.74,67.18,High,SYNTHETIC_ML
+252,Gadge Nagar Area,Gadge Nagar,Residential Area,20.943325,77.764346,Friday,13,42.77,78.14,57.95,51.28,63.7,40.3,Medium,SYNTHETIC_ML
+253,Camp Area,Camp,Commercial Area,20.924636,77.753563,Friday,18,48.71,61.8,99.2,76.92,49.9,59.59,Medium,SYNTHETIC_ML
+254,Badnera Road,Badnera Road,Main Road,20.909436,77.734313,Friday,21,58.98,41.53,76.66,90.88,35.42,77.79,High,SYNTHETIC_ML
+255,University Area,University Area,Educational Area,20.946494,77.769093,Saturday,10,30.38,84.91,65.22,46.97,73.25,35.19,Low,SYNTHETIC_ML
+256,Bus Stand Area,Central Amravati,Transport Hub,20.932339,77.754484,Saturday,15,57.1,38.5,88.74,84.79,39.07,65.46,High,SYNTHETIC_ML
+257,Railway Station Area,Amravati,Transport Hub,20.928725,77.756678,Saturday,19,75.44,47.68,99.15,95.1,46.97,73.01,High,SYNTHETIC_ML
+258,Shivaji Nagar,Shivaji Nagar,Residential Area,20.938223,77.758947,Saturday,22,33.9,67.16,53.2,49.25,65.64,39.33,Low,SYNTHETIC_ML
+259,Panchwati Square,Panchwati,Junction,20.917178,77.751848,Sunday,10,55.36,53.43,86.73,97.69,47.27,55.79,Medium,SYNTHETIC_ML
+260,Morshi Road,Morshi Road,Main Road,20.952283,77.780538,Sunday,15,48.87,63.49,73.07,73.88,62.31,56.45,Medium,SYNTHETIC_ML
+261,Rajapeth Area,Rajapeth,Market Area,20.929833,77.749433,Sunday,19,61.45,50.18,81.69,95.56,46.3,71.9,High,SYNTHETIC_ML
+262,Gadge Nagar Area,Gadge Nagar,Residential Area,20.942624,77.764187,Sunday,22,33.52,77.53,53.29,35.6,71.36,33.46,Low,SYNTHETIC_ML
+263,Camp Area,Camp,Commercial Area,20.922567,77.755922,Monday,8,56.04,58.25,80.73,75.03,48.95,55.67,Medium,SYNTHETIC_ML
+264,Badnera Road,Badnera Road,Main Road,20.909269,77.734532,Monday,13,66.42,47.88,68.26,82.44,39.72,65.2,High,SYNTHETIC_ML
+265,University Area,University Area,Educational Area,20.94443,77.766851,Monday,18,39.14,69.59,68.96,40.3,69.35,42.03,Medium,SYNTHETIC_ML
+266,Bus Stand Area,Central Amravati,Transport Hub,20.931588,77.752802,Monday,21,77.48,50.85,100.0,92.87,40.28,79.51,High,SYNTHETIC_ML
+267,Railway Station Area,Amravati,Transport Hub,20.926572,77.756776,Tuesday,8,68.08,44.14,100.0,100.0,48.84,73.02,High,SYNTHETIC_ML
+268,Shivaji Nagar,Shivaji Nagar,Residential Area,20.93751,77.76069,Tuesday,13,23.25,79.6,60.98,37.07,70.81,32.14,Low,SYNTHETIC_ML
+269,Panchwati Square,Panchwati,Junction,20.919069,77.747588,Tuesday,18,56.96,58.5,97.24,91.4,51.75,66.09,High,SYNTHETIC_ML
+270,Morshi Road,Morshi Road,Main Road,20.950307,77.781768,Tuesday,21,45.13,66.07,67.3,54.69,61.23,47.15,Medium,SYNTHETIC_ML
+271,Rajapeth Area,Rajapeth,Market Area,20.928412,77.749215,Wednesday,8,48.72,54.04,84.11,87.89,37.01,59.29,Medium,SYNTHETIC_ML
+272,Gadge Nagar Area,Gadge Nagar,Residential Area,20.939975,77.767306,Wednesday,13,30.25,69.95,62.44,43.83,69.94,35.49,Low,SYNTHETIC_ML
+273,Camp Area,Camp,Commercial Area,20.923521,77.754916,Wednesday,18,49.48,51.69,77.29,88.52,58.8,59.36,Medium,SYNTHETIC_ML
+274,Badnera Road,Badnera Road,Main Road,20.909868,77.733546,Wednesday,21,66.86,44.62,74.66,82.37,33.72,70.07,High,SYNTHETIC_ML
+275,University Area,University Area,Educational Area,20.942153,77.77193,Thursday,8,18.3,88.68,66.58,65.62,66.92,29.86,Low,SYNTHETIC_ML
+276,Bus Stand Area,Central Amravati,Transport Hub,20.933675,77.750988,Thursday,13,64.21,49.88,90.31,92.15,34.3,69.51,High,SYNTHETIC_ML
+277,Railway Station Area,Amravati,Transport Hub,20.925016,77.759037,Thursday,18,60.1,52.92,85.93,87.37,45.71,65.39,High,SYNTHETIC_ML
+278,Shivaji Nagar,Shivaji Nagar,Residential Area,20.937681,77.761849,Thursday,21,44.08,62.97,53.88,43.08,67.19,35.16,Low,SYNTHETIC_ML
+279,Panchwati Square,Panchwati,Junction,20.916452,77.749905,Friday,8,48.45,63.97,78.48,80.94,48.85,51.35,Medium,SYNTHETIC_ML
+280,Morshi Road,Morshi Road,Main Road,20.948332,77.781253,Friday,13,42.44,70.39,79.86,81.48,55.87,55.69,Medium,SYNTHETIC_ML
+281,Rajapeth Area,Rajapeth,Market Area,20.92729,77.751788,Friday,18,63.3,61.27,94.49,84.63,27.83,66.32,High,SYNTHETIC_ML
+282,Gadge Nagar Area,Gadge Nagar,Residential Area,20.940444,77.763643,Friday,21,37.93,64.86,60.03,64.47,53.48,43.59,Medium,SYNTHETIC_ML
+283,Camp Area,Camp,Commercial Area,20.924396,77.753583,Saturday,10,46.81,66.05,73.66,66.12,42.19,52.98,Medium,SYNTHETIC_ML
+284,Badnera Road,Badnera Road,Main Road,20.91174,77.736569,Saturday,15,60.35,59.75,79.09,81.65,38.89,66.86,High,SYNTHETIC_ML
+285,University Area,University Area,Educational Area,20.946308,77.768958,Saturday,19,23.69,73.65,79.99,59.04,67.64,42.67,Medium,SYNTHETIC_ML
+286,Bus Stand Area,Central Amravati,Transport Hub,20.933865,77.752134,Saturday,22,60.23,40.38,100.0,90.44,35.84,75.85,High,SYNTHETIC_ML
+287,Railway Station Area,Amravati,Transport Hub,20.924484,77.760257,Sunday,10,63.85,52.43,100.0,89.45,42.22,71.33,High,SYNTHETIC_ML
+288,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936915,77.759135,Sunday,15,25.37,75.01,58.53,48.08,65.57,35.89,Low,SYNTHETIC_ML
+289,Panchwati Square,Panchwati,Junction,20.91886,77.749035,Sunday,19,52.09,62.29,81.62,79.92,44.9,57.58,Medium,SYNTHETIC_ML
+290,Morshi Road,Morshi Road,Main Road,20.950417,77.777936,Sunday,22,47.53,65.6,71.99,62.14,49.87,43.61,Medium,SYNTHETIC_ML
+291,Rajapeth Area,Rajapeth,Market Area,20.930129,77.753265,Monday,8,50.56,57.81,79.2,74.86,45.04,61.13,Medium,SYNTHETIC_ML
+292,Gadge Nagar Area,Gadge Nagar,Residential Area,20.943763,77.767887,Monday,13,24.21,71.79,60.41,41.75,60.06,35.96,Low,SYNTHETIC_ML
+293,Camp Area,Camp,Commercial Area,20.925831,77.755346,Monday,18,36.35,69.96,72.2,85.21,55.82,50.01,Medium,SYNTHETIC_ML
+294,Badnera Road,Badnera Road,Main Road,20.909148,77.734069,Monday,21,74.35,37.92,63.66,93.77,38.48,66.71,High,SYNTHETIC_ML
+295,University Area,University Area,Educational Area,20.944908,77.770189,Tuesday,8,30.5,85.86,65.01,59.69,78.21,42.37,Medium,SYNTHETIC_ML
+296,Bus Stand Area,Central Amravati,Transport Hub,20.931371,77.750614,Tuesday,13,67.62,44.66,83.25,95.06,35.3,83.81,High,SYNTHETIC_ML
+297,Railway Station Area,Amravati,Transport Hub,20.926175,77.754636,Tuesday,18,68.57,64.18,93.03,94.83,33.94,61.54,Medium,SYNTHETIC_ML
+298,Shivaji Nagar,Shivaji Nagar,Residential Area,20.936997,77.760455,Tuesday,21,26.33,64.83,43.35,48.17,66.83,40.34,Medium,SYNTHETIC_ML
+299,Panchwati Square,Panchwati,Junction,20.917007,77.748184,Wednesday,8,53.58,58.85,76.89,81.44,43.09,56.79,Medium,SYNTHETIC_ML
+300,Morshi Road,Morshi Road,Main Road,20.951532,77.779194,Wednesday,13,51.85,62.47,58.1,76.47,51.64,47.46,Medium,SYNTHETIC_ML
