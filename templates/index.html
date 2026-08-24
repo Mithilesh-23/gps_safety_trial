@@ -698,7 +698,7 @@
 
     <!-- action row -->
     <div class="action-row">
-        <button id="routeButton" class="route-button">Find routes</button>
+        <button type="button" id="routeButton" class="route-button">Find routes</button>
         <span id="status">Select start and destination</span>
     </div>
 
@@ -826,6 +826,11 @@
     let routeLayers = {};
     let availableRoutes = [];
     let selectedRouteId = null;
+
+    // Prevent duplicate /api/route requests.
+    // This also protects against accidental double-clicks and
+    // duplicate script/listener attachment.
+    let routeRequestInProgress = false;
 
     // All safety data loaded from amravati_safety_data.csv through /api/safety-data.
     // We use this as the source for route-specific risk points.
@@ -1143,9 +1148,45 @@
     // ============================================================
     //  FIND ROUTES
     // ============================================================
-    document.getElementById('routeButton').addEventListener('click', findRoutes);
+
+    const routeButton =
+        document.getElementById('routeButton');
+
+    // Attach the click handler only once.
+    // The data flag protects against duplicate script execution.
+    if (
+        routeButton &&
+        routeButton.dataset.routeHandlerAttached !== 'true'
+    ) {
+        routeButton.dataset.routeHandlerAttached = 'true';
+
+        routeButton.addEventListener(
+            'click',
+            findRoutes
+        );
+    }
 
     async function findRoutes() {
+
+        // Ignore a second click while the current request
+        // is still being processed.
+        if (routeRequestInProgress) {
+            console.log(
+                'Route request already in progress. Duplicate request ignored.'
+            );
+            return;
+        }
+
+        routeRequestInProgress = true;
+
+        if (routeButton) {
+            routeButton.disabled = true;
+            routeButton.dataset.originalText =
+                routeButton.textContent;
+
+            routeButton.textContent =
+                'Finding routes...';
+        }
 
         if (startLat === null || startLon === null) {
             setStatus('Please select a starting location.');
@@ -1227,6 +1268,8 @@
 
         } catch (e) {
 
+            // Ignore AbortError if a future request cancellation
+            // is introduced; otherwise show the normal error.
             console.error(
                 'Route error:',
                 e
@@ -1235,6 +1278,18 @@
             setStatus(
                 'Unable to find routes.'
             );
+
+        } finally {
+
+            routeRequestInProgress = false;
+
+            if (routeButton) {
+                routeButton.disabled = false;
+
+                routeButton.textContent =
+                    routeButton.dataset.originalText ||
+                    'Find routes';
+            }
         }
     }
 

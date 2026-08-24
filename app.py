@@ -3,6 +3,9 @@ import requests
 import math
 import pandas as pd
 import os
+from datetime import datetime
+
+from ml_risk_predictor import predict_risk
 
 
 app = Flask(__name__)
@@ -969,165 +972,6 @@ def build_safety_breakdown(
 
 
 # =========================================================
-# ROUTE RECOMMENDATION SCORE
-# =========================================================
-# Separate decision layer. Existing safety calculation is unchanged.
-# =========================================================
-
-RECOMMENDATION_WEIGHTS = {
-    "safety": 0.50,
-    "time": 0.20,
-    "distance": 0.20,
-    "risk_points": 0.10
-}
-
-
-def normalize_inverse(value, minimum, maximum):
-    """Lower value is better: convert it to a 0-100 score."""
-
-    try:
-        value = float(value)
-        minimum = float(minimum)
-        maximum = float(maximum)
-    except (TypeError, ValueError):
-        return 0.0
-
-    if maximum <= minimum:
-        return 100.0
-
-    score = (
-        (maximum - value)
-        / (maximum - minimum)
-    ) * 100.0
-
-    return max(0.0, min(100.0, score))
-
-
-def calculate_recommendation_scores(routes):
-    """
-    Add an overall recommendation score to every route.
-
-    Safety remains the strongest factor. Time, distance and
-    risk-point count are secondary factors.
-    """
-
-    if not routes:
-        return routes
-
-    times = []
-    distances = []
-    risk_counts = []
-
-    for route in routes:
-
-        try:
-            times.append(
-                float(route.get("duration_minutes", 0))
-            )
-        except (TypeError, ValueError):
-            times.append(0.0)
-
-        try:
-            distances.append(
-                float(route.get("distance_km", 0))
-            )
-        except (TypeError, ValueError):
-            distances.append(0.0)
-
-        try:
-            risk_counts.append(
-                float(
-                    route.get(
-                        "risk_point_count",
-                        len(route.get("risk_points", []))
-                    )
-                )
-            )
-        except (TypeError, ValueError):
-            risk_counts.append(0.0)
-
-    min_time = min(times)
-    max_time = max(times)
-
-    min_distance = min(distances)
-    max_distance = max(distances)
-
-    min_risk_points = min(risk_counts)
-    max_risk_points = max(risk_counts)
-
-    for index, route in enumerate(routes):
-
-        try:
-            safety_score = float(
-                route.get("safety_score", 0)
-            )
-        except (TypeError, ValueError):
-            safety_score = 0.0
-
-        time_score = normalize_inverse(
-            times[index],
-            min_time,
-            max_time
-        )
-
-        distance_score = normalize_inverse(
-            distances[index],
-            min_distance,
-            max_distance
-        )
-
-        risk_point_score = normalize_inverse(
-            risk_counts[index],
-            min_risk_points,
-            max_risk_points
-        )
-
-        recommendation_score = (
-            safety_score * RECOMMENDATION_WEIGHTS["safety"]
-            + time_score * RECOMMENDATION_WEIGHTS["time"]
-            + distance_score * RECOMMENDATION_WEIGHTS["distance"]
-            + risk_point_score * RECOMMENDATION_WEIGHTS["risk_points"]
-        )
-
-        recommendation_score = max(
-            0.0,
-            min(100.0, recommendation_score)
-        )
-
-        route["time_score"] = round(time_score, 2)
-        route["distance_score"] = round(distance_score, 2)
-        route["risk_point_score"] = round(risk_point_score, 2)
-        route["recommendation_score"] = round(
-            recommendation_score,
-            2
-        )
-
-    ranked_routes = sorted(
-        routes,
-        key=lambda route: route.get(
-            "recommendation_score",
-            0
-        ),
-        reverse=True
-    )
-
-    for rank, route in enumerate(
-        ranked_routes,
-        start=1
-    ):
-        route["recommendation_rank"] = rank
-
-        if rank == 1:
-            route["recommendation_level"] = "Recommended"
-        elif rank == 2:
-            route["recommendation_level"] = "Good Alternative"
-        else:
-            route["recommendation_level"] = "Alternative"
-
-    return routes
-
-
-# =========================================================
 # SAFETY RISK LEVEL
 # =========================================================
 
@@ -1914,6 +1758,107 @@ def get_safety_data_for_route(
     return unique_points
 
 
+
+# =========================================================
+# FINAL ML + RULE-BASED RISK
+# =========================================================
+
+RULE_BASED_WEIGHT = 0.40
+ML_WEIGHT = 0.60
+
+
+def get_final_risk_level(score):
+    """
+    Convert final numerical risk into a display level.
+    """
+
+    score = float(score)
+
+    if score >= 65:
+        return "High"
+
+    if score >= 40:
+        return "Medium"
+
+    return "Low"
+
+
+def calculate_final_risk(
+    existing_risk,
+    ml_risk,
+    risk_point_count
+):
+    """
+    Calculate the final route risk.
+
+    Rules:
+    1. No safety/risk points -> final score is None.
+       This prevents an unmeasured route from appearing
+       artificially safe.
+    2. Safety points + ML prediction -> 40% existing risk
+       + 60% ML risk.
+    3. Safety points but no ML prediction -> existing risk.
+    """
+
+    existing_risk = float(existing_risk)
+
+    if int(risk_point_count) == 0:
+
+        return {
+            "final_risk_score": None,
+            "final_risk_level": "Insufficient Data",
+            "risk_source": "no_safety_data"
+        }
+
+    if ml_risk is None:
+
+        final_score = max(
+            0.0,
+            min(
+                100.0,
+                existing_risk
+            )
+        )
+
+        return {
+            "final_risk_score": round(
+                final_score,
+                2
+            ),
+            "final_risk_level": get_final_risk_level(
+                final_score
+            ),
+            "risk_source": "existing_algorithm"
+        }
+
+    ml_risk = float(ml_risk)
+
+    final_score = (
+        RULE_BASED_WEIGHT * existing_risk
+        +
+        ML_WEIGHT * ml_risk
+    )
+
+    final_score = max(
+        0.0,
+        min(
+            100.0,
+            final_score
+        )
+    )
+
+    return {
+        "final_risk_score": round(
+            final_score,
+            2
+        ),
+        "final_risk_level": get_final_risk_level(
+            final_score
+        ),
+        "risk_source": "combined_rule_ml"
+    }
+
+
 # =========================================================
 # ROUTE API
 # =========================================================
@@ -2193,23 +2138,37 @@ def get_multiple_routes():
         )
 
 
-        # Find safety points
+        # =====================================================
+        # FIND SAFETY DATA
+        # =====================================================
 
         nearby_safety_data = (
-
             get_safety_data_for_route(
-
                 route["geometry"],
-
                 SAFETY_RADIUS_KM
-
             )
-
         )
+
+
+        # =====================================================
+        # EXISTING RULE-BASED RISK
+        # =====================================================
+        #
+        # IMPORTANT:
+        # This calculation remains unchanged.
+        # It is executed BEFORE ML so that ML can use the
+        # exact risk_points generated for this route.
+        # =====================================================
 
         route_risk_data = calculate_route_risk(
             route["geometry"]
         )
+
+
+        calculated_risk_points = (
+            route_risk_data["risk_points"]
+        )
+
 
         print(
             "Route",
@@ -2220,7 +2179,7 @@ def get_multiple_routes():
             ),
             "| calculated risk points:",
             len(
-                route_risk_data["risk_points"]
+                calculated_risk_points
             ),
             "| route risk:",
             route_risk_data["route_risk"],
@@ -2228,144 +2187,366 @@ def get_multiple_routes():
             route_risk_data["safety_score"]
         )
 
-        print(
-            "Route",
-            index + 1,
-            "| risk points:",
-            len(
-                route_risk_data["risk_points"]
-            ),
-            "| route risk:",
-            route_risk_data["route_risk"],
-            "| safety score:",
-            route_risk_data["safety_score"]
-        )
 
-        print(
-            "Route",
-            index + 1,
-            "| backend safety breakdown:",
+        # =====================================================
+        # SAFETY BREAKDOWN
+        # =====================================================
+
+        safety_breakdown = (
             build_safety_breakdown(
-                route_risk_data["risk_points"]
+                calculated_risk_points
             )
         )
 
-        # The backend calculation is now the single source of
-        # truth for all route-safety values sent to the frontend.
-        calculated_risk_points = (
-            route_risk_data["risk_points"]
-        )
 
-        safety_breakdown = build_safety_breakdown(
+        # =====================================================
+        # ML RISK PREDICTION
+        # =====================================================
+        #
+        # The Random Forest predicts numerical risk_score.
+        #
+        # We use the SAME calculated risk points that the
+        # existing route-risk algorithm used.
+        #
+        # If a route has no calculated risk points, ML is
+        # intentionally unavailable rather than assuming
+        # zeros or artificial safety.
+        # =====================================================
+
+        ml_risk_score = None
+        ml_risk_level = None
+
+        ml_source_points = (
             calculated_risk_points
         )
 
-        routes.append({
 
-                "route_id":
-                    index + 1,
+        def safe_average(
+            points,
+            field_name
+        ):
 
-                "distance_km":
-                    round(
-                        distance_km,
-                        2
-                    ),
+            values = []
 
-                "duration_minutes":
-                    round(
-                        duration_minutes,
-                        2
-                    ),
+            for point in points:
 
-                "geometry":
-                    route["geometry"],
+                try:
 
-                # Keep this for existing map/display behaviour.
-                "safety_data":
-                    nearby_safety_data,
+                    value = point.get(
+                        field_name,
+                        None
+                    )
 
-                "safety_point_count":
-                    len(
-                        calculated_risk_points
-                    ),
+                    if value is None:
+                        continue
 
-                "risk_point_count":
-                    len(
-                        calculated_risk_points
-                    ),
+                    value = float(value)
 
-                "route_risk":
-                    route_risk_data[
-                        "route_risk"
-                    ],
+                    if pd.notna(value):
+                        values.append(
+                            value
+                        )
 
-                "safety_score":
-                    route_risk_data[
-                        "safety_score"
-                    ],
+                except (
+                    TypeError,
+                    ValueError
+                ):
+                    continue
 
-                "risk_level":
-                    get_risk_level(
-                        route_risk_data[
-                            "safety_score"
-                        ]
-                    ),
+            if not values:
+                return None
 
-                # Single backend-calculated risk-point list.
-                "risk_points":
-                    calculated_risk_points,
-
-                # Breakdown is derived from the same backend
-                # risk-point list; no frontend recalculation needed.
-                "safety_breakdown":
-                    safety_breakdown
-
-            })
+            return (
+                sum(values)
+                /
+                len(values)
+            )
 
 
-    # =====================================================
-    # CALCULATE OVERALL ROUTE RECOMMENDATION
-    # =====================================================
-    # This is a new ranking layer. Existing safety scoring is unchanged.
-
-    routes = calculate_recommendation_scores(routes)
-
-    print("\n=========== RECOMMENDATION DEBUG ===========")
-
-    for route in routes:
-        print(
-            "Route",
-            route["route_id"],
-            "| Safety:",
-            route["safety_score"],
-            "| Time:",
-            route["duration_minutes"],
-            "| Distance:",
-            route["distance_km"],
-            "| Risk points:",
-            route["risk_point_count"],
-            "| Recommendation:",
-            route["recommendation_score"],
-            "| Rank:",
-            route["recommendation_rank"]
+        crime_risk = safe_average(
+            ml_source_points,
+            "crime_risk"
         )
 
-    print("=============================================\n")
+        lighting_level = safe_average(
+            ml_source_points,
+            "lighting_level"
+        )
+
+        crowd_density = safe_average(
+            ml_source_points,
+            "crowd_density"
+        )
+
+        traffic_level = safe_average(
+            ml_source_points,
+            "traffic_level"
+        )
+
+        police_presence = safe_average(
+            ml_source_points,
+            "police_presence"
+        )
+
+
+        ml_features_available = all([
+            crime_risk is not None,
+            lighting_level is not None,
+            crowd_density is not None,
+            traffic_level is not None,
+            police_presence is not None
+        ])
+
+
+        if ml_features_available:
+
+            try:
+
+                current_time = (
+                    datetime.now()
+                )
+
+
+                ml_result = predict_risk(
+
+                    crime_risk=crime_risk,
+
+                    lighting_level=lighting_level,
+
+                    crowd_density=crowd_density,
+
+                    traffic_level=traffic_level,
+
+                    police_presence=police_presence,
+
+                    hour=current_time.hour,
+
+                    day_of_week=current_time.strftime(
+                        "%A"
+                    )
+
+                )
+
+
+                ml_risk_score = (
+                    ml_result[
+                        "predicted_risk_score"
+                    ]
+                )
+
+                ml_risk_level = (
+                    ml_result[
+                        "predicted_risk_level"
+                    ]
+                )
+
+
+            except Exception as error:
+
+                print(
+                    "ML prediction error:",
+                    repr(error)
+                )
+
+        else:
+
+            print(
+                "ML skipped: required safety "
+                "features are missing."
+            )
+
+
+        # =====================================================
+        # ROUTE DEBUG
+        # =====================================================
+
+        print(
+            "Route",
+            index + 1,
+
+            "| Existing Risk:",
+            route_risk_data[
+                "route_risk"
+            ],
+
+            "| Existing Safety:",
+            route_risk_data[
+                "safety_score"
+            ],
+
+            "| ML Risk:",
+            ml_risk_score,
+
+            "| ML Level:",
+            ml_risk_level,
+
+            "| ML Source Points:",
+            len(
+                ml_source_points
+            ),
+
+            "| ML Features:",
+            {
+                "crime": crime_risk,
+                "lighting": lighting_level,
+                "crowd": crowd_density,
+                "traffic": traffic_level,
+                "police": police_presence
+            }
+        )
+
+
+        # =====================================================
+        # FINAL RISK
+        # =====================================================
+
+        final_risk_data = calculate_final_risk(
+            existing_risk=route_risk_data[
+                "route_risk"
+            ],
+            ml_risk=ml_risk_score,
+            risk_point_count=len(
+                calculated_risk_points
+            )
+        )
+
+
+        print(
+            "Route",
+            index + 1,
+            "| Existing Risk:",
+            route_risk_data[
+                "route_risk"
+            ],
+            "| ML Risk:",
+            ml_risk_score,
+            "| FINAL Risk:",
+            final_risk_data[
+                "final_risk_score"
+            ],
+            "| FINAL Level:",
+            final_risk_data[
+                "final_risk_level"
+            ]
+        )
+
+
+        # =====================================================
+        # ROUTE RESPONSE OBJECT
+        # =====================================================
+
+        routes.append({
+
+            "route_id":
+                index + 1,
+
+            "distance_km":
+                round(
+                    distance_km,
+                    2
+                ),
+
+            "duration_minutes":
+                round(
+                    duration_minutes,
+                    2
+                ),
+
+            "geometry":
+                route["geometry"],
+
+            # Existing frontend safety data
+            "safety_data":
+                nearby_safety_data,
+
+            # Existing backend risk information
+            "safety_point_count":
+                len(
+                    calculated_risk_points
+                ),
+
+            "risk_point_count":
+                len(
+                    calculated_risk_points
+                ),
+
+            "route_risk":
+                route_risk_data[
+                    "route_risk"
+                ],
+
+            "safety_score":
+                route_risk_data[
+                    "safety_score"
+                ],
+
+            "risk_level":
+                get_risk_level(
+                    route_risk_data[
+                        "safety_score"
+                    ]
+                ),
+
+            # ML prediction
+            "ml_risk_score":
+                ml_risk_score,
+
+            "ml_risk_level":
+                ml_risk_level,
+
+            # Final combined risk
+            "final_risk_score":
+                final_risk_data[
+                    "final_risk_score"
+                ],
+
+            "final_risk_level":
+                final_risk_data[
+                    "final_risk_level"
+                ],
+
+            "risk_source":
+                final_risk_data[
+                    "risk_source"
+                ],
+
+            # Backend calculated risk points
+            "risk_points":
+                calculated_risk_points,
+
+            # Existing breakdown
+            "safety_breakdown":
+                safety_breakdown
+
+        })
 
 
     # =====================================================
     # FIND SAFEST ROUTE
     # =====================================================
+    #
+    # Lower final risk = safer route.
+    # This now considers the Random Forest when ML data
+    # is available and falls back to the existing algorithm
+    # when ML data is unavailable.
+    # =====================================================
 
-    if routes:
+    routes_with_risk = [
+        route
+        for route in routes
+        if route.get(
+            "final_risk_score"
+        ) is not None
+    ]
 
-        safest_route = max(
-            routes,
+    if routes_with_risk:
+
+        safest_route = min(
+            routes_with_risk,
             key=lambda route:
-                route.get(
-                    "safety_score",
-                    0
-                )
+                route[
+                    "final_risk_score"
+                ]
         )
 
         safest_route_id = (
@@ -2388,24 +2569,13 @@ def get_multiple_routes():
         "route_count":
             len(routes),
 
+        "routes_with_risk_data":
+            len(routes_with_risk),
+
         # This identifies the safest route only.
         # It does NOT remove the other routes.
         "safest_route_id":
             safest_route_id,
-
-        # Overall recommendation from the new ranking layer.
-        "recommended_route_id":
-            (
-                max(
-                    routes,
-                    key=lambda route: route.get(
-                        "recommendation_score",
-                        0
-                    )
-                )["route_id"]
-                if routes
-                else None
-            ),
 
         # Return ALL generated routes.
         "routes":
