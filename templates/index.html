@@ -335,6 +335,51 @@
             gap: 4px;
         }
 
+
+        /* ----- Google Maps navigation button ----- */
+        .navigation-btn {
+            margin-left: 16px;
+            padding: 8px 14px;
+            border: 1px solid #d1d9e6;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.05s, border 0.15s;
+            white-space: nowrap;
+        }
+
+        .navigation-btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        .navigation-btn:active {
+            transform: scale(0.97);
+        }
+
+        .navigation-btn.safest-navigation {
+            background: #16a34a;
+            color: white;
+            border-color: #16a34a;
+        }
+
+        .navigation-btn.safest-navigation:hover {
+            background: #15803d;
+            border-color: #15803d;
+        }
+
+        @media (max-width: 700px) {
+            .navigation-btn {
+                margin-left: 0;
+                width: 100%;
+                margin-top: 8px;
+            }
+        }
+
         .safety-count {
             font-size: 13px;
             font-weight: 500;
@@ -2429,6 +2474,156 @@
     }
 
     // ============================================================
+    //  GOOGLE MAPS NAVIGATION
+    // ============================================================
+
+    function openGoogleMapsForRoute(route) {
+
+        if (!route) {
+            alert('Route information is not available.');
+            return;
+        }
+
+        // Use the selected start location.
+        if (
+            !Number.isFinite(Number(startLat)) ||
+            !Number.isFinite(Number(startLon))
+        ) {
+            alert('Starting location is not available.');
+            return;
+        }
+
+        // Use the selected destination.
+        if (
+            !Number.isFinite(Number(destLat)) ||
+            !Number.isFinite(Number(destLon))
+        ) {
+            alert('Destination is not available.');
+            return;
+        }
+
+        const origin =
+            `${Number(startLat)},${Number(startLon)}`;
+
+        const destination =
+            `${Number(destLat)},${Number(destLon)}`;
+
+        /*
+         * Each route returned by the backend contains route geometry.
+         * The geometry is normally GeoJSON:
+         *
+         * [longitude, latitude]
+         *
+         * We pass a few representative intermediate points to
+         * Google Maps so it can follow the selected analyzed route
+         * more closely.
+         */
+        const coordinates =
+            route &&
+            route.geometry &&
+            Array.isArray(route.geometry.coordinates)
+                ? route.geometry.coordinates
+                : [];
+
+        const waypoints = [];
+        const maxWaypoints = 5;
+
+        if (coordinates.length > 2) {
+
+            const middlePoints = coordinates.slice(1, -1);
+
+            if (middlePoints.length <= maxWaypoints) {
+
+                middlePoints.forEach(point => {
+
+                    if (
+                        !Array.isArray(point) ||
+                        point.length < 2
+                    ) {
+                        return;
+                    }
+
+                    const lon = Number(point[0]);
+                    const lat = Number(point[1]);
+
+                    if (
+                        Number.isFinite(lat) &&
+                        Number.isFinite(lon)
+                    ) {
+                        waypoints.push(`${lat},${lon}`);
+                    }
+                });
+
+            } else {
+
+                // Select evenly distributed points.
+                for (
+                    let i = 1;
+                    i <= maxWaypoints;
+                    i++
+                ) {
+
+                    const index = Math.floor(
+                        i * middlePoints.length /
+                        (maxWaypoints + 1)
+                    );
+
+                    const point = middlePoints[index];
+
+                    if (
+                        !Array.isArray(point) ||
+                        point.length < 2
+                    ) {
+                        continue;
+                    }
+
+                    const lon = Number(point[0]);
+                    const lat = Number(point[1]);
+
+                    if (
+                        Number.isFinite(lat) &&
+                        Number.isFinite(lon)
+                    ) {
+                        waypoints.push(`${lat},${lon}`);
+                    }
+                }
+            }
+        }
+
+        // Google Maps Directions URL.
+        let googleMapsUrl =
+            'https://www.google.com/maps/dir/?api=1' +
+            '&origin=' + encodeURIComponent(origin) +
+            '&destination=' + encodeURIComponent(destination) +
+            '&travelmode=driving';
+
+        if (waypoints.length > 0) {
+
+            googleMapsUrl +=
+                '&waypoints=' +
+                encodeURIComponent(
+                    waypoints.join('|')
+                );
+        }
+
+        console.log(
+            'Opening Google Maps for Route:',
+            route.route_id
+        );
+
+        console.log(
+            'Google Maps waypoints:',
+            waypoints
+        );
+
+        // Navigate in the current browser tab.
+        // Using location.href avoids popup-blocker issues
+        // that can prevent window.open() from working.
+        window.location.href = googleMapsUrl;
+    }
+
+
+    // ============================================================
     //  ROUTE CARDS
     // ============================================================
     function displayRouteInformation(routes) {
@@ -2517,22 +2712,35 @@
             card.innerHTML = `
                 <span class="route-title">
                     ${rankLabel}
+
                     <span style="margin-left:10px;">
                         Route ${route.route_id}
                     </span>
 
                     ${
                         isSafest
-                            ? '<span style="color:#16a34a; font-size:12px; margin-left:8px;">● SAFEST</span>'
+                            ? `
+                                <span style="
+                                    color:#16a34a;
+                                    font-size:12px;
+                                    margin-left:8px;
+                                ">
+                                    ● SAFEST
+                                </span>
+                              `
                             : ''
                     }
                 </span>
 
                 <div class="route-meta">
 
-                    <span>${route.distance_km} km</span>
+                    <span>
+                        ${route.distance_km} km
+                    </span>
 
-                    <span>${route.duration_minutes} min</span>
+                    <span>
+                        ${route.duration_minutes} min
+                    </span>
 
                     <span>
                         Safety:
@@ -2562,15 +2770,63 @@
                         ⚠️ ${riskCount} risk points
                     </span>
 
+                    <button
+                        type="button"
+                        class="navigation-btn ${
+                            isSafest
+                                ? 'safest-navigation'
+                                : ''
+                        }"
+                        id="navigate-route-${route.route_id}"
+                    >
+                        ${
+                            isSafest
+                                ? '🧭 Start Safest Route'
+                                : '🧭 Take Directions'
+                        }
+                    </button>
+
                 </div>
             `;
 
+
+            // First add the card to the DOM.
+            // The navigation button cannot be found with
+            // getElementById() until the card is appended.
+            container.appendChild(card);
+
+            // Google Maps navigation button.
+            const navigationButton =
+                card.querySelector(
+                    '.navigation-btn'
+                );
+
+            if (navigationButton) {
+
+                navigationButton.addEventListener(
+                    'click',
+                    (e) => {
+
+                        // Prevent the button from also
+                        // selecting the route card.
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        openGoogleMapsForRoute(route);
+                    }
+                );
+            }
+
             card.addEventListener('click', (e) => {
+                // If the click originated from the navigation
+                // button, let its own handler manage it.
+                if (e.target.closest('.navigation-btn')) {
+                    return;
+                }
+
                 e.stopPropagation();
                 selectRoute(route.route_id);
             });
-
-            container.appendChild(card);
         });
 
         console.log(
